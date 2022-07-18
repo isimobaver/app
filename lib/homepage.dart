@@ -142,10 +142,9 @@ class _TopBarState extends State<TopBar> {
       height: 100,
       padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(30),
-          bottomLeft: Radius.circular(30),
-        ),
+        borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
         color: Color(0xFF6DB9AF),
         boxShadow: [
           BoxShadow(
@@ -239,11 +238,10 @@ class _FirstState extends State<First> {
     "images/6099494567cc3.jpg",
     "images/6099494567cc3.jpg",
     "images/6099494567cc3.jpg",
-    "images/2.png",
-    "images/2.png",
-    "images/2.png",
-    "images/2.png",
-    "images/2.png",
+    "images/6099494567cc3.jpg",
+    "images/6099494567cc3.jpg",
+    "images/6099494567cc3.jpg",
+    "images/6099494567cc3.jpg",
   ];
   @override
   Widget build(BuildContext context) {
@@ -313,12 +311,13 @@ class _SecondState extends State<Second> {
   );
 
   final buttonsText = const [
-    "Bahla",
-    "Nizwa",
-    "Hamra",
-    "Adam",
-    "Izki",
+    "Last",
+    "Top 10",
+    "common",
+    "For you",
+    "Most View",
   ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -332,12 +331,13 @@ class _SecondState extends State<Second> {
           children: buttonsText
               .map(
                 (bText) => CupertinoButton(
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                   child: Text(
                     bText,
                     style: const TextStyle(
                       fontSize: 22,
-                      color: Color.fromARGB(255, 143, 139, 139),
+                      color:  Color(0xFFFFCFB7),
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.5,
                     ),

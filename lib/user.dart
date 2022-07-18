@@ -1,3 +1,6 @@
+import 'dart:ffi';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 // import 'package:drop_down_list/drop_down_list.dart';
 // import 'package:myapp/homepage.dart';
@@ -59,9 +62,8 @@ class _TopBarState extends State<TopBar> {
       height: 250,
       padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
           ),
           color: Color(0xFF6DB9AF),
           boxShadow: [
@@ -92,39 +94,48 @@ class _TopBarState extends State<TopBar> {
                         return DraggableScrollableSheet(
                           initialChildSize: 1,
                           maxChildSize: 1,
-                          minChildSize: 0.2,
-                          builder:(context, scrollController) {
-                            return  Container(
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(20))),
-                            child: ListView(
-                              controller: scrollController,
-                              padding: const EdgeInsets.all(20),
-                              // add your desired elements here in a list [Widget, Widget, Widget, ...]
-                              children:  List.generate(25, (index) => Text("Item $index")),
-                              // children: List.generate(25, (index) => Text("Test")),
-                            ),
-                          );
+                          minChildSize: 0.5,
+                          builder: (context, scrollController) {
+                            return Container(
+                                alignment: AlignmentDirectional.topCenter,
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(20))),
+                                child: Stack(
+                                  alignment: AlignmentDirectional.topCenter,
+                                  fit: StackFit.loose,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.fromLTRB(
+                                          0, 50, 0, 0),
+                                      child: buildBottomDrawer(context),
+                                    ),
+                                    Container(
+                                      height: 5,
+                                      margin: const EdgeInsets.symmetric(
+                                        horizontal: 95,
+                                      ),
+                                      decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(30)),
+                                          color: Color(0xFFFBAA82),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                blurRadius: 6.0,
+                                                offset: Offset(0, 0),
+                                                color:
+                                                    Color.fromARGB(59, 0, 0, 0))
+                                          ]),
+                                    ),
+                                  ],
+                                ));
                           },
                         );
                       },
                     );
-
-                    // DropDownState(
-                    //   DropDown(
-                    //     submitButtonText: "Done",
-                    //     submitButtonColor: const Color.fromRGBO(70, 76, 222, 1),
-                    //     searchHintText: "Search",
-                    //     bottomSheetTitle: "Avatars",
-                    //     searchBackgroundColor: Colors.black12,
-                    //     dataList: [],
-                    //     enableMultipleSelection: false,
-                    //     searchController: _searchTextEditingController,
-
-                    //   ),
-                    // ).showModal(context);
                   }),
             ],
           ),
@@ -159,6 +170,328 @@ class _TopBarState extends State<TopBar> {
                   ),
                 ),
               ))
+        ],
+      ),
+    );
+  }
+
+/////////////////////////////
+  Widget buildBottomDrawer(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
         ],
       ),
     );

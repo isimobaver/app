@@ -50,6 +50,13 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: const BoxDecoration(boxShadow: [
+        BoxShadow(
+            blurRadius: 10,
+            offset: Offset(0, 0),
+            color: Color.fromARGB(33, 0, 0, 0))
+      ]),
+      height: 50,
       alignment: AlignmentDirectional.center,
       margin: const EdgeInsets.fromLTRB(20, 30, 20, 5),
       child: Row(
@@ -69,11 +76,15 @@ class _SearchBarState extends State<SearchBar> {
               },
               decoration: InputDecoration(
                 hintText: "Where to go next?",
-                fillColor: Colors.white,
+                hintStyle: const TextStyle(textBaseline: TextBaseline.alphabetic,
+                  height: 1,
+                  color: Color(0xFF73A2AC),
+                ),
+                fillColor: const Color(0xFFC2D9DE),
                 filled: true,
                 prefixIcon: const Icon(
                   Icons.search,
-                  color: Color(0xFF0B5D69),
+                  color: Color(0xFF73A2AC),
                 ),
                 suffixIcon: AnimatedSize(
                   duration: const Duration(milliseconds: 200),
@@ -81,7 +92,7 @@ class _SearchBarState extends State<SearchBar> {
                       ? IconButton(
                           icon: const Icon(
                             CupertinoIcons.clear_circled_solid,
-                            color: Color(0x880B5D69),
+                            color: Colors.white,
                           ),
                           onPressed: () {
                             searchController.clear();
@@ -95,7 +106,7 @@ class _SearchBarState extends State<SearchBar> {
                     width: 0,
                   ),
                   borderRadius: BorderRadius.circular(
-                    6,
+                    15,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
@@ -104,7 +115,7 @@ class _SearchBarState extends State<SearchBar> {
                     width: 0,
                   ),
                   borderRadius: BorderRadius.circular(
-                    6,
+                    15,
                   ),
                 ),
               ),
@@ -134,6 +145,7 @@ class _SearchBarState extends State<SearchBar> {
   }
 }
 
+////////////////BodySection//////////////
 class BodySection extends StatelessWidget {
   const BodySection({Key? key}) : super(key: key);
 
@@ -146,10 +158,10 @@ class BodySection extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Padding(
-                  padding: EdgeInsets.only(left: 30),
-                  child: Text(
+              children: [
+                 Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+                  child: const Text(
                     "Last",
                     textAlign: TextAlign.left,
                     style: TextStyle(
@@ -158,9 +170,20 @@ class BodySection extends StatelessWidget {
                     ),
                   ),
                 ),
-                LayoutPost(),
-                SizedBox(height: 10),
-                Divider(height: 10, color: Color(0xFF0B5D69))
+                const LayoutPost(),
+                Container(
+                  height: 3,
+                  margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      color: Color(0xFFFBAA82),
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 6.0,
+                            offset: Offset(0, 0),
+                            color: Color.fromARGB(59, 0, 0, 0))
+                      ]),
+                ),
               ],
             ),
           );
@@ -168,6 +191,7 @@ class BodySection extends StatelessWidget {
       ),
     );
   }
+  
 }
 
 // /////////////////////////////BodySection/////////////////////////////////////
@@ -370,11 +394,10 @@ class _LayoutPostState extends State<LayoutPost> {
     "images/6099494567cc3.jpg",
     "images/6099494567cc3.jpg",
     "images/6099494567cc3.jpg",
-    "images/2.png",
-    "images/2.png",
-    "images/2.png",
-    "images/2.png",
-    "images/2.png",
+    "images/6099494567cc3.jpg",
+    "images/6099494567cc3.jpg",
+    "images/6099494567cc3.jpg",
+    "images/6099494567cc3.jpg",
   ];
   @override
   Widget build(BuildContext context) {
