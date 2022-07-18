@@ -5,6 +5,7 @@ import 'package:myapp/search.dart';
 import 'package:myapp/user.dart';
 import 'package:widget_slider/widget_slider.dart';
 
+final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -23,6 +24,7 @@ class _HomeState extends State<Home> {
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
+          key: scaffoldKey,
           bottomNavigationBar: buildNavBar(context),
           backgroundColor: const Color(0xFFF2F2F2), //لون الصفحة
           body: listOfTop[pageId],
