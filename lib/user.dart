@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:drop_down_list/drop_down_list.dart';
+// import 'package:drop_down_list/drop_down_list.dart';
+// import 'package:myapp/homepage.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -52,20 +53,16 @@ class TopBar extends StatefulWidget {
 }
 
 class _TopBarState extends State<TopBar> {
-  final TextEditingController _searchTextEditingController = TextEditingController();
-  final texttype = const [
-    "BAHLA",
-    "BAHLA",
-    "BAHLA",
-    "BAHLA",
-  ];
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 250,
       padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(30)),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+          ),
           color: Color(0xFF6DB9AF),
           boxShadow: [
             BoxShadow(
@@ -74,39 +71,63 @@ class _TopBarState extends State<TopBar> {
                 color: Color.fromARGB(59, 0, 0, 0))
           ]),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-              flex: 4,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const Expanded(flex: 7, child: SizedBox()),
-                  Expanded(
-                    flex: 1,
-                    child: IconButton(
-                        icon: const Icon(Icons.expand_more_rounded,
-                            color: Color(0xFF0B5D69), size: 50),
-                        onPressed: () {
-                          DropDownState(
-                            DropDown(
-                              submitButtonText: "Done",
-                              submitButtonColor:
-                                  const Color.fromRGBO(70, 76, 222, 1),
-                              searchHintText: "Search",
-                              bottomSheetTitle: "Avatars",
-                              searchBackgroundColor: Colors.black12,
-                              dataList: [],
-                              enableMultipleSelection: false,
-                              searchController: _searchTextEditingController,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Expanded(child: SizedBox()),
+              IconButton(
+                  icon: const Icon(Icons.expand_more_rounded,
+                      color: Color(0xFF0B5D69), size: 50),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(20)),
+                      ),
+                      context: context,
+                      builder: (context) {
+                        return DraggableScrollableSheet(
+                          initialChildSize: 1,
+                          maxChildSize: 1,
+                          minChildSize: 0.2,
+                          builder:(context, scrollController) {
+                            return  Container(
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20))),
+                            child: ListView(
+                              controller: scrollController,
+                              padding: const EdgeInsets.all(20),
+                              // add your desired elements here in a list [Widget, Widget, Widget, ...]
+                              children:  List.generate(25, (index) => Text("Item $index")),
+                              // children: List.generate(25, (index) => Text("Test")),
                             ),
-                          ).showModal(context);
-                        }),
-                  ),
-                ],
-              )),
+                          );
+                          },
+                        );
+                      },
+                    );
+
+                    // DropDownState(
+                    //   DropDown(
+                    //     submitButtonText: "Done",
+                    //     submitButtonColor: const Color.fromRGBO(70, 76, 222, 1),
+                    //     searchHintText: "Search",
+                    //     bottomSheetTitle: "Avatars",
+                    //     searchBackgroundColor: Colors.black12,
+                    //     dataList: [],
+                    //     enableMultipleSelection: false,
+                    //     searchController: _searchTextEditingController,
+
+                    //   ),
+                    // ).showModal(context);
+                  }),
+            ],
+          ),
           Expanded(
               flex: 5,
               child: Container(
@@ -225,139 +246,34 @@ class SecondSection extends StatefulWidget {
 class _SecondSectionState extends State<SecondSection> {
   @override
   Widget build(BuildContext context) {
-    return Wrap(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Wrap(
         direction: Axis.horizontal,
         spacing: 30,
         runSpacing: 30,
-        children: [
-          Container(
-            height: 140,
-            width: 140,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Colors.blueGrey,
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  offset: Offset(0, 0),
-                  spreadRadius: -10,
-                  blurRadius: 20,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 140,
-            width: 140,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Colors.blueGrey,
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  offset: Offset(0, 0),
-                  spreadRadius: -10,
-                  blurRadius: 20,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 140,
-            width: 140,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Colors.blueGrey,
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  offset: Offset(0, 0),
-                  spreadRadius: -10,
-                  blurRadius: 20,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 140,
-            width: 140,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Colors.blueGrey,
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  offset: Offset(0, 0),
-                  spreadRadius: -10,
-                  blurRadius: 20,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 140,
-            width: 140,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Colors.blueGrey,
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  offset: Offset(0, 0),
-                  spreadRadius: -10,
-                  blurRadius: 20,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 140,
-            width: 140,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Colors.blueGrey,
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  offset: Offset(0, 0),
-                  spreadRadius: -10,
-                  blurRadius: 20,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 140,
-            width: 140,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Colors.blueGrey,
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  offset: Offset(0, 0),
-                  spreadRadius: -10,
-                  blurRadius: 20,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 140,
-            width: 140,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Colors.blueGrey,
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  offset: Offset(0, 0),
-                  spreadRadius: -10,
-                  blurRadius: 20,
-                ),
-              ],
-            ),
-          ),
-        ]);
+        children: List.generate(
+          12,
+          (index) {
+            return Container(
+              height: 140,
+              width: 140,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                color: Colors.blueGrey,
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    offset: Offset(0, 0),
+                    spreadRadius: -10,
+                    blurRadius: 20,
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 }

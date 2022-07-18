@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_slider/widget_slider.dart';
-import 'package:anim_search_app_bar/anim_search_app_bar.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -13,13 +12,7 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Expanded(flex: 12, child: TopSection()), //top
-      ],
-    );
+    return const SingleChildScrollView(child: TopSection());
   }
 }
 
@@ -34,13 +27,12 @@ class TopSection extends StatefulWidget {
 class _TopSectionState extends State<TopSection> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(
+    return Column(
       children: const [
         SearchBar(),
         BodySection(),
       ],
-    ));
+    );
   }
 }
 
@@ -53,209 +45,314 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> {
+  final searchController = TextEditingController();
+  bool isVisible = false;
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: AlignmentDirectional.center,
       margin: const EdgeInsets.fromLTRB(20, 30, 20, 5),
-      child: const AnimSearchAppBar(
-        cancelButtonText: "Cancel",
-        hintText: "Search",
-        backgroundColor: Color(0xFFF2F2F2),
-        iconColor: Color(0xFF73A2AC),
-        clearIconColor: Colors.white,
-        cancelButtonTextStyle: TextStyle(color: Color(0xFF0B5D69)),
-        hintStyle: TextStyle(
-          color: Color(0xFF73A2AC),
-        ),
+      child: Row(
+        children: [
+          Flexible(
+            child: TextFormField(
+              controller: searchController,
+              onTap: () {
+                setState(() {
+                  isVisible = true;
+                });
+              },
+              onChanged: (value) {
+                if (searchController.text != "") {
+                  setState(() {});
+                }
+              },
+              decoration: InputDecoration(
+                hintText: "Where to go next?",
+                fillColor: Colors.white,
+                filled: true,
+                prefixIcon: const Icon(
+                  Icons.search,
+                  color: Color(0xFF0B5D69),
+                ),
+                suffixIcon: AnimatedSize(
+                  duration: const Duration(milliseconds: 200),
+                  child: isVisible == true && searchController.text != ""
+                      ? IconButton(
+                          icon: const Icon(
+                            CupertinoIcons.clear_circled_solid,
+                            color: Color(0x880B5D69),
+                          ),
+                          onPressed: () {
+                            searchController.clear();
+                          },
+                        )
+                      : const SizedBox(),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                    width: 0,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    6,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                    width: 0,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    6,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          AnimatedSize(
+            duration: const Duration(milliseconds: 200),
+            child: isVisible
+                ? TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isVisible = false;
+                      });
+                      searchController.clear();
+                      FocusScope.of(context).requestFocus(FocusNode());
+                    },
+                    child: const Text(
+                      "Cancel",
+                      style: TextStyle(color: Color(0xFF0B5D69), fontSize: 16),
+                    ),
+                  )
+                : const SizedBox(),
+          ),
+        ],
       ),
     );
   }
 }
 
-/////////////////////////////BodySection/////////////////////////////////////
-class BodySection extends StatefulWidget {
+class BodySection extends StatelessWidget {
   const BodySection({Key? key}) : super(key: key);
 
   @override
-  State<BodySection> createState() => _BodySectionState();
-}
-
-class _BodySectionState extends State<BodySection> {
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 5),
-          padding: const EdgeInsets.all(10),
-          alignment: Alignment.topLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            textDirection: TextDirection.ltr,
-            children: const [
-              Text(
-                "Last",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Color(0xFF0B5D69),
-                  fontSize: 27,
-                  shadows: <Shadow>[
-                    Shadow(
-                      blurRadius: 6.0,
-                      offset: Offset(0, 0),
-                      color: Color.fromARGB(100, 0, 0, 0),
-                    )
-                  ],
+    return SingleChildScrollView(
+      child: Column(
+        children: List.generate(4, (index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(left: 30),
+                  child: Text(
+                    "Last",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Color(0xFF0B5D69),
+                      fontSize: 27,
+                    ),
+                  ),
                 ),
-              ),
-              LayoutPost(),
-            ],
-          ),
-        ),
-        Container(
-          height: 5,
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Color(0xFFFBAA82),
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 6.0,
-                    offset: Offset(0, 0),
-                    color: Color.fromARGB(59, 0, 0, 0))
-              ]),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 5),
-          padding: const EdgeInsets.all(10),
-          alignment: Alignment.topLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            textDirection: TextDirection.ltr,
-            children: const [
-              Text(
-                "Last",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Color(0xFF0B5D69),
-                  fontSize: 27,
-                  shadows: <Shadow>[
-                    Shadow(
-                      blurRadius: 6.0,
-                      offset: Offset(0, 0),
-                      color: Color.fromARGB(100, 0, 0, 0),
-                    )
-                  ],
-                ),
-              ),
-              LayoutPost(),
-            ],
-          ),
-        ),
-        Container(
-          height: 5,
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Color(0xFFFBAA82),
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 6.0,
-                    offset: Offset(0, 0),
-                    color: Color.fromARGB(59, 0, 0, 0))
-              ]),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 5),
-          padding: const EdgeInsets.all(10),
-          alignment: Alignment.topLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            textDirection: TextDirection.ltr,
-            children: const [
-              Text(
-                "Last",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Color(0xFF0B5D69),
-                  fontSize: 27,
-                  shadows: <Shadow>[
-                    Shadow(
-                      blurRadius: 6.0,
-                      offset: Offset(0, 0),
-                      color: Color.fromARGB(100, 0, 0, 0),
-                    )
-                  ],
-                ),
-              ),
-              LayoutPost(),
-            ],
-          ),
-        ),
-        Container(
-          height: 5,
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Color(0xFFFBAA82),
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 6.0,
-                    offset: Offset(0, 0),
-                    color: Color.fromARGB(59, 0, 0, 0))
-              ]),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 5),
-          padding: const EdgeInsets.all(10),
-          alignment: Alignment.topLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            textDirection: TextDirection.ltr,
-            children: const [
-              Text(
-                "Last",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: Color(0xFF0B5D69),
-                  fontSize: 27,
-                  shadows: <Shadow>[
-                    Shadow(
-                      blurRadius: 6.0,
-                      offset: Offset(0, 0),
-                      color: Color.fromARGB(100, 0, 0, 0),
-                    )
-                  ],
-                ),
-              ),
-              LayoutPost(),
-            ],
-          ),
-        ),
-        Container(
-          height: 5,
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: Color(0xFFFBAA82),
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 6.0,
-                    offset: Offset(0, 0),
-                    color: Color.fromARGB(59, 0, 0, 0))
-              ]),
-        ),
-      ],
+                LayoutPost(),
+                SizedBox(height: 10),
+                Divider(height: 10, color: Color(0xFF0B5D69))
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 }
 
-////////////////////////LayoutPost///////////////////////////////
+// /////////////////////////////BodySection/////////////////////////////////////
+// class BodySection extends StatefulWidget {
+//   const BodySection({Key? key}) : super(key: key);
+
+//   @override
+//   State<BodySection> createState() => _BodySectionState();
+// }
+
+// class _BodySectionState extends State<BodySection> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         Container(
+//           margin: const EdgeInsets.symmetric(vertical: 5),
+//           padding: const EdgeInsets.all(10),
+//           alignment: Alignment.topLeft,
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             textDirection: TextDirection.ltr,
+//             children: const [
+//               Text(
+//                 "Last",
+//                 textAlign: TextAlign.left,
+//                 style: TextStyle(
+//                   color: Color(0xFF0B5D69),
+//                   fontSize: 27,
+//                   shadows: <Shadow>[
+//                     Shadow(
+//                       blurRadius: 6.0,
+//                       offset: Offset(0, 0),
+//                       color: Color.fromARGB(100, 0, 0, 0),
+//                     )
+//                   ],
+//                 ),
+//               ),
+//               LayoutPost(),
+//             ],
+//           ),
+//         ),
+//         Container(
+//           height: 5,
+//           margin: const EdgeInsets.symmetric(horizontal: 10),
+//           decoration: const BoxDecoration(
+//               borderRadius: BorderRadius.all(Radius.circular(30)),
+//               color: Color(0xFFFBAA82),
+//               boxShadow: [
+//                 BoxShadow(
+//                     blurRadius: 6.0,
+//                     offset: Offset(0, 0),
+//                     color: Color.fromARGB(59, 0, 0, 0))
+//               ]),
+//         ),
+//         Container(
+//           margin: const EdgeInsets.symmetric(vertical: 5),
+//           padding: const EdgeInsets.all(10),
+//           alignment: Alignment.topLeft,
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             textDirection: TextDirection.ltr,
+//             children: const [
+//               Text(
+//                 "Last",
+//                 textAlign: TextAlign.left,
+//                 style: TextStyle(
+//                   color: Color(0xFF0B5D69),
+//                   fontSize: 27,
+//                   shadows: <Shadow>[
+//                     Shadow(
+//                       blurRadius: 6.0,
+//                       offset: Offset(0, 0),
+//                       color: Color.fromARGB(100, 0, 0, 0),
+//                     )
+//                   ],
+//                 ),
+//               ),
+//               LayoutPost(),
+//             ],
+//           ),
+//         ),
+//         Container(
+//           height: 5,
+//           margin: const EdgeInsets.symmetric(horizontal: 10),
+//           decoration: const BoxDecoration(
+//               borderRadius: BorderRadius.all(Radius.circular(30)),
+//               color: Color(0xFFFBAA82),
+//               boxShadow: [
+//                 BoxShadow(
+//                     blurRadius: 6.0,
+//                     offset: Offset(0, 0),
+//                     color: Color.fromARGB(59, 0, 0, 0))
+//               ]),
+//         ),
+//         Container(
+//           margin: const EdgeInsets.symmetric(vertical: 5),
+//           padding: const EdgeInsets.all(10),
+//           alignment: Alignment.topLeft,
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             textDirection: TextDirection.ltr,
+//             children: const [
+//               Text(
+//                 "Last",
+//                 textAlign: TextAlign.left,
+//                 style: TextStyle(
+//                   color: Color(0xFF0B5D69),
+//                   fontSize: 27,
+//                   shadows: <Shadow>[
+//                     Shadow(
+//                       blurRadius: 6.0,
+//                       offset: Offset(0, 0),
+//                       color: Color.fromARGB(100, 0, 0, 0),
+//                     )
+//                   ],
+//                 ),
+//               ),
+//               LayoutPost(),
+//             ],
+//           ),
+//         ),
+//         Container(
+//           height: 5,
+//           margin: const EdgeInsets.symmetric(horizontal: 10),
+//           decoration: const BoxDecoration(
+//               borderRadius: BorderRadius.all(Radius.circular(30)),
+//               color: Color(0xFFFBAA82),
+//               boxShadow: [
+//                 BoxShadow(
+//                     blurRadius: 6.0,
+//                     offset: Offset(0, 0),
+//                     color: Color.fromARGB(59, 0, 0, 0))
+//               ]),
+//         ),
+//         Container(
+//           margin: const EdgeInsets.symmetric(vertical: 5),
+//           padding: const EdgeInsets.all(10),
+//           alignment: Alignment.topLeft,
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             textDirection: TextDirection.ltr,
+//             children: const [
+//               Text(
+//                 "Last",
+//                 textAlign: TextAlign.left,
+//                 style: TextStyle(
+//                   color: Color(0xFF0B5D69),
+//                   fontSize: 27,
+//                   shadows: <Shadow>[
+//                     Shadow(
+//                       blurRadius: 6.0,
+//                       offset: Offset(0, 0),
+//                       color: Color.fromARGB(100, 0, 0, 0),
+//                     )
+//                   ],
+//                 ),
+//               ),
+//               LayoutPost(),
+//             ],
+//           ),
+//         ),
+//         Container(
+//           height: 5,
+//           margin: const EdgeInsets.symmetric(horizontal: 10),
+//           decoration: const BoxDecoration(
+//               borderRadius: BorderRadius.all(Radius.circular(30)),
+//               color: Color(0xFFFBAA82),
+//               boxShadow: [
+//                 BoxShadow(
+//                     blurRadius: 6.0,
+//                     offset: Offset(0, 0),
+//                     color: Color.fromARGB(59, 0, 0, 0))
+//               ]),
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+// ////////////////////////LayoutPost///////////////////////////////
 class LayoutPost extends StatefulWidget {
   const LayoutPost({Key? key}) : super(key: key);
 
@@ -284,39 +381,23 @@ class _LayoutPostState extends State<LayoutPost> {
     return Container(
       alignment: Alignment.center,
       //margin: const EdgeInsets.symmetric(vertical: 0),
-      child: WidgetSlider(
-        fixedSize: 200,
-        sizeDistinction: 0.4,
-        infiniteScroll: true,
-        padEnds: true,
-        reverse: false,
-        proximity: 0.6,
-        controller: controller,
-        itemCount: images.length,
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.only(left: 20),
         scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index, activeIndex) {
+        child: Row(
+            children: images.map((imagePath) {
           return CupertinoButton(
-            onPressed: () async => await controller.moveTo?.call(index),
+            onPressed: () {},
             child: Container(
-              //margin: const EdgeInsets.all(0),
-              /*child: Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  alignment: AlignmentDirectional.bottomCenter,
-                  margin: EdgeInsets.all(10),
-                  child: const Text(textAlign: TextAlign.right,"jsjjkdhkhlkdhlkfhdhkfhkdhl lajslhlfdldfh klkdshflhlsdhflhs")),*/
+              height: 180,
+              width: 200,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(images[index]),
+                  image: AssetImage(imagePath),
                 ),
                 boxShadow: const [
-                  /*BoxShadow(
-                    color: Color.fromARGB(255, 121, 121, 121),
-                    offset: Offset(0, 0),
-                    spreadRadius: 6,
-                  ),*/
                   BoxShadow(
                     color: Color.fromARGB(255, 0, 0, 0),
                     offset: Offset(0, 0),
@@ -327,7 +408,7 @@ class _LayoutPostState extends State<LayoutPost> {
               ),
             ),
           );
-        },
+        }).toList()),
       ),
     );
   }

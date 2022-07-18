@@ -5,8 +5,7 @@ import 'package:myapp/search.dart';
 import 'package:myapp/user.dart';
 import 'package:widget_slider/widget_slider.dart';
 
-
-
+final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -15,21 +14,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Widget> listOfTop = const [
-    TopSection(),
-    Search(),
-    UserPage()
-  ];
-  
+  List<Widget> listOfTop = const [TopSection(), Search(), UserPage()];
+
   int pageId = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // this line will remove the red debug banner from the top
+      debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
+          key: scaffoldKey,
           bottomNavigationBar: buildNavBar(context),
           backgroundColor: const Color(0xFFF2F2F2), //لون الصفحة
-          body: listOfTop[pageId]
+          body: listOfTop[pageId],
         ),
       ),
     );
@@ -40,39 +38,41 @@ class _HomeState extends State<Home> {
       //alignment: Alignment.bottomCenter,
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 13),
       decoration: const BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
-          color: Color(0xFFF2F2F2),
-          boxShadow: [
-            BoxShadow(
-                blurRadius: 6,
-                offset: Offset(0, -3),
-                color: Color.fromARGB(59, 0, 0, 0))
-          ]),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+        color: Color(0xFFF2F2F2),
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 6,
+            offset: Offset(0, -3),
+            color: Color.fromARGB(59, 0, 0, 0),
+          ),
+        ],
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-              child: IconButton(
-            icon: SvgPicture.asset(
-              "images/svg/HOME.svg",
-              fit: BoxFit.fitHeight,
-              color: pageId == 0
-                  ? const Color(0xFF6DB9AF)
-                  : const Color(0xFFCCCCCC),
-            ),
-            onPressed: () {
-            setState(() {
-                pageId = 0;
-              });
+            child: IconButton(
+              icon: SvgPicture.asset(
+                "images/svg/HOME.svg",
+                fit: BoxFit.fitHeight,
+                color: pageId == 0
+                    ? const Color(0xFF6DB9AF)
+                    : const Color(0xFFCCCCCC),
+              ),
+              onPressed: () {
+                setState(() {
+                  pageId = 0;
+                });
               },
-          )),
+            ),
+          ),
           Expanded(
               child: IconButton(
             icon: SvgPicture.asset(
               "images/svg/SEARCH.svg",
               fit: BoxFit.fitHeight,
-              color:  pageId == 1
+              color: pageId == 1
                   ? const Color(0xFF6DB9AF)
                   : const Color(0xFFCCCCCC),
             ),
@@ -83,20 +83,23 @@ class _HomeState extends State<Home> {
             },
           )),
           Expanded(
-              child: IconButton(
-            icon: SvgPicture.asset(
-              "images/svg/USER.svg",
-              fit: BoxFit.fitHeight,
-              color: pageId == 2
-                  ? const Color(0xFF6DB9AF)
-                  : const Color(0xFFCCCCCC),
+            child: IconButton(
+              icon: SvgPicture.asset(
+                "images/svg/USER.svg",
+                fit: BoxFit.fitHeight,
+                color: pageId == 2
+                    ? const Color(0xFF6DB9AF)
+                    : const Color(0xFFCCCCCC),
+              ),
+              onPressed: () {
+                setState(
+                  () {
+                    pageId = 2;
+                  },
+                );
+              },
             ),
-            onPressed: () {
-              setState(() {
-                pageId = 2;
-              });
-            },
-          )),
+          ),
         ],
       ),
     );
@@ -116,13 +119,11 @@ class _TopSectionState extends State<TopSection> {
   Widget build(BuildContext context) {
     return Column(
       children: const [
-        Expanded(flex: 2, child: TopBar()),////Top
-        Expanded(flex: 6, child: Body()),///Body
+        TopBar(),
+        Expanded(flex: 6, child: Body()),
       ],
     );
   }
-
-  
 }
 
 //Top Bar////////////////////////////////////////////////
@@ -138,33 +139,42 @@ class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 100,
       padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(30)),
-          color: Color(0xFF6DB9AF),
-          boxShadow: [
-            BoxShadow(
-                blurRadius: 90,
-                offset: Offset(0, 0),
-                color: Color.fromARGB(59, 0, 0, 0))
-          ]),
+        borderRadius: BorderRadius.only(
+          bottomRight: Radius.circular(30),
+          bottomLeft: Radius.circular(30),
+        ),
+        color: Color(0xFF6DB9AF),
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 90,
+            offset: Offset(0, 0),
+            color: Color.fromARGB(59, 0, 0, 0),
+          )
+        ],
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Expanded(
-              flex: 1,
-              child: Container(
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          blurRadius: 6,
-                          offset: Offset(0, 3),
-                          color: Color.fromARGB(59, 0, 0, 0))
-                    ]),
-              )),
+          Container(
+            height: 50,
+            width: 50,
+            margin: const EdgeInsets.only(left: 10),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 6,
+                  offset: Offset(0, 3),
+                  color: Color.fromARGB(59, 0, 0, 0),
+                )
+              ],
+            ),
+          ),
           const Expanded(flex: 7, child: SizedBox())
         ],
       ),
@@ -302,39 +312,40 @@ class _SecondState extends State<Second> {
     duration: const Duration(milliseconds: 600),
   );
 
-  final texttype = const [
-    "BAHLA",
-    "BAHLA",
-    "BAHLA",
-    "BAHLA",
+  final buttonsText = const [
+    "Bahla",
+    "Nizwa",
+    "Hamra",
+    "Adam",
+    "Izki",
   ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: const EdgeInsets.symmetric(vertical: 0),
-      child: WidgetSlider(
-        fixedSize: 100,
-        sizeDistinction: 0.1,
-        infiniteScroll: false,
-        padEnds: true,
-        reverse: false,
-        proximity: 0.4,
-        controller: controller,
-        itemCount: texttype.length,
-        itemBuilder: (context, index, activeIndex) {
-          return CupertinoButton(
-              onPressed: () async => await controller.moveTo?.call(index),
-              child: Flexible(
-                child: Text(texttype[index],
+      // margin: const EdgeInsets.only(left: 20),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.only(left: 20),
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: buttonsText
+              .map(
+                (bText) => CupertinoButton(
+                  onPressed: () {},
+                  child: Text(
+                    bText,
                     style: const TextStyle(
-                      fontSize: 30,
+                      fontSize: 22,
                       color: Color.fromARGB(255, 143, 139, 139),
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.5,
-                    )),
-              ));
-        },
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }
