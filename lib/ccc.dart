@@ -299,6 +299,72 @@ class _NvBarState extends State<NvBar> {
 
 
 
+@override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: List.generate(4, (index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                 Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+                  child: const Text(
+                    "Last",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Color(0xFF0B5D69),
+                      fontSize: 27,
+                    ),
+                  ),
+                ),
+                const LayoutPost(),
+                Container(
+                  height: 3,
+                  margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      color: Color(0xFFFBAA82),
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 6.0,
+                            offset: Offset(0, 0),
+                            color: Color.fromARGB(59, 0, 0, 0))
+                      ]),
+                ),
+              ],
+            ),
+          );
+        }),
+      ),
+    );
+  }
+
+
+
+
+
+Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                const Text(
+                  "About",
+                  textDirection: TextDirection.ltr,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
 
 
 
@@ -306,5 +372,405 @@ class _NvBarState extends State<NvBar> {
 
 
 
+
+
+
+Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          height: 5,
+                                          margin: const EdgeInsets.symmetric(
+                                            horizontal: 95,
+                                          ),
+                                          decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(30)),
+                                              color: Color(0xFFFBAA82),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    blurRadius: 6.0,
+                                                    offset: Offset(0, 0),
+                                                    color: Color.fromARGB(
+                                                        59, 0, 0, 0))
+                                              ]),
+                                        ),
+                                      ],
+                                    ),
+
+
+
+Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.info_rounded,
+                  size: 25,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: const Text(
+                    "About",
+                    textDirection: TextDirection.ltr,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+            color: Colors.black12,
+            height: 10,
+            thickness: 1,
+            indent: 50,
+          ),
+        ],
+      ),
+
+
+
+
+
+
+
+
+
+
+<span class="material-icons-round">
+language
+</span>
+
+
+
+
+
+
+
+
+
+
+
+Container(
+                                                      height: 90,
+                                                      width: 90,
+                                                      decoration:
+                                                          const BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    30)),
+                                                        color: Colors.blueGrey,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    0,
+                                                                    0,
+                                                                    0),
+                                                            offset:
+                                                                Offset(0, 0),
+                                                            spreadRadius: -10,
+                                                            blurRadius: 20,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )
 
 */

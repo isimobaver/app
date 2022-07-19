@@ -77,7 +77,7 @@ class _SearchBarState extends State<SearchBar> {
               decoration: InputDecoration(
                 hintText: "Where to go next?",
                 hintStyle: const TextStyle(textBaseline: TextBaseline.alphabetic,
-                  height: 1,
+                  height: 0.8,
                   color: Color(0xFF73A2AC),
                 ),
                 fillColor: const Color(0xFFC2D9DE),
