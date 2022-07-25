@@ -28,8 +28,8 @@ class _TopSectionState extends State<TopSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        SearchBar(),
+      children: [
+        const SearchBar(),
         BodySection(),
       ],
     );
@@ -50,72 +50,75 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(boxShadow: [
-        BoxShadow(
-            blurRadius: 10,
-            offset: Offset(0, 0),
-            color: Color.fromARGB(33, 0, 0, 0))
-      ]),
       height: 50,
       alignment: AlignmentDirectional.center,
       margin: const EdgeInsets.fromLTRB(20, 30, 20, 5),
       child: Row(
         children: [
           Flexible(
-            child: TextFormField(
-              controller: searchController,
-              onTap: () {
-                setState(() {
-                  isVisible = true;
-                });
-              },
-              onChanged: (value) {
-                if (searchController.text != "") {
-                  setState(() {});
-                }
-              },
-              decoration: InputDecoration(
-                hintText: "Where to go next?",
-                hintStyle: const TextStyle(textBaseline: TextBaseline.alphabetic,
-                  height: 0.8,
-                  color: Color(0xFF73A2AC),
-                ),
-                fillColor: const Color(0xFFC2D9DE),
-                filled: true,
-                prefixIcon: const Icon(
-                  Icons.search,
-                  color: Color(0xFF73A2AC),
-                ),
-                suffixIcon: AnimatedSize(
-                  duration: const Duration(milliseconds: 200),
-                  child: isVisible == true && searchController.text != ""
-                      ? IconButton(
-                          icon: const Icon(
-                            CupertinoIcons.clear_circled_solid,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            searchController.clear();
-                          },
-                        )
-                      : const SizedBox(),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.transparent,
-                    width: 0,
+            child: Container(
+              decoration: const BoxDecoration(boxShadow: [
+                BoxShadow(
+                    blurRadius: 10,
+                    offset: Offset(0, 0),
+                    color: Color.fromARGB(47, 0, 0, 0))
+              ]),
+              child: TextFormField(
+                controller: searchController,
+                onTap: () {
+                  setState(() {
+                    isVisible = true;
+                  });
+                },
+                onChanged: (value) {
+                  if (searchController.text != "") {
+                    setState(() {});
+                  }
+                },
+                decoration: InputDecoration(
+                  hintText: "Where to go next?",
+                  hintStyle: const TextStyle(
+                    textBaseline: TextBaseline.alphabetic,
+                    height: 0.8,
+                    color: Color(0xFF73A2AC),
                   ),
-                  borderRadius: BorderRadius.circular(
-                    15,
+                  fillColor: const Color(0xFFC2D9DE),
+                  filled: true,
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    color: Color(0xFF73A2AC),
                   ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.transparent,
-                    width: 0,
+                  suffixIcon: AnimatedSize(
+                    duration: const Duration(milliseconds: 200),
+                    child: isVisible == true && searchController.text != ""
+                        ? IconButton(
+                            icon: const Icon(
+                              CupertinoIcons.clear_circled_solid,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              searchController.clear();
+                            },
+                          )
+                        : const SizedBox(),
                   ),
-                  borderRadius: BorderRadius.circular(
-                    15,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: Colors.transparent,
+                      width: 0,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      15,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: Colors.transparent,
+                      width: 0,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      15,
+                    ),
                   ),
                 ),
               ),
@@ -147,11 +150,14 @@ class _SearchBarState extends State<SearchBar> {
 
 ////////////////BodySection//////////////
 class BodySection extends StatelessWidget {
-  const BodySection({Key? key}) : super(key: key);
+  BodySection({Key? key}) : super(key: key);
+  final ScrollController controllerOne = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      controller: controllerOne,
       child: Column(
         children: List.generate(4, (index) {
           return Padding(
@@ -159,8 +165,9 @@ class BodySection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                   child: const Text(
                     "Last",
                     textAlign: TextAlign.left,
@@ -173,7 +180,8 @@ class BodySection extends StatelessWidget {
                 const LayoutPost(),
                 Container(
                   height: 3,
-                  margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
                       color: Color(0xFFFBAA82),
@@ -191,7 +199,6 @@ class BodySection extends StatelessWidget {
       ),
     );
   }
-  
 }
 
 // /////////////////////////////BodySection/////////////////////////////////////

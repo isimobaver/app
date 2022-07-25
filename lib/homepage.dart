@@ -36,6 +36,7 @@ class _HomeState extends State<Home> {
   Widget buildNavBar(BuildContext context) {
     return Container(
       //alignment: Alignment.bottomCenter,
+      height: 80,
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 13),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
@@ -48,58 +49,66 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Column(
         children: [
           Expanded(
-            child: IconButton(
-              icon: SvgPicture.asset(
-                "images/svg/HOME.svg",
-                fit: BoxFit.fitHeight,
-                color: pageId == 0
-                    ? const Color(0xFF6DB9AF)
-                    : const Color(0xFFCCCCCC),
-              ),
-              onPressed: () {
-                setState(() {
-                  pageId = 0;
-                });
-              },
-            ),
-          ),
-          Expanded(
-              child: IconButton(
-            icon: SvgPicture.asset(
-              "images/svg/SEARCH.svg",
-              fit: BoxFit.fitHeight,
-              color: pageId == 1
-                  ? const Color(0xFF6DB9AF)
-                  : const Color(0xFFCCCCCC),
-            ),
-            onPressed: () {
-              setState(() {
-                pageId = 1;
-              });
-            },
-          )),
-          Expanded(
-            child: IconButton(
-              icon: SvgPicture.asset(
-                "images/svg/USER.svg",
-                fit: BoxFit.fitHeight,
-                color: pageId == 2
-                    ? const Color(0xFF6DB9AF)
-                    : const Color(0xFFCCCCCC),
-              ),
-              onPressed: () {
-                setState(
-                  () {
-                    pageId = 2;
+            flex: 5,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: IconButton(
+                    icon: SvgPicture.asset(
+                      "images/svg/HOME.svg",
+                      fit: BoxFit.contain,
+                      color: pageId == 0
+                          ? const Color(0xFF6DB9AF)
+                          : const Color(0xFFCCCCCC),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        pageId = 0;
+                      });
+                    },
+                  ),
+                ),
+                Expanded(
+                    child: IconButton(
+                  icon: SvgPicture.asset(
+                    "images/svg/SEARCH.svg",
+                    fit: BoxFit.contain,
+                    color: pageId == 1
+                        ? const Color(0xFF6DB9AF)
+                        : const Color(0xFFCCCCCC),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      pageId = 1;
+                    });
                   },
-                );
-              },
+                )),
+                Expanded(
+                  child: IconButton(
+                    icon: SvgPicture.asset(
+                      "images/svg/USER.svg",
+                      fit: BoxFit.contain,
+                      color: pageId == 2
+                          ? const Color(0xFF6DB9AF)
+                          : const Color(0xFFCCCCCC),
+                    ),
+                    onPressed: () {
+                      setState(
+                        () {
+                          pageId = 2;
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
+          const Expanded(flex: 2, child: SizedBox()),
         ],
       ),
     );
