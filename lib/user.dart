@@ -94,8 +94,8 @@ class _TopBarState extends State<TopBar> {
                         context: context,
                         builder: (context) {
                           return DraggableScrollableSheet(
-                            initialChildSize: 0.8,
-                            maxChildSize: 1.5,
+                            initialChildSize: 0.6,
+                            maxChildSize: 0.7,
                             minChildSize: 0.5,
                             builder: (context, scrollController) {
                               return Container(
@@ -370,7 +370,7 @@ class _TopBarState extends State<TopBar> {
                   ),
                   direction: AxisDirection.left,
                 ),
-              );;
+              );
             },
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -548,16 +548,15 @@ class _BodyState extends State<Body> {
 }
 
 ///////////////////DrawerPage////////////////////////////////
-
 class DrawerPage extends StatelessWidget {
-  List<Widget> pageDrawer = const [
+  final List<Widget> pageDrawer = const [
     AboutPage(),
     DevelopersPage(),
     CopyrightPage(),
   ];
   late final int pageDrawerId;
 
-  List<String> titelPage = ["About", "Developers", "Copyright"];
+  final List<String> titelPage = ["About", "Developers", "Copyright"];
 
   DrawerPage({Key? key, required this.pageDrawerId}) : super(key: key);
 
@@ -606,13 +605,16 @@ class DrawerPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const IconButton(
-              onPressed: null,
-              icon: Icon(
+           IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(
                 Icons.chevron_left_rounded,
                 size: 45,
                 color: Color(0xFF0B5D69),
-              )),
+              ),
+              ),
           Expanded(
             child: Container(
               alignment: AlignmentDirectional.bottomCenter,

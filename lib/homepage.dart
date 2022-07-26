@@ -24,6 +24,7 @@ class _HomeState extends State<Home> {
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
+          extendBody: true,
           key: scaffoldKey,
           bottomNavigationBar: buildNavBar(context),
           backgroundColor: const Color(0xFFF2F2F2), //لون الصفحة
@@ -35,7 +36,6 @@ class _HomeState extends State<Home> {
 
   Widget buildNavBar(BuildContext context) {
     return Container(
-      //alignment: Alignment.bottomCenter,
       height: 80,
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 13),
       decoration: const BoxDecoration(
