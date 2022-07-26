@@ -1,5 +1,11 @@
+// import 'dart:html';
+// import 'dart:async';
+// import 'package:flutter/foundation.dart';
+// import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:avatars/avatars.dart';
+// import 'package:image_picker/image_picker.dart';
 // import 'package:drop_down_list/drop_down_list.dart';
 // import 'package:myapp/homepage.dart';
 
@@ -48,14 +54,13 @@ class _TopSectionState extends State<TopSection> {
 ////////////////Top Bar//////////////////
 class TopBar extends StatefulWidget {
   const TopBar({Key? key}) : super(key: key);
-
   @override
   State<TopBar> createState() => _TopBarState();
 }
 
 class _TopBarState extends State<TopBar> {
   late int idPage;
-
+  late int idDrawer;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -84,8 +89,114 @@ class _TopBarState extends State<TopBar> {
                 IconButton(
                     icon: const Icon(Icons.menu_rounded,
                         color: Color(0xFF0B5D69), size: 30),
-                    onPressed: () {
-                      showModalBottomSheet(
+                    onPressed: () => _showBottomDrawer(context),
+                    ),
+              ],
+            ),
+          ),
+          const Expanded(
+              child: SizedBox(
+            height: 35,
+          )),
+          Expanded(
+              flex: 5,
+              child: Container(
+                margin: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          blurRadius: 6,
+                          offset: Offset(0, 3),
+                          color: Color.fromARGB(59, 0, 0, 0))
+                    ]),
+              )),
+          Expanded(
+              flex: 2,
+              child: Container(
+                alignment: AlignmentDirectional.center,
+                child: TextButton(
+                  child: const Text(
+                    "Edit",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Color(0xFFEDEDED),
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  onPressed: () => _showActionSheet(context),
+                ),
+              ))
+        ],
+      ),
+    );
+  }
+
+  void _showActionSheet(BuildContext context) {
+    showCupertinoModalPopup(
+        context: context,
+        builder: (BuildContext context) => CupertinoActionSheet(
+              actions: [
+                CupertinoActionSheetAction(
+                  isDefaultAction: true,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    "Take Photo",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                CupertinoActionSheetAction(
+                  isDefaultAction: true,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    "Choose from library",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                CupertinoActionSheetAction(
+                  isDefaultAction: true,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    "Use avatar",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+              cancelButton: CupertinoActionSheetAction(
+                isDefaultAction: true,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "Cancel",
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ));
+  }
+
+  void _showBottomDrawer(BuildContext context){
+    showModalBottomSheet(
                         backgroundColor: Colors.transparent,
                         shape: const RoundedRectangleBorder(
                           borderRadius:
@@ -138,188 +249,8 @@ class _TopBarState extends State<TopBar> {
                           );
                         },
                       );
-                    }),
-              ],
-            ),
-          ),
-          const Expanded(
-              child: SizedBox(
-            height: 35,
-          )),
-          Expanded(
-              flex: 5,
-              child: Container(
-                margin: const EdgeInsets.all(5),
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          blurRadius: 6,
-                          offset: Offset(0, 3),
-                          color: Color.fromARGB(59, 0, 0, 0))
-                    ]),
-              )),
-          Expanded(
-              flex: 2,
-              child: Container(
-                alignment: AlignmentDirectional.center,
-                child: TextButton(
-                    child: const Text(
-                      "Edit",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color(0xFFEDEDED),
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                    onPressed: () {
-                      showModalBottomSheet(
-                        backgroundColor: Colors.transparent,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(20)),
-                        ),
-                        context: context,
-                        builder: (context) {
-                          return DraggableScrollableSheet(
-                            initialChildSize: 0.8,
-                            maxChildSize: 1.5,
-                            minChildSize: 0.5,
-                            builder: (context, scrollController) {
-                              return Container(
-                                  alignment: AlignmentDirectional.topCenter,
-                                  decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.vertical(
-                                          top: Radius.circular(20))),
-                                  child: Stack(
-                                    alignment: AlignmentDirectional.topCenter,
-                                    fit: StackFit.loose,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          top: 75,
-                                          left: 10,
-                                          right: 10,
-                                        ),
-                                        child: ListView(
-                                          shrinkWrap: false,
-                                          controller: scrollController,
-                                          children: [
-                                            Center(
-                                              child: Wrap(
-                                                direction: Axis.horizontal,
-                                                spacing: 30,
-                                                runSpacing: 30,
-                                                children: List.generate(
-                                                  30,
-                                                  (index) {
-                                                    return Container(
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              color:
-                                                                  Colors.white,
-                                                              boxShadow: [
-                                                            BoxShadow(
-                                                                blurRadius: 6,
-                                                                offset: Offset(
-                                                                    0, 3),
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        59,
-                                                                        0,
-                                                                        0,
-                                                                        0))
-                                                          ]),
-                                                      child: Avatar(
-                                                        sources: [
-                                                          GitHubSource(
-                                                              'luckyseven'),
-                                                          InstagramSource(
-                                                              'alberto.fecchi'), // Fallback if GitHubSource is not available
-                                                        ],
-                                                        shape: AvatarShape.rectangle(
-                                                            90,
-                                                            90,
-                                                            const BorderRadius
-                                                                    .all(
-                                                                Radius.circular(
-                                                                    30.0))),
-                                                        name:
-                                                            'Alberto Fecchi', // Fallback if no image source is available
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 75,
-                                        child: ListView(
-                                          controller: scrollController,
-                                          children: [
-                                            Container(
-                                              height: 5,
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                horizontal: 95,
-                                                vertical: 10,
-                                              ),
-                                              decoration: const BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(30)),
-                                                  color: Color(0xFFFBAA82),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                        blurRadius: 6.0,
-                                                        offset: Offset(0, 0),
-                                                        color: Color.fromARGB(
-                                                            59, 0, 0, 0))
-                                                  ]),
-                                            ),
-                                            Container(
-                                              alignment:
-                                                  AlignmentDirectional.topStart,
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                vertical: 9,
-                                                horizontal: 25,
-                                              ),
-                                              child: const Text(
-                                                "Avatar",
-                                                textDirection:
-                                                    TextDirection.ltr,
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 27,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ));
-                            },
-                          );
-                        },
-                      );
-                    }),
-              ))
-        ],
-      ),
-    );
   }
+
 
 ////////////////////////////////////////////////////
   Widget buildBottomDrawer(BuildContext context) {
@@ -370,7 +301,7 @@ class _TopBarState extends State<TopBar> {
                   ),
                   direction: AxisDirection.left,
                 ),
-              );;
+              );
             },
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
