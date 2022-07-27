@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:myapp/search.dart';
-import 'package:myapp/user.dart';
+import 'search.dart';
+import 'user.dart';
 import 'package:widget_slider/widget_slider.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
@@ -36,6 +36,7 @@ class _HomeState extends State<Home> {
 
   Widget buildNavBar(BuildContext context) {
     return Container(
+      //alignment: Alignment.bottomCenter,
       height: 80,
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 13),
       decoration: const BoxDecoration(
@@ -113,6 +114,7 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
 }
 
 ////////////////Top Section/////////////////////
