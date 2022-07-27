@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'search.dart';
 import 'user.dart';
 import 'package:widget_slider/widget_slider.dart';
+import 'package:myapp/style/colors.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 class Home extends StatefulWidget {
@@ -27,7 +28,7 @@ class _HomeState extends State<Home> {
           extendBody: true,
           key: scaffoldKey,
           bottomNavigationBar: buildNavBar(context),
-          backgroundColor: const Color(0xFFF2F2F2), //لون الصفحة
+          backgroundColor: backgroundColorOfpages, //لون الصفحة
           body: listOfTop[pageId],
         ),
       ),
@@ -152,16 +153,16 @@ class _TopBarState extends State<TopBar> {
     return Container(
       height: 100,
       padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.vertical(
+      decoration:  BoxDecoration(
+        borderRadius: const BorderRadius.vertical(
             bottom: Radius.circular(30),
           ),
-        color: Color(0xFF6DB9AF),
+        color: backgroundColorOfTopBar,
         boxShadow: [
           BoxShadow(
             blurRadius: 90,
-            offset: Offset(0, 0),
-            color: Color.fromARGB(59, 0, 0, 0),
+            offset: const Offset(0, 0),
+            color: shadowColorOfTopBar,
           )
         ],
       ),
@@ -173,14 +174,14 @@ class _TopBarState extends State<TopBar> {
             height: 50,
             width: 50,
             margin: const EdgeInsets.only(left: 10),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.white,
+              color: backgroundColorOfAvatar,
               boxShadow: [
                 BoxShadow(
                   blurRadius: 6,
-                  offset: Offset(0, 3),
-                  color: Color.fromARGB(59, 0, 0, 0),
+                  offset: const Offset(0, 3),
+                  color: shadowColorOfAvatar,
                 )
               ],
             ),
@@ -272,28 +273,17 @@ class _FirstState extends State<First> {
           return CupertinoButton(
             onPressed: () async => await controller.moveTo?.call(index),
             child: Container(
-              //margin: const EdgeInsets.all(0),
-              /*child: Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  alignment: AlignmentDirectional.bottomCenter,
-                  margin: EdgeInsets.all(10),
-                  child: const Text(textAlign: TextAlign.right,"jsjjkdhkhlkdhlkfhdhkfhkdhl lajslhlfdldfh klkdshflhlsdhflhs")),*/
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
+                color: backgroundColorOfSlider,
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(images[index]),
                 ),
-                boxShadow: const [
-                  /*BoxShadow(
-                    color: Color.fromARGB(255, 121, 121, 121),
-                    offset: Offset(0, 0),
-                    spreadRadius: 6,
-                  ),*/
+                boxShadow:  [
                   BoxShadow(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    offset: Offset(0, 0),
+                    color: shadowColorOfSlider,
+                    offset: const Offset(0, 0),
                     spreadRadius: -10,
                     blurRadius: 20,
                   ),
@@ -346,9 +336,9 @@ class _SecondState extends State<Second> {
                   },
                   child: Text(
                     bText,
-                    style: const TextStyle(
+                    style:  TextStyle(
                       fontSize: 22,
-                      color:  Color(0xFFFFCFB7),
+                      color:  textColorOfSliderText,
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.5,
                     ),

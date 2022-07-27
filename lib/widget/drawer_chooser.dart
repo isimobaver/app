@@ -3,6 +3,7 @@ import 'package:myapp/style/effects.dart';
 import 'package:myapp/layout/drawer_sheet.dart';
 import 'language_chooser.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:myapp/style/colors.dart';
 
 
 /////////////////////////BottomDrawer/////////////////////////
@@ -31,19 +32,19 @@ class _BottomDrawerState extends State<BottomDrawer> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Icon(
+                Icon(
                   Icons.language_rounded,
                   size: 25,
-                  color: Color(0xFF0B5D69),
+                  color: iconColorOFDrawerChooser ,
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
-                  child: const Text(
+                  child: Text(
                     "Language",
                     textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      color: Color(0xFF73A2AC),
+                      color: textColorOfDrawerChooser,
                       fontSize: 20,
                     ),
                   ),
@@ -51,8 +52,8 @@ class _BottomDrawerState extends State<BottomDrawer> {
               ],
             ),
           ),
-          const Divider(
-            color: Colors.black12,
+          Divider(
+            color: dividerColorOfDrawerChooser,
             height: 10,
             thickness: 1,
             indent: 50,
@@ -75,19 +76,19 @@ class _BottomDrawerState extends State<BottomDrawer> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Icon(
+                Icon(
                   Icons.info_rounded,
                   size: 25,
-                  color: Color(0xFF0B5D69),
+                  color: iconColorOFDrawerChooser,
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
-                  child: const Text(
+                  child: Text(
                     "About",
                     textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      color: Color(0xFF73A2AC),
+                      color: textColorOfDrawerChooser,
                       fontSize: 20,
                     ),
                   ),
@@ -95,8 +96,8 @@ class _BottomDrawerState extends State<BottomDrawer> {
               ],
             ),
           ),
-          const Divider(
-            color: Colors.black12,
+          Divider(
+            color: dividerColorOfDrawerChooser,
             height: 10,
             thickness: 1,
             indent: 50,
@@ -119,19 +120,19 @@ class _BottomDrawerState extends State<BottomDrawer> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Icon(
+                Icon(
                   Icons.code_rounded,
                   size: 25,
-                  color: Color(0xFF0B5D69),
+                  color: iconColorOFDrawerChooser,
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
-                  child: const Text(
+                  child: Text(
                     "Developers",
                     textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      color: Color(0xFF73A2AC),
+                      color: textColorOfDrawerChooser,
                       fontSize: 20,
                     ),
                   ),
@@ -139,8 +140,8 @@ class _BottomDrawerState extends State<BottomDrawer> {
               ],
             ),
           ),
-          const Divider(
-            color: Colors.black12,
+          Divider(
+            color: dividerColorOfDrawerChooser,
             height: 10,
             thickness: 1,
             indent: 50,
@@ -163,19 +164,19 @@ class _BottomDrawerState extends State<BottomDrawer> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Icon(
+                Icon(
                   Icons.copyright_rounded,
                   size: 25,
-                  color: Color(0xFF0B5D69),
+                  color: iconColorOFDrawerChooser,
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
-                  child: const Text(
+                  child: Text(
                     "Copyright",
                     textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      color: Color(0xFF73A2AC),
+                      color: textColorOfDrawerChooser,
                       fontSize: 20,
                     ),
                   ),
@@ -183,8 +184,8 @@ class _BottomDrawerState extends State<BottomDrawer> {
               ],
             ),
           ),
-          const Divider(
-            color: Colors.black12,
+          Divider(
+            color: dividerColorOfDrawerChooser,
             height: 10,
             thickness: 1,
             indent: 50,
@@ -198,19 +199,19 @@ class _BottomDrawerState extends State<BottomDrawer> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Icon(
+                Icon(
                   Icons.support_agent_rounded,
                   size: 25,
-                  color: Color(0xFF0B5D69),
+                  color: iconColorOFDrawerChooser,
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
-                  child: const Text(
+                  child: Text(
                     "Support",
                     textDirection: TextDirection.ltr,
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      color: Color(0xFF73A2AC),
+                      color: textColorOfDrawerChooser,
                       fontSize: 20,
                     ),
                   ),
@@ -218,8 +219,8 @@ class _BottomDrawerState extends State<BottomDrawer> {
               ],
             ),
           ),
-          const Divider(
-            color: Colors.black12,
+          Divider(
+            color: dividerColorOfDrawerChooser,
             height: 10,
             thickness: 1,
             indent: 50,
@@ -267,7 +268,7 @@ class DrawerPage extends StatelessWidget {
     return MaterialApp(
       home: SafeArea(
           child: Scaffold(
-        backgroundColor: const Color(0xFFF2F2F2),
+        backgroundColor: backgroundColorOfpages,
         body: Stack(
           alignment: AlignmentDirectional.topCenter,
           children: [
@@ -352,23 +353,23 @@ class AboutPage extends StatelessWidget {
               right: 30,
             ),
             child: Column(
-              children: const [
+              children:  [
                 Text(
                   "The About Us page of your website is an essential source of information for all who want to know more about your business About Us pages are where you showcase your history what is unique about your work, your companys values, and who you serve. The design written content, and visual or video elements together tell an important story about who you are and why you do it. How can you make the most of this integral part of your marketing strategy? In this article, youll learn what makes an exceptional About Us page and find 25 about us page examples of the best ones out there to inspire your own About Us page design and content.",
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      color: Color(0xFF0B5D69),
+                      color: textColorOfHeaderText,
                       fontSize: 20,
                       fontWeight: FontWeight.w500),
                 ),
-                Divider(color: Colors.black12, thickness: 1, height: 40),
+                Divider(color: dividerColorOfAboutPage, thickness: 1, height: 40),
                 Text(
                   "The About Us page of your website is an essential source of information for all who want to know more about your business About Us pages are where you showcase your history what is unique about your work, your companys values, and who you serve. The design written content, and visual or video elements together tell an important story about who you are and why you do it. How can you make the most of this integral part of your marketing strategy? In this article, youll learn what makes an exceptional About Us page and find 25 about us page examples of the best ones out there to inspire your own About Us page design and content.",
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      color: Color(0xFF0B5D69),
+                      color: textColorOfHeaderText,
                       fontSize: 10,
                       fontWeight: FontWeight.w500),
                 ),
@@ -402,37 +403,37 @@ class DevelopersPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
+              children:  [
                 Text(
                   "Name : Basim Nasser Al-mofarji",
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      color: Color(0xFF0B5D69),
+                      color: textColorOfHeaderText,
                       fontSize: 20,
                       fontWeight: FontWeight.w500),
                 ),
-                Divider(color: Color(0xFFFBAA82), thickness: 1, height: 50),
+                Divider(color: dividerColorOfevelopersPage, thickness: 1, height: 50),
                 Text(
                   "Name : Said Suod Al-qasabi",
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      color: Color(0xFF0B5D69),
+                      color: textColorOfHeaderText,
                       fontSize: 20,
                       fontWeight: FontWeight.w500),
                 ),
-                Divider(color: Color(0xFFFBAA82), thickness: 1, height: 50),
+                Divider(color: dividerColorOfevelopersPage, thickness: 1, height: 50),
                 Text(
                   "Name : Hamud Nasser Al-adawie",
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      color: Color(0xFF0B5D69),
+                      color: textColorOfHeaderText,
                       fontSize: 20,
                       fontWeight: FontWeight.w500),
                 ),
-                Divider(color: Color(0xFFFBAA82), thickness: 1, height: 50),
+                Divider(color: dividerColorOfevelopersPage, thickness: 1, height: 50),
               ],
             ),
           ),
@@ -463,37 +464,37 @@ class CopyrightPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
+              children:  [
                 Text(
                   "Name : Basim Nasser Al-mofarji.....The About Us page of your website is an essential source of information for all who want to know more about your business",
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      color: Color(0xFF0B5D69),
+                      color: textColorOfHeaderText,
                       fontSize: 20,
                       fontWeight: FontWeight.w500),
                 ),
-                Divider(color: Color(0xFFFBAA82), thickness: 1, height: 50),
+                Divider(color: dividerColorOfCopyrightPage, thickness: 1, height: 50),
                 Text(
                   "Name : Said Suod Al-qasabi....////The About Us page of your website is an essential source of information for all who want to know more about your business",
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      color: Color(0xFF0B5D69),
+                      color: textColorOfHeaderText,
                       fontSize: 20,
                       fontWeight: FontWeight.w500),
                 ),
-                Divider(color: Color(0xFFFBAA82), thickness: 1, height: 50),
+                Divider(color: dividerColorOfCopyrightPage, thickness: 1, height: 50),
                 Text(
                   "Name : Hamud Nasser Al-adawie-------------The About Us page of your website is an essential source of information for all who want to know more about your business",
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      color: Color(0xFF0B5D69),
+                      color: textColorOfHeaderText,
                       fontSize: 20,
                       fontWeight: FontWeight.w500),
                 ),
-                Divider(color: Color(0xFFFBAA82), thickness: 1, height: 50),
+                Divider(color: dividerColorOfCopyrightPage, thickness: 1, height: 50),
               ],
             ),
           ),
@@ -521,10 +522,10 @@ class _ActionSheetSuportState extends State<ActionSheetSuport> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text(
+                  child:  Text(
                     "Call",
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: textColorOfActionSheetSuport,
                       fontSize: 20,
                     ),
                   ),
@@ -534,10 +535,10 @@ class _ActionSheetSuportState extends State<ActionSheetSuport> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text(
+                  child: Text(
                     "E-mail",
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: textColorOfActionSheetSuport,
                       fontSize: 20,
                     ),
                   ),
@@ -547,10 +548,10 @@ class _ActionSheetSuportState extends State<ActionSheetSuport> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text(
+                  child: Text(
                     "WhatsApp",
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: textColorOfActionSheetSuport,
                       fontSize: 20,
                     ),
                   ),
@@ -561,10 +562,10 @@ class _ActionSheetSuportState extends State<ActionSheetSuport> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text(
+                child: Text(
                   "Cancel",
                   style: TextStyle(
-                    color: Colors.grey,
+                    color: textColorOfActionSheetSuportcancel,
                     fontSize: 20,
                   ),
                 ),

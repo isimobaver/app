@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_slider/widget_slider.dart';
+import 'package:myapp/style/colors.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -57,11 +58,11 @@ class _SearchBarState extends State<SearchBar> {
         children: [
           Flexible(
             child: Container(
-              decoration: const BoxDecoration(boxShadow: [
+              decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
                     blurRadius: 10,
-                    offset: Offset(0, 0),
-                    color: Color.fromARGB(47, 0, 0, 0))
+                    offset: const Offset(0, 0),
+                    color: shadowColorOfSearchBar,)
               ]),
               child: TextFormField(
                 controller: searchController,
@@ -77,24 +78,24 @@ class _SearchBarState extends State<SearchBar> {
                 },
                 decoration: InputDecoration(
                   hintText: "Where to go next?",
-                  hintStyle: const TextStyle(
+                  hintStyle:  TextStyle(
                     textBaseline: TextBaseline.alphabetic,
                     height: 0.8,
-                    color: Color(0xFF73A2AC),
+                    color: textColorOfhintTextOfSearchBar,
                   ),
-                  fillColor: const Color(0xFFC2D9DE),
+                  fillColor: backgroundColorOfSearchBar,
                   filled: true,
-                  prefixIcon: const Icon(
+                  prefixIcon:  Icon(
                     Icons.search,
-                    color: Color(0xFF73A2AC),
+                    color: iconColorOfSearchBarsearch,
                   ),
                   suffixIcon: AnimatedSize(
                     duration: const Duration(milliseconds: 200),
                     child: isVisible == true && searchController.text != ""
                         ? IconButton(
-                            icon: const Icon(
+                            icon: Icon(
                               CupertinoIcons.clear_circled_solid,
-                              color: Colors.white,
+                              color: iconColorOfSearchBarclear,
                             ),
                             onPressed: () {
                               searchController.clear();
@@ -135,9 +136,9 @@ class _SearchBarState extends State<SearchBar> {
                       searchController.clear();
                       FocusScope.of(context).requestFocus(FocusNode());
                     },
-                    child: const Text(
+                    child: Text(
                       "Cancel",
-                      style: TextStyle(color: Color(0xFF0B5D69), fontSize: 16),
+                      style: TextStyle(color: textColorOfCancelSearchBar, fontSize: 16),
                     ),
                   )
                 : const SizedBox(),
@@ -152,6 +153,13 @@ class _SearchBarState extends State<SearchBar> {
 class BodySection extends StatelessWidget {
   BodySection({Key? key}) : super(key: key);
   final ScrollController controllerOne = ScrollController();
+  final List <String> headerText = const [
+    "Last",
+    "Top 10",
+    "common",
+    "For you",
+    "Most View",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -168,11 +176,11 @@ class BodySection extends StatelessWidget {
                 Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: const Text(
-                    "Last",
+                  child:  Text(
+                    headerText[index],
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      color: Color(0xFF0B5D69),
+                      color: textColorOfHeaderText,
                       fontSize: 27,
                     ),
                   ),
@@ -182,14 +190,14 @@ class BodySection extends StatelessWidget {
                   height: 3,
                   margin:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: Color(0xFFFBAA82),
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      color: dividerColorOfSearchPage,
                       boxShadow: [
                         BoxShadow(
                             blurRadius: 6.0,
-                            offset: Offset(0, 0),
-                            color: Color.fromARGB(59, 0, 0, 0))
+                            offset: const Offset(0, 0),
+                            color: shadowColorOfdivider)
                       ]),
                 ),
               ],
@@ -200,188 +208,6 @@ class BodySection extends StatelessWidget {
     );
   }
 }
-
-// /////////////////////////////BodySection/////////////////////////////////////
-// class BodySection extends StatefulWidget {
-//   const BodySection({Key? key}) : super(key: key);
-
-//   @override
-//   State<BodySection> createState() => _BodySectionState();
-// }
-
-// class _BodySectionState extends State<BodySection> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         Container(
-//           margin: const EdgeInsets.symmetric(vertical: 5),
-//           padding: const EdgeInsets.all(10),
-//           alignment: Alignment.topLeft,
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             textDirection: TextDirection.ltr,
-//             children: const [
-//               Text(
-//                 "Last",
-//                 textAlign: TextAlign.left,
-//                 style: TextStyle(
-//                   color: Color(0xFF0B5D69),
-//                   fontSize: 27,
-//                   shadows: <Shadow>[
-//                     Shadow(
-//                       blurRadius: 6.0,
-//                       offset: Offset(0, 0),
-//                       color: Color.fromARGB(100, 0, 0, 0),
-//                     )
-//                   ],
-//                 ),
-//               ),
-//               LayoutPost(),
-//             ],
-//           ),
-//         ),
-//         Container(
-//           height: 5,
-//           margin: const EdgeInsets.symmetric(horizontal: 10),
-//           decoration: const BoxDecoration(
-//               borderRadius: BorderRadius.all(Radius.circular(30)),
-//               color: Color(0xFFFBAA82),
-//               boxShadow: [
-//                 BoxShadow(
-//                     blurRadius: 6.0,
-//                     offset: Offset(0, 0),
-//                     color: Color.fromARGB(59, 0, 0, 0))
-//               ]),
-//         ),
-//         Container(
-//           margin: const EdgeInsets.symmetric(vertical: 5),
-//           padding: const EdgeInsets.all(10),
-//           alignment: Alignment.topLeft,
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             textDirection: TextDirection.ltr,
-//             children: const [
-//               Text(
-//                 "Last",
-//                 textAlign: TextAlign.left,
-//                 style: TextStyle(
-//                   color: Color(0xFF0B5D69),
-//                   fontSize: 27,
-//                   shadows: <Shadow>[
-//                     Shadow(
-//                       blurRadius: 6.0,
-//                       offset: Offset(0, 0),
-//                       color: Color.fromARGB(100, 0, 0, 0),
-//                     )
-//                   ],
-//                 ),
-//               ),
-//               LayoutPost(),
-//             ],
-//           ),
-//         ),
-//         Container(
-//           height: 5,
-//           margin: const EdgeInsets.symmetric(horizontal: 10),
-//           decoration: const BoxDecoration(
-//               borderRadius: BorderRadius.all(Radius.circular(30)),
-//               color: Color(0xFFFBAA82),
-//               boxShadow: [
-//                 BoxShadow(
-//                     blurRadius: 6.0,
-//                     offset: Offset(0, 0),
-//                     color: Color.fromARGB(59, 0, 0, 0))
-//               ]),
-//         ),
-//         Container(
-//           margin: const EdgeInsets.symmetric(vertical: 5),
-//           padding: const EdgeInsets.all(10),
-//           alignment: Alignment.topLeft,
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             textDirection: TextDirection.ltr,
-//             children: const [
-//               Text(
-//                 "Last",
-//                 textAlign: TextAlign.left,
-//                 style: TextStyle(
-//                   color: Color(0xFF0B5D69),
-//                   fontSize: 27,
-//                   shadows: <Shadow>[
-//                     Shadow(
-//                       blurRadius: 6.0,
-//                       offset: Offset(0, 0),
-//                       color: Color.fromARGB(100, 0, 0, 0),
-//                     )
-//                   ],
-//                 ),
-//               ),
-//               LayoutPost(),
-//             ],
-//           ),
-//         ),
-//         Container(
-//           height: 5,
-//           margin: const EdgeInsets.symmetric(horizontal: 10),
-//           decoration: const BoxDecoration(
-//               borderRadius: BorderRadius.all(Radius.circular(30)),
-//               color: Color(0xFFFBAA82),
-//               boxShadow: [
-//                 BoxShadow(
-//                     blurRadius: 6.0,
-//                     offset: Offset(0, 0),
-//                     color: Color.fromARGB(59, 0, 0, 0))
-//               ]),
-//         ),
-//         Container(
-//           margin: const EdgeInsets.symmetric(vertical: 5),
-//           padding: const EdgeInsets.all(10),
-//           alignment: Alignment.topLeft,
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             textDirection: TextDirection.ltr,
-//             children: const [
-//               Text(
-//                 "Last",
-//                 textAlign: TextAlign.left,
-//                 style: TextStyle(
-//                   color: Color(0xFF0B5D69),
-//                   fontSize: 27,
-//                   shadows: <Shadow>[
-//                     Shadow(
-//                       blurRadius: 6.0,
-//                       offset: Offset(0, 0),
-//                       color: Color.fromARGB(100, 0, 0, 0),
-//                     )
-//                   ],
-//                 ),
-//               ),
-//               LayoutPost(),
-//             ],
-//           ),
-//         ),
-//         Container(
-//           height: 5,
-//           margin: const EdgeInsets.symmetric(horizontal: 10),
-//           decoration: const BoxDecoration(
-//               borderRadius: BorderRadius.all(Radius.circular(30)),
-//               color: Color(0xFFFBAA82),
-//               boxShadow: [
-//                 BoxShadow(
-//                     blurRadius: 6.0,
-//                     offset: Offset(0, 0),
-//                     color: Color.fromARGB(59, 0, 0, 0))
-//               ]),
-//         ),
-//       ],
-//     );
-//   }
-// }
 
 // ////////////////////////LayoutPost///////////////////////////////
 class LayoutPost extends StatefulWidget {
@@ -410,7 +236,6 @@ class _LayoutPostState extends State<LayoutPost> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      //margin: const EdgeInsets.symmetric(vertical: 0),
       child: SingleChildScrollView(
         padding: const EdgeInsets.only(left: 20),
         scrollDirection: Axis.horizontal,
@@ -423,14 +248,15 @@ class _LayoutPostState extends State<LayoutPost> {
               width: 200,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
+                color: backgroundColorOfSlider,
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(imagePath),
                 ),
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    offset: Offset(0, 0),
+                    color: shadowColorOfSlider,
+                    offset: const Offset(0, 0),
                     spreadRadius: -10,
                     blurRadius: 20,
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:myapp/style/colors.dart';
 
 
 
@@ -20,10 +21,10 @@ class _ActionSheetState extends State<ActionSheet> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text(
+                  child: Text(
                     "Take Photo",
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: textColorOfActionSheetProfile,
                       fontSize: 20,
                     ),
                   ),
@@ -33,10 +34,10 @@ class _ActionSheetState extends State<ActionSheet> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text(
+                  child: Text(
                     "Choose from library",
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: textColorOfActionSheetProfile,
                       fontSize: 20,
                     ),
                   ),
@@ -46,10 +47,10 @@ class _ActionSheetState extends State<ActionSheet> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text(
+                  child: Text(
                     "Use avatar",
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: textColorOfActionSheetProfile,
                       fontSize: 20,
                     ),
                   ),
@@ -60,10 +61,10 @@ class _ActionSheetState extends State<ActionSheet> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text(
+                child: Text(
                   "Cancel",
                   style: TextStyle(
-                    color: Colors.grey,
+                    color: textColorOfActionSheetProfilecancel,
                     fontSize: 20,
                   ),
                 ),

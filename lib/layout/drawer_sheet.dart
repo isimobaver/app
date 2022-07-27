@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/style/colors.dart';
 
 ////////////////////////ShowBottomDrawer//////////////////////////
 class ShowBottomDrawer extends StatefulWidget {
@@ -34,9 +35,9 @@ class _ShowBottomDrawerState extends State<ShowBottomDrawer> {
         return Container(
             alignment: AlignmentDirectional.topCenter,
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+            decoration: BoxDecoration(
+                color: backgroundColorOfdrawerSheet,
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(20))),
             child: Stack(
               alignment: AlignmentDirectional.topCenter,
               fit: StackFit.loose,
@@ -50,14 +51,14 @@ class _ShowBottomDrawerState extends State<ShowBottomDrawer> {
                   margin: const EdgeInsets.symmetric(
                     horizontal: 95,
                   ),
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: Color(0xFFFBAA82),
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      color: holderColorOfdrawerSheet,
                       boxShadow: [
                         BoxShadow(
                             blurRadius: 6.0,
-                            offset: Offset(0, 0),
-                            color: Color.fromARGB(59, 0, 0, 0))
+                            offset: const Offset(0, 0),
+                            color: shadowColorOfholderDraweSheet)
                       ]),
                 ),
               ],

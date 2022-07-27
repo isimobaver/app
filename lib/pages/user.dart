@@ -15,35 +15,11 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Expanded(child: TopSection()), //top
-      ],
-    );
-  }
-}
-
-/////////body/////////////////////
-class TopSection extends StatefulWidget {
-  const TopSection({Key? key}) : super(key: key);
-
-  @override
-  State<TopSection> createState() => _TopSectionState();
-}
-
-class _TopSectionState extends State<TopSection> {
-  @override
-  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        children: const [
-          TopBar(),
-          Body(),
-        ],
-      ),
-    );
+        children: const [TopBar(),Body()],
+      )
+      );
   }
 }
 
@@ -60,16 +36,16 @@ class _TopBarState extends State<TopBar> {
     return Container(
       height: 250,
       padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.vertical(
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.vertical(
             bottom: Radius.circular(30),
           ),
-          color: Color(0xFF6DB9AF),
+          color: backgroundColorOfTopBar,
           boxShadow: [
             BoxShadow(
                 blurRadius: 90,
-                offset: Offset(0, 0),
-                color: Color.fromARGB(59, 0, 0, 0))
+                offset: const Offset(0, 0),
+                color: shadowColorOfTopBar)
           ]),
       child: Column(
         children: [
@@ -81,8 +57,8 @@ class _TopBarState extends State<TopBar> {
               children: [
                 const Expanded(child: SizedBox()),
                 IconButton(
-                  icon: const Icon(Icons.menu_rounded,
-                      color: Color(0xFF0B5D69), size: 30),
+                  icon: Icon(Icons.menu_rounded,
+                      color: iconColorOfmenuInUserpage, size: 30),
                   onPressed: () => _showBottomDrawer(context),
                 ),
               ],
@@ -96,14 +72,14 @@ class _TopBarState extends State<TopBar> {
               flex: 5,
               child: Container(
                 margin: const EdgeInsets.all(5),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white,
+                    color: backgroundColorOfAvatar,
                     boxShadow: [
                       BoxShadow(
                           blurRadius: 6,
-                          offset: Offset(0, 3),
-                          color: Color.fromARGB(59, 0, 0, 0))
+                          offset: const Offset(0, 3),
+                          color: shadowColorOfAvatar)
                     ]),
               )),
           Expanded(
@@ -111,11 +87,11 @@ class _TopBarState extends State<TopBar> {
               child: Container(
                 alignment: AlignmentDirectional.center,
                 child: TextButton(
-                  child: const Text(
+                  child: Text(
                     "Edit",
                     style: TextStyle(
                       fontSize: 15,
-                      color: Color(0xFFEDEDED),
+                      color: textColorOfeditAvatar,
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.5,
                     ),
@@ -190,28 +166,28 @@ class _FirstSectionState extends State<FirstSection> {
         children: [
           Container(
               margin: const EdgeInsets.only(bottom: 10),
-              child: const Icon(
+              child: Icon(
                 Icons.bookmark,
-                color: Color(0xFF73A2AC),
+                color: iconColorOfbookmarkInUserpage,
                 size: 40,
                 shadows: [
                   BoxShadow(
                       blurRadius: 6.0,
-                      offset: Offset(0, 0),
-                      color: Color.fromARGB(59, 0, 0, 0))
+                      offset: const Offset(0, 0),
+                      color: shadowColorOfbookmarkInUserpage)
                 ],
               )),
           Container(
             height: 5,
             margin: const EdgeInsets.symmetric(horizontal: 50),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
-                color: Color(0xFFFBAA82),
+                color: dividerColorOfUserPage,
                 boxShadow: [
                   BoxShadow(
                       blurRadius: 6.0,
-                      offset: Offset(0, 0),
-                      color: Color.fromARGB(59, 0, 0, 0))
+                      offset: const Offset(0, 0),
+                      color: shadowColorOfdivider)
                 ]),
           ),
         ],
@@ -243,13 +219,13 @@ class _SecondSectionState extends State<SecondSection> {
             return Container(
               height: 140,
               width: 140,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-                color: Colors.blueGrey,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(30)),
+                color: backgroundColorOfSlider,
                 boxShadow: [
                   BoxShadow(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    offset: Offset(0, 0),
+                    color: shadowColorOfSlider,
+                    offset: const Offset(0, 0),
                     spreadRadius: -10,
                     blurRadius: 20,
                   ),
