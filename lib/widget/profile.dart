@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:myapp/style/colors.dart';
+import 'package:myapp/style/text.dart';
 
 
 
@@ -22,11 +23,8 @@ class _ActionSheetState extends State<ActionSheet> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "Take Photo",
-                    style: TextStyle(
-                      color: textColorOfActionSheetProfile,
-                      fontSize: 20,
-                    ),
+                    textOfProfileEditInside,
+                    style: textStyleOfActionSheetProfileEdit,
                   ),
                 ),
                 CupertinoActionSheetAction(
@@ -35,11 +33,8 @@ class _ActionSheetState extends State<ActionSheet> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "Choose from library",
-                    style: TextStyle(
-                      color: textColorOfActionSheetProfile,
-                      fontSize: 20,
-                    ),
+                    textOfProfileEditInside0,
+                    style: textStyleOfActionSheetProfileEdit,
                   ),
                 ),
                 CupertinoActionSheetAction(
@@ -48,11 +43,8 @@ class _ActionSheetState extends State<ActionSheet> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "Use avatar",
-                    style: TextStyle(
-                      color: textColorOfActionSheetProfile,
-                      fontSize: 20,
-                    ),
+                    textOfProfileEditInside1,
+                    style: textStyleOfActionSheetProfileEdit,
                   ),
                 ),
               ],
@@ -62,11 +54,8 @@ class _ActionSheetState extends State<ActionSheet> {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  "Cancel",
-                  style: TextStyle(
-                    color: textColorOfActionSheetProfilecancel,
-                    fontSize: 20,
-                  ),
+                  textOfProfileEditInsideCancel,
+                  style: textStyleOfCancelOfActionSheetProfileEdit,
                 ),
               ),
             );

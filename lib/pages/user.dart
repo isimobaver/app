@@ -4,6 +4,7 @@ import 'package:myapp/layout/drawer_sheet.dart';
 import 'package:myapp/widget/profile.dart';
 import 'package:myapp/widget/drawer_chooser.dart';
 import 'package:myapp/style/colors.dart';
+import 'package:myapp/style/text.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -88,13 +89,8 @@ class _TopBarState extends State<TopBar> {
                 alignment: AlignmentDirectional.center,
                 child: TextButton(
                   child: Text(
-                    "Edit",
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: textColorOfeditAvatar,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 0.5,
-                    ),
+                    textOfEditAvatar,
+                    style: textStyleOfEditAvatar,
                   ),
                   onPressed: () => _showActionSheet(context),
                 ),
@@ -181,7 +177,7 @@ class _FirstSectionState extends State<FirstSection> {
             height: 5,
             margin: const EdgeInsets.symmetric(horizontal: 50),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(30)),
+                borderRadius: const BorderRadius.all(Radius.circular(30)),
                 color: dividerColorOfUserPage,
                 boxShadow: [
                   BoxShadow(

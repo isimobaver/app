@@ -9,8 +9,8 @@ class CustomPageRoute extends PageRouteBuilder {
     required this.child,
     this.direction = AxisDirection.right,
   }) : super(
-          transitionDuration: const Duration(milliseconds: 600),
-          reverseTransitionDuration: const Duration(milliseconds: 600),
+          transitionDuration: const Duration(milliseconds: 200),
+          reverseTransitionDuration: const Duration(milliseconds: 200),
           pageBuilder: (context, animation, secondaryAnimation) => child,
         );
 

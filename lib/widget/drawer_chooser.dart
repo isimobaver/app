@@ -4,6 +4,8 @@ import 'package:myapp/layout/drawer_sheet.dart';
 import 'language_chooser.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:myapp/style/colors.dart';
+import 'package:myapp/style/text.dart';
+import 'package:myapp/pages/homepage.dart';
 
 
 /////////////////////////BottomDrawer/////////////////////////
@@ -40,13 +42,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    "Language",
-                    textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: textColorOfDrawerChooser,
-                      fontSize: 20,
-                    ),
+                    textOfLanguageOfDrawerChooser,
+                    textDirection: textDirection,
+                    textAlign: textAlignOfDrawerChooser,
+                    style: textStyleOfDrawerChooser,
                   ),
                 ),
               ],
@@ -84,13 +83,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    "About",
-                    textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: textColorOfDrawerChooser,
-                      fontSize: 20,
-                    ),
+                    textOfAboutOfDrawerChooser,
+                    textDirection: textDirection,
+                    textAlign: textAlignOfDrawerChooser,
+                    style: textStyleOfDrawerChooser,
                   ),
                 ),
               ],
@@ -128,13 +124,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    "Developers",
-                    textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: textColorOfDrawerChooser,
-                      fontSize: 20,
-                    ),
+                    textOfDevelopersOfDrawerChooser,
+                    textDirection: textDirection,
+                    textAlign: textAlignOfDrawerChooser,
+                    style: textStyleOfDrawerChooser,
                   ),
                 ),
               ],
@@ -172,13 +165,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    "Copyright",
-                    textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: textColorOfDrawerChooser,
-                      fontSize: 20,
-                    ),
+                    textOfCopyrightOfDrawerChooser,
+                    textDirection: textDirection,
+                    textAlign: textAlignOfDrawerChooser,
+                    style: textStyleOfDrawerChooser,
                   ),
                 ),
               ],
@@ -207,13 +197,10 @@ class _BottomDrawerState extends State<BottomDrawer> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    "Support",
-                    textDirection: TextDirection.ltr,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: textColorOfDrawerChooser,
-                      fontSize: 20,
-                    ),
+                    textOfSupportOfDrawerChooser,
+                    textDirection: textDirection,
+                    textAlign: textAlignOfDrawerChooser,
+                    style: textStyleOfDrawerChooser,
                   ),
                 ),
               ],
@@ -259,7 +246,7 @@ class DrawerPage extends StatelessWidget {
   ];
   late final int pageDrawerId;
 
-  final List<String> titelPage = ["About", "Developers", "Copyright"];
+  List<String> titelPage = textOftitelPageOfDrawerChooser;
 
   DrawerPage({Key? key, required this.pageDrawerId}) : super(key: key);
 
@@ -286,18 +273,18 @@ class DrawerPage extends StatelessWidget {
       height: 100,
       alignment: AlignmentDirectional.bottomCenter,
       padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(95),
           bottomRight: Radius.circular(120),
           topRight: Radius.circular(60),
         ),
-        color: Color(0xFF6DB9AF),
+        color: backgroundColorOfTopBar,
         boxShadow: [
           BoxShadow(
             blurRadius: 90,
-            offset: Offset(0, 0),
-            color: Color.fromARGB(59, 0, 0, 0),
+            offset: const Offset(0, 0),
+            color: shadowColorOfTopBar,
           )
         ],
       ),
@@ -309,10 +296,10 @@ class DrawerPage extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.chevron_left_rounded,
               size: 45,
-              color: Color(0xFF0B5D69),
+              color: iconColorOfchevronOFDrawerChooserpages,
             ),
           ),
           Expanded(
@@ -321,12 +308,9 @@ class DrawerPage extends StatelessWidget {
               margin: const EdgeInsets.only(right: 45),
               child: Text(
                 titelPage[pageDrawerId],
-                textDirection: TextDirection.ltr,
-                textAlign: TextAlign.left,
-                style: const TextStyle(
-                    color: Color(0xFF0B5D69),
-                    fontSize: 30,
-                    fontWeight: FontWeight.w500),
+                textDirection: textDirection,
+                textAlign: textAlignOfDrawerChooserpages,
+                style: textStyleOfHeaderText,
               ),
             ),
           )
@@ -355,23 +339,17 @@ class AboutPage extends StatelessWidget {
             child: Column(
               children:  [
                 Text(
-                  "The About Us page of your website is an essential source of information for all who want to know more about your business About Us pages are where you showcase your history what is unique about your work, your companys values, and who you serve. The design written content, and visual or video elements together tell an important story about who you are and why you do it. How can you make the most of this integral part of your marketing strategy? In this article, youll learn what makes an exceptional About Us page and find 25 about us page examples of the best ones out there to inspire your own About Us page design and content.",
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: textColorOfHeaderText,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500),
+                  textOfAboutOfDrawerChooserInside,
+                  textDirection: textDirection,
+                  textAlign: textAlignall,
+                  style: textStyleOfAboutpage,
                 ),
                 Divider(color: dividerColorOfAboutPage, thickness: 1, height: 40),
                 Text(
-                  "The About Us page of your website is an essential source of information for all who want to know more about your business About Us pages are where you showcase your history what is unique about your work, your companys values, and who you serve. The design written content, and visual or video elements together tell an important story about who you are and why you do it. How can you make the most of this integral part of your marketing strategy? In this article, youll learn what makes an exceptional About Us page and find 25 about us page examples of the best ones out there to inspire your own About Us page design and content.",
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: textColorOfHeaderText,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500),
+                  textOfAboutOfDrawerChooserInside0,
+                  textDirection: textDirection,
+                  textAlign: textAlignall,
+                  style: textStyleOfAbout0page,
                 ),
               ],
             ),
@@ -405,33 +383,24 @@ class DevelopersPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children:  [
                 Text(
-                  "Name : Basim Nasser Al-mofarji",
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: textColorOfHeaderText,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500),
+                  textOfDevelopersOfDrawerChooserInside,
+                  textDirection: textDirection,
+                  textAlign: textAlignall,
+                  style: textStyleOfDeveloperspage,
                 ),
                 Divider(color: dividerColorOfevelopersPage, thickness: 1, height: 50),
                 Text(
-                  "Name : Said Suod Al-qasabi",
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: textColorOfHeaderText,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500),
+                  textOfDevelopersOfDrawerChooserInside0,
+                  textDirection: textDirection,
+                  textAlign: textAlignall,
+                  style: textStyleOfDeveloperspage,
                 ),
                 Divider(color: dividerColorOfevelopersPage, thickness: 1, height: 50),
                 Text(
-                  "Name : Hamud Nasser Al-adawie",
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: textColorOfHeaderText,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500),
+                  textOfDevelopersOfDrawerChooserInside1,
+                  textDirection: textDirection,
+                  textAlign: textAlignall,
+                  style: textStyleOfDeveloperspage,
                 ),
                 Divider(color: dividerColorOfevelopersPage, thickness: 1, height: 50),
               ],
@@ -466,33 +435,24 @@ class CopyrightPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children:  [
                 Text(
-                  "Name : Basim Nasser Al-mofarji.....The About Us page of your website is an essential source of information for all who want to know more about your business",
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: textColorOfHeaderText,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500),
+                  textOfCopyrightOfDrawerChooserInside,
+                  textDirection: textDirection,
+                  textAlign: textAlignall,
+                  style: textStyleOfCopyrightpage,
                 ),
                 Divider(color: dividerColorOfCopyrightPage, thickness: 1, height: 50),
                 Text(
-                  "Name : Said Suod Al-qasabi....////The About Us page of your website is an essential source of information for all who want to know more about your business",
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: textColorOfHeaderText,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500),
+                  textOfCopyrightOfDrawerChooserInside0,
+                  textDirection: textDirection,
+                  textAlign: textAlignall,
+                  style: textStyleOfCopyrightpage,
                 ),
                 Divider(color: dividerColorOfCopyrightPage, thickness: 1, height: 50),
                 Text(
-                  "Name : Hamud Nasser Al-adawie-------------The About Us page of your website is an essential source of information for all who want to know more about your business",
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: textColorOfHeaderText,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500),
+                  textOfCopyrightOfDrawerChooserInside1,
+                  textDirection: textDirection,
+                  textAlign: textAlignall,
+                  style: textStyleOfCopyrightpage,
                 ),
                 Divider(color: dividerColorOfCopyrightPage, thickness: 1, height: 50),
               ],
@@ -504,7 +464,7 @@ class CopyrightPage extends StatelessWidget {
   }
 }
 
-////////////////////////////////Suport//////////////////////////////////
+////////////////////////////////Support//////////////////////////////////
 class ActionSheetSuport extends StatefulWidget {
   const ActionSheetSuport({Key? key}) : super(key: key);
 
@@ -523,11 +483,8 @@ class _ActionSheetSuportState extends State<ActionSheetSuport> {
                     Navigator.pop(context);
                   },
                   child:  Text(
-                    "Call",
-                    style: TextStyle(
-                      color: textColorOfActionSheetSuport,
-                      fontSize: 20,
-                    ),
+                    textOfActionSheetSuportInside,
+                    style: textStyleOfActionSheetSuport,
                   ),
                 ),
                 CupertinoActionSheetAction(
@@ -536,11 +493,8 @@ class _ActionSheetSuportState extends State<ActionSheetSuport> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "E-mail",
-                    style: TextStyle(
-                      color: textColorOfActionSheetSuport,
-                      fontSize: 20,
-                    ),
+                    textOfActionSheetSuportInside0,
+                    style: textStyleOfActionSheetSuport,
                   ),
                 ),
                 CupertinoActionSheetAction(
@@ -549,11 +503,8 @@ class _ActionSheetSuportState extends State<ActionSheetSuport> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "WhatsApp",
-                    style: TextStyle(
-                      color: textColorOfActionSheetSuport,
-                      fontSize: 20,
-                    ),
+                    textOfActionSheetSuportInside1,
+                    style: textStyleOfActionSheetSuport,
                   ),
                 ),
               ],
@@ -563,11 +514,8 @@ class _ActionSheetSuportState extends State<ActionSheetSuport> {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  "Cancel",
-                  style: TextStyle(
-                    color: textColorOfActionSheetSuportcancel,
-                    fontSize: 20,
-                  ),
+                  textOfActionSheetSuportInsideCancel,
+                  style: textStyleOfCancelOfActionSheetSuport,
                 ),
               ),
             );

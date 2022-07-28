@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_slider/widget_slider.dart';
 import 'package:myapp/style/colors.dart';
+import 'package:myapp/style/text.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -60,9 +61,10 @@ class _SearchBarState extends State<SearchBar> {
             child: Container(
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
-                    blurRadius: 10,
-                    offset: const Offset(0, 0),
-                    color: shadowColorOfSearchBar,)
+                  blurRadius: 10,
+                  offset: const Offset(0, 0),
+                  color: shadowColorOfSearchBar,
+                )
               ]),
               child: TextFormField(
                 controller: searchController,
@@ -77,15 +79,11 @@ class _SearchBarState extends State<SearchBar> {
                   }
                 },
                 decoration: InputDecoration(
-                  hintText: "Where to go next?",
-                  hintStyle:  TextStyle(
-                    textBaseline: TextBaseline.alphabetic,
-                    height: 0.8,
-                    color: textColorOfhintTextOfSearchBar,
-                  ),
-                  fillColor: backgroundColorOfSearchBar,
+                  hintText: textOfhintTextOfSearchBarInSearchpage,
+                  hintStyle: textStyleOfhintTextOfSearchBarInSearchpage,
+                  fillColor: backgroundColorOfSearchBarInSearchpage,
                   filled: true,
-                  prefixIcon:  Icon(
+                  prefixIcon: Icon(
                     Icons.search,
                     color: iconColorOfSearchBarsearch,
                   ),
@@ -137,8 +135,8 @@ class _SearchBarState extends State<SearchBar> {
                       FocusScope.of(context).requestFocus(FocusNode());
                     },
                     child: Text(
-                      "Cancel",
-                      style: TextStyle(color: textColorOfCancelSearchBar, fontSize: 16),
+                      textOfCancelBottonOfSearchBarInSearchpage,
+                      style: textStyleOfCancelBottonOfSearchBarInSearchpage,
                     ),
                   )
                 : const SizedBox(),
@@ -153,13 +151,7 @@ class _SearchBarState extends State<SearchBar> {
 class BodySection extends StatelessWidget {
   BodySection({Key? key}) : super(key: key);
   final ScrollController controllerOne = ScrollController();
-  final List <String> headerText = const [
-    "Last",
-    "Top 10",
-    "common",
-    "For you",
-    "Most View",
-  ];
+  List<String> headerText = textOfHeaderTextBottonInUserpage;
 
   @override
   Widget build(BuildContext context) {
@@ -176,13 +168,10 @@ class BodySection extends StatelessWidget {
                 Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child:  Text(
+                  child: Text(
                     headerText[index],
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: textColorOfHeaderText,
-                      fontSize: 27,
-                    ),
+                    textAlign: textAlignOfHeaderTextBottonInUserpage,
+                    style: textStyleOfHeaderTextBottonInUserpage,
                   ),
                 ),
                 const LayoutPost(),

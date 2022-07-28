@@ -5,6 +5,7 @@ import 'search.dart';
 import 'user.dart';
 import 'package:widget_slider/widget_slider.dart';
 import 'package:myapp/style/colors.dart';
+import'package:myapp/style/text.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 class Home extends StatefulWidget {
@@ -37,17 +38,16 @@ class _HomeState extends State<Home> {
 
   Widget buildNavBar(BuildContext context) {
     return Container(
-      //alignment: Alignment.bottomCenter,
       height: 80,
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 13),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
-        color: Color(0xFFF2F2F2),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20.0)),
+        color: backgroundColorOfbottomNavigationBar,
         boxShadow: [
           BoxShadow(
             blurRadius: 6,
-            offset: Offset(0, -3),
-            color: Color.fromARGB(59, 0, 0, 0),
+            offset: const Offset(0, -3),
+            color: shadowColorOfbottomNavigationBar,
           ),
         ],
       ),
@@ -64,8 +64,8 @@ class _HomeState extends State<Home> {
                       "images/svg/HOME.svg",
                       fit: BoxFit.contain,
                       color: pageId == 0
-                          ? const Color(0xFF6DB9AF)
-                          : const Color(0xFFCCCCCC),
+                          ? iconColorOfabelOfbottomNavigationBar
+                          : iconColorOfdisabelOfbottomNavigationBar,
                     ),
                     onPressed: () {
                       setState(() {
@@ -80,8 +80,8 @@ class _HomeState extends State<Home> {
                     "images/svg/SEARCH.svg",
                     fit: BoxFit.contain,
                     color: pageId == 1
-                        ? const Color(0xFF6DB9AF)
-                        : const Color(0xFFCCCCCC),
+                        ? iconColorOfabelOfbottomNavigationBar
+                        : iconColorOfdisabelOfbottomNavigationBar,
                   ),
                   onPressed: () {
                     setState(() {
@@ -95,8 +95,8 @@ class _HomeState extends State<Home> {
                       "images/svg/USER.svg",
                       fit: BoxFit.contain,
                       color: pageId == 2
-                          ? const Color(0xFF6DB9AF)
-                          : const Color(0xFFCCCCCC),
+                          ? iconColorOfabelOfbottomNavigationBar
+                          : iconColorOfdisabelOfbottomNavigationBar,
                     ),
                     onPressed: () {
                       setState(
@@ -207,7 +207,6 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      //padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.only(bottom: 50),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -221,10 +220,6 @@ class _BodyState extends State<Body> {
             flex: 7,
             child: First(),
           ),
-          /*Expanded(
-            flex: 2,
-            child: SizedBox.expand(),
-          )*/
         ],
       ),
     );
@@ -311,13 +306,7 @@ class _SecondState extends State<Second> {
     duration: const Duration(milliseconds: 600),
   );
 
-  final buttonsText = const [
-    "Last",
-    "Top 10",
-    "common",
-    "For you",
-    "Most View",
-  ];
+ List<String> buttonsText = textOfSliderTextBottonInHomepage;
 
 
   @override
@@ -336,12 +325,7 @@ class _SecondState extends State<Second> {
                   },
                   child: Text(
                     bText,
-                    style:  TextStyle(
-                      fontSize: 22,
-                      color:  textColorOfSliderText,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 0.5,
-                    ),
+                    style:  textStyleOfSliderTextBottonInHomepag,
                   ),
                 ),
               )
