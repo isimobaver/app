@@ -151,7 +151,7 @@ class _SearchBarState extends State<SearchBar> {
 class BodySection extends StatelessWidget {
   BodySection({Key? key}) : super(key: key);
   final ScrollController controllerOne = ScrollController();
-  List<String> headerText = textOfHeaderTextBottonInUserpage;
+  final List<String> headerText = textOfHeaderTextBottonInUserpage;
 
   @override
   Widget build(BuildContext context) {
