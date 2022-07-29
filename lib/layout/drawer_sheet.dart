@@ -11,24 +11,20 @@ class ShowBottomDrawer extends StatefulWidget {
 
   @override
   State<ShowBottomDrawer> createState() => _ShowBottomDrawerState(
-        heightDrawer: heightDrawer,
-        contineDrawer: contineDrawer,
+        // heightDrawer: heightDrawer,
+        // contineDrawer: contineDrawer,
       );
 }
 
 class _ShowBottomDrawerState extends State<ShowBottomDrawer> {
-  late final double heightDrawer;
-  final Widget contineDrawer;
-  _ShowBottomDrawerState({
-    Key? key,
-    required this.heightDrawer,
-    required this.contineDrawer,
-  });
+  // late final double heightDrawer;
+  // final Widget contineDrawer;
+  _ShowBottomDrawerState();
 
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: heightDrawer,
+      initialChildSize: widget.heightDrawer,
       maxChildSize: 2,
       minChildSize: 0.5,
       builder: (context, scrollController) {
@@ -44,7 +40,7 @@ class _ShowBottomDrawerState extends State<ShowBottomDrawer> {
               children: [
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-                  child: contineDrawer,
+                  child: widget.contineDrawer,
                 ),
                 Container(
                   height: 5,

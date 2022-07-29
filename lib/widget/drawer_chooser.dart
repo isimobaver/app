@@ -5,7 +5,7 @@ import 'language_chooser.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
-import 'package:myapp/pages/homepage.dart';
+// import 'package:myapp/pages/homepage.dart';
 
 
 /////////////////////////BottomDrawer/////////////////////////
@@ -246,7 +246,7 @@ class DrawerPage extends StatelessWidget {
   ];
   late final int pageDrawerId;
 
-  List<String> titelPage = textOftitelPageOfDrawerChooser;
+  final List<String> titelPage = textOftitelPageOfDrawerChooser;
 
   DrawerPage({Key? key, required this.pageDrawerId}) : super(key: key);
 
