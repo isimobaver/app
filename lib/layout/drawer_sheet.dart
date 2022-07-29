@@ -25,7 +25,7 @@ class _ShowBottomDrawerState extends State<ShowBottomDrawer> {
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       initialChildSize: widget.heightDrawer,
-      maxChildSize: 2,
+      maxChildSize: 1.0,
       minChildSize: 0.5,
       builder: (context, scrollController) {
         return Container(

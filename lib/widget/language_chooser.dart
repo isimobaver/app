@@ -32,7 +32,7 @@ class LanguagesTiles extends StatefulWidget {
 
 class _LanguagesTilesState extends State<LanguagesTiles> {
   List<String> languagesList = ["العريبة", "English", "française"];
-  late String language;
+  String appLang = "العريبة";
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -41,9 +41,9 @@ class _LanguagesTilesState extends State<LanguagesTiles> {
           children: languagesList.map<Widget>(
             (language) {
               return Material(
-                child: RadioListTile(
+                child: RadioListTile<String>(
                   value: language,
-                  groupValue: language,
+                  groupValue: appLang,
                   title:  Text(
                     language,
                     style: const TextStyle(
@@ -53,6 +53,9 @@ class _LanguagesTilesState extends State<LanguagesTiles> {
                   ),
                   tileColor: Colors.white,
                   onChanged: (e) {
+                    setState(() {
+                      appLang = e!;
+                    });
                   },
                 ),
               );
