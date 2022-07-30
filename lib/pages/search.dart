@@ -159,40 +159,45 @@ class BodySection extends StatelessWidget {
       scrollDirection: Axis.vertical,
       controller: controllerOne,
       child: Column(
-        children: List.generate(4, (index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: Text(
-                    headerText[index],
-                    textAlign: textAlignOfHeaderTextBottonInUserpage,
-                    style: textStyleOfHeaderTextBottonInUserpage,
-                  ),
+        children: [
+          Column(
+            children: List.generate(4, (index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin:
+                          const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      child: Text(
+                        headerText[index],
+                        textAlign: textAlignOfHeaderTextBottonInUserpage,
+                        style: textStyleOfHeaderTextBottonInUserpage,
+                      ),
+                    ),
+                    const LayoutPost(),
+                    Container(
+                      height: 3,
+                      margin:
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(Radius.circular(30)),
+                          color: dividerColorOfSearchPage,
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 6.0,
+                                offset: const Offset(0, 0),
+                                color: shadowColorOfdivider)
+                          ]),
+                    ),
+                  ],
                 ),
-                const LayoutPost(),
-                Container(
-                  height: 3,
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(30)),
-                      color: dividerColorOfSearchPage,
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 6.0,
-                            offset: const Offset(0, 0),
-                            color: shadowColorOfdivider)
-                      ]),
-                ),
-              ],
-            ),
-          );
-        }),
+              );
+            }),
+          ),
+          SizedBox(height: 100,)
+        ],
       ),
     );
   }

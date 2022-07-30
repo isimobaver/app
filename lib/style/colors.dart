@@ -25,6 +25,7 @@ Color textColorOfHeaderTextBottonInUserpage = const Color(0xFF0B5D69);
 Color textColorOfHeaderText = const Color(0xFF0B5D69);
 Color textColorOfEditAvatar = const Color(0xFFEDEDED);
 Color textColorOfDrawerChooser = const Color(0xFF73A2AC);
+Color textColorOfLanguageChooser = const Color(0xFF73A2AC);
 Color textColorOfActionSheetSuport = Colors.grey;
 Color textColorOfCancelOfActionSheetSuport = Colors.grey;
 Color textColorOfActionSheetSuportcancel = Colors.grey;

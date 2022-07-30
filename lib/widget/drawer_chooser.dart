@@ -256,12 +256,15 @@ class DrawerPage extends StatelessWidget {
       home: SafeArea(
           child: Scaffold(
         backgroundColor: backgroundColorOfpages,
-        body: Stack(
-          alignment: AlignmentDirectional.topCenter,
-          children: [
-            pageDrawer[pageDrawerId],
-            buildTopBarDrawer(context),
-          ],
+        body: GestureDetector(
+          onHorizontalDragStart: (details) => Navigator.pop(context),
+          child: Stack(
+            alignment: AlignmentDirectional.topCenter,
+            children: [
+              pageDrawer[pageDrawerId],
+              buildTopBarDrawer(context),
+            ],
+          ),
         ),
       )),
     );

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/layout/Check_List_Tile.dart';
+import 'package:myapp/style/colors.dart';
+import 'package:myapp/style/text.dart';
 
 class CurrencyChooser extends StatelessWidget {
   const CurrencyChooser({Key? key}) : super(key: key);
@@ -8,20 +11,30 @@ class CurrencyChooser extends StatelessWidget {
   Widget build(BuildContext context) {
           return Center(
             child: Column(
-              children: const  [
-                 Text(
-                  ': اختر لغتك',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children:  [
+                 Padding(
+                   padding: const EdgeInsets.symmetric(horizontal: 10),
+                   child: Text(
+                    textOfHeaderOfLanguageChooser,
+                    style: textStyleOfHeaderOfLanguageChooser,
                 ),
-                SizedBox(
+                 ),
+                const SizedBox(
                   height: 10,
                 ),
-                LanguagesTiles()
+                const LanguagesTiles()
               ],
             ),
           );
         }
-      }
+}
+
+
+
+enum SingingCharacter { lafayette, jefferson }
+
 
 class LanguagesTiles extends StatefulWidget {
   const LanguagesTiles({Key? key}) : super(key: key);
@@ -31,27 +44,31 @@ class LanguagesTiles extends StatefulWidget {
 }
 
 class _LanguagesTilesState extends State<LanguagesTiles> {
-  List<String> languagesList = ["العريبة", "English", "française"];
-  String appLang = "العريبة";
+  List<String> languagesList = textOfLanguageChooserInside;
+  
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: languagesList.map<Widget>(
             (language) {
               return Material(
-                child: RadioListTile<String>(
+                child: CheckListTile<String>(
+                  activeColor: textColorOfLanguageChooser,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 0),
                   value: language,
                   groupValue: appLang,
-                  title:  Text(
-                    language,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
+                  title:  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                    child: Text(
+                      language,
+                      style: textStyleOfLanguageChooserInside,
                     ),
                   ),
-                  tileColor: Colors.white,
+                  tileColor: backgroundColorOfdrawerSheet,
                   onChanged: (e) {
                     setState(() {
                       appLang = e!;

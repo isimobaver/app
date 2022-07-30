@@ -30,7 +30,7 @@ class _ShowBottomDrawerState extends State<ShowBottomDrawer> {
       builder: (context, scrollController) {
         return Container(
             alignment: AlignmentDirectional.topCenter,
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             decoration: BoxDecoration(
                 color: backgroundColorOfdrawerSheet,
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(20))),

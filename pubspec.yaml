@@ -38,6 +38,8 @@ dependencies:
   widget_slider: ^0.1.0
   avatars: ^3.0.2
   image_picker: ^0.8.5+3
+  carousel_slider: ^4.1.1
+  provider: ^6.0.3
   
 
 dev_dependencies:

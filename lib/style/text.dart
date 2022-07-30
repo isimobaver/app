@@ -25,14 +25,19 @@ String textOfDevelopersOfDrawerChooser = "Developers";
 String textOfCopyrightOfDrawerChooser = "Copyright";
 String textOfSupportOfDrawerChooser = "Support";
 final textOftitelPageOfDrawerChooser = ["About", "Developers", "Copyright"];
-String textOfAboutOfDrawerChooserInside = "The About Us page of your website is an essential source of information for all who want to know more about your business About Us pages are where you showcase your history what is unique about your work, your companys values, and who you serve. The design written content, and visual or video elements together tell an important story about who you are and why you do it. How can you make the most of this integral part of your marketing strategy? In this article, youll learn what makes an exceptional About Us page and find 25 about us page examples of the best ones out there to inspire your own About Us page design and content.";
-String textOfAboutOfDrawerChooserInside0 = "The About Us page of your website is an essential source of information for all who want to know more about your business About Us pages are where you showcase your history what is unique about your work, your companys values, and who you serve. The design written content, and visual or video elements together tell an important story about who you are and why you do it. How can you make the most of this integral part of your marketing strategy? In this article, youll learn what makes an exceptional About Us page and find 25 about us page examples of the best ones out there to inspire your own About Us page design and content.";
+String textOfAboutOfDrawerChooserInside =
+    "The About Us page of your website is an essential source of information for all who want to know more about your business About Us pages are where you showcase your history what is unique about your work, your companys values, and who you serve. The design written content, and visual or video elements together tell an important story about who you are and why you do it. How can you make the most of this integral part of your marketing strategy? In this article, youll learn what makes an exceptional About Us page and find 25 about us page examples of the best ones out there to inspire your own About Us page design and content.";
+String textOfAboutOfDrawerChooserInside0 =
+    "The About Us page of your website is an essential source of information for all who want to know more about your business About Us pages are where you showcase your history what is unique about your work, your companys values, and who you serve. The design written content, and visual or video elements together tell an important story about who you are and why you do it. How can you make the most of this integral part of your marketing strategy? In this article, youll learn what makes an exceptional About Us page and find 25 about us page examples of the best ones out there to inspire your own About Us page design and content.";
 String textOfDevelopersOfDrawerChooserInside = "Name : Basim Nasser Al-mofarji";
 String textOfDevelopersOfDrawerChooserInside0 = "Name : Said Suod Al-qasabi";
 String textOfDevelopersOfDrawerChooserInside1 = "Name : Hamud Nasser Al-adawie";
-String textOfCopyrightOfDrawerChooserInside = "Name : Basim Nasser Al-mofarji.....The About Us page of your website is an essential source of information for all who want to know more about your business";
-String textOfCopyrightOfDrawerChooserInside0 = "Name : Said Suod Al-qasabi....////The About Us page of your website is an essential source of information for all who want to know more about your business";
-String textOfCopyrightOfDrawerChooserInside1 = "Name : Hamud Nasser Al-adawie-------------The About Us page of your website is an essential source of information for all who want to know more about your business";
+String textOfCopyrightOfDrawerChooserInside =
+    "Name : Basim Nasser Al-mofarji.....The About Us page of your website is an essential source of information for all who want to know more about your business";
+String textOfCopyrightOfDrawerChooserInside0 =
+    "Name : Said Suod Al-qasabi....////The About Us page of your website is an essential source of information for all who want to know more about your business";
+String textOfCopyrightOfDrawerChooserInside1 =
+    "Name : Hamud Nasser Al-adawie-------------The About Us page of your website is an essential source of information for all who want to know more about your business";
 String textOfActionSheetSuportInside = "Call";
 String textOfActionSheetSuportInside0 = "E-mail";
 String textOfActionSheetSuportInside1 = "WhatsApp";
@@ -41,6 +46,17 @@ String textOfProfileEditInside = "Take Photo";
 String textOfProfileEditInside0 = "Choose from library";
 String textOfProfileEditInside1 = "Use avatar";
 String textOfProfileEditInsideCancel = "Cancel";
+String textOfHeaderOfLanguageChooser = "language";
+final textOfLanguageChooserInside = [
+  "العريبة",
+  "English",
+  "française",
+  "française1",
+  "française2",
+  "française3",
+  "française4"
+];
+String appLang = "العريبة";
 /////////////////////////////textStyle///////////////////////////////
 TextStyle textStyleOfSliderTextBottonInHomepag = TextStyle(
   fontSize: fontSizeOfSliderTextBottonInHomepage,
@@ -112,6 +128,16 @@ TextStyle textStyleOfCancelOfActionSheetProfileEdit = TextStyle(
   color: textColorOfActionSheetProfilecancel,
   fontSize: fontSizeOfProfileEditsheet,
 );
+TextStyle textStyleOfHeaderOfLanguageChooser = TextStyle(
+  fontSize: fontSizeOfHeaderOfLanguageChooser,
+  fontWeight: fontWeightOfHeaderOfLanguageChoose,
+  color: textColorOfHeaderText,
+);
+TextStyle textStyleOfLanguageChooserInside = TextStyle(
+  fontSize: fontSizeOfLanguageChooserInside,
+  fontWeight: fontWeightOfLanguageChooserInside,
+  color: textColorOfLanguageChooser,
+);
 /////////////////////////////fontSize////////////////////////////////
 double fontSizeOfSliderTextBottonInHomepage = 22;
 double fontSizeOfCancelBottonOfSearchBarInSearchpage = 16;
@@ -125,6 +151,8 @@ double fontSizeOfDeveloperspage = 20;
 double fontSizeOfCopyrightpage = 20;
 double fontSizeOfSuportsheet = 20;
 double fontSizeOfProfileEditsheet = 20;
+double fontSizeOfHeaderOfLanguageChooser = 25;
+double fontSizeOfLanguageChooserInside = 20;
 /////////////////////////////fontWeight//////////////////////////////
 FontWeight fontWeightOfSliderTextBottonInHomepage = FontWeight.w500;
 FontWeight fontWeightOfEditAvatar = FontWeight.w500;
@@ -132,6 +160,8 @@ FontWeight fontWeightOfHeaderText = FontWeight.w500;
 FontWeight fontWeightOfAboutpage = FontWeight.w500;
 FontWeight fontWeightOfDeveloperspage = FontWeight.w500;
 FontWeight fontWeightOfCopyrightpage = FontWeight.w500;
+FontWeight fontWeightOfHeaderOfLanguageChoose = FontWeight.w800;
+FontWeight fontWeightOfLanguageChooserInside = FontWeight.w800;
 /////////////////////////////letterSpacing///////////////////////////
 double letterSpacingOfSliderTextBottonInHomepage = 0.5;
 double letterSpacingOfEditAvatar = 0.5;
