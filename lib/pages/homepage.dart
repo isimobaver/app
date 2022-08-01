@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,9 +6,11 @@ import 'search.dart';
 import 'user.dart';
 import 'package:widget_slider/widget_slider.dart';
 import 'package:myapp/style/colors.dart';
-import'package:myapp/style/text.dart';
-
+import 'package:myapp/style/text.dart';
+import 'package:myapp/layout/drawer_sheet.dart';
+import 'package:myapp/widget/poster.dart';
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -115,7 +118,6 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-
 }
 
 ////////////////Top Section/////////////////////
@@ -153,10 +155,10 @@ class _TopBarState extends State<TopBar> {
     return Container(
       height: 100,
       padding: const EdgeInsets.all(10),
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         borderRadius: const BorderRadius.vertical(
-            bottom: Radius.circular(30),
-          ),
+          bottom: Radius.circular(30),
+        ),
         color: backgroundColorOfTopBar,
         boxShadow: [
           BoxShadow(
@@ -266,7 +268,10 @@ class _FirstState extends State<First> {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index, activeIndex) {
           return CupertinoButton(
-            onPressed: () async => await controller.moveTo?.call(index),
+            onPressed: () async {
+              await controller.moveTo?.call(index);
+              _showBottomDrawer(context);
+            },
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
@@ -275,7 +280,7 @@ class _FirstState extends State<First> {
                   fit: BoxFit.cover,
                   image: AssetImage(images[index]),
                 ),
-                boxShadow:  [
+                boxShadow: [
                   BoxShadow(
                     color: shadowColorOfSlider,
                     offset: const Offset(0, 0),
@@ -290,7 +295,28 @@ class _FirstState extends State<First> {
       ),
     );
   }
+
+  void _showBottomDrawer(BuildContext context) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      context: context,
+      builder: (context) {
+        return ShowBottomDrawer(
+          childHeader: header(),
+          heightDrawer: 1,
+          contineDrawer: Poster(),
+          showholderDraweSheet: false,
+        );
+      },
+    );
+  }
 }
+
+
 
 //////////////////////////////////////Second Elemant///////////////////////////
 
@@ -306,8 +332,7 @@ class _SecondState extends State<Second> {
     duration: const Duration(milliseconds: 600),
   );
 
- List<String> buttonsText = textOfSliderTextBottonInHomepage;
-
+  List<String> buttonsText = textOfSliderTextBottonInHomepage;
 
   @override
   Widget build(BuildContext context) {
@@ -321,11 +346,10 @@ class _SecondState extends State<Second> {
           children: buttonsText
               .map(
                 (bText) => CupertinoButton(
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                   child: Text(
                     bText,
-                    style:  textStyleOfSliderTextBottonInHomepag,
+                    style: textStyleOfSliderTextBottonInHomepag,
                   ),
                 ),
               )

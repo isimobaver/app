@@ -21,198 +21,201 @@ class _BottomDrawerState extends State<BottomDrawer> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _showBottomDrawer(context);
-            },
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.language_rounded,
-                  size: 25,
-                  color: iconColorOFDrawerChooser ,
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Text(
-                    textOfLanguageOfDrawerChooser,
-                    textDirection: textDirection,
-                    textAlign: textAlignOfDrawerChooser,
-                    style: textStyleOfDrawerChooser,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10,right: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _showBottomDrawer(context);
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.language_rounded,
+                    size: 25,
+                    color: iconColorOFDrawerChooser ,
                   ),
-                ),
-              ],
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      textOfLanguageOfDrawerChooser,
+                      textDirection: textDirection,
+                      textAlign: textAlignOfDrawerChooser,
+                      style: textStyleOfDrawerChooser,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Divider(
-            color: dividerColorOfDrawerChooser,
-            height: 10,
-            thickness: 1,
-            indent: 50,
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              idPage = 0;
-              Navigator.push(
-                context,
-                CustomPageRoute(
-                  child: DrawerPage(
-                    pageDrawerId: idPage,
-                  ),
-                  direction: AxisDirection.left,
-                ),
-              );
-            },
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.info_rounded,
-                  size: 25,
-                  color: iconColorOFDrawerChooser,
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Text(
-                    textOfAboutOfDrawerChooser,
-                    textDirection: textDirection,
-                    textAlign: textAlignOfDrawerChooser,
-                    style: textStyleOfDrawerChooser,
-                  ),
-                ),
-              ],
+            Divider(
+              color: dividerColorOfDrawerChooser,
+              height: 10,
+              thickness: 1,
+              indent: 50,
             ),
-          ),
-          Divider(
-            color: dividerColorOfDrawerChooser,
-            height: 10,
-            thickness: 1,
-            indent: 50,
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              idPage = 1;
-              Navigator.push(
-                context,
-                CustomPageRoute(
-                  child: DrawerPage(
-                    pageDrawerId: idPage,
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                idPage = 0;
+                Navigator.push(
+                  context,
+                  CustomPageRoute(
+                    child: DrawerPage(
+                      pageDrawerId: idPage,
+                    ),
+                    direction: AxisDirection.left,
                   ),
-                  direction: AxisDirection.left,
-                ),
-              );
-            },
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.code_rounded,
-                  size: 25,
-                  color: iconColorOFDrawerChooser,
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Text(
-                    textOfDevelopersOfDrawerChooser,
-                    textDirection: textDirection,
-                    textAlign: textAlignOfDrawerChooser,
-                    style: textStyleOfDrawerChooser,
+                );
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.info_rounded,
+                    size: 25,
+                    color: iconColorOFDrawerChooser,
                   ),
-                ),
-              ],
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      textOfAboutOfDrawerChooser,
+                      textDirection: textDirection,
+                      textAlign: textAlignOfDrawerChooser,
+                      style: textStyleOfDrawerChooser,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Divider(
-            color: dividerColorOfDrawerChooser,
-            height: 10,
-            thickness: 1,
-            indent: 50,
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              idPage = 2;
-              Navigator.push(
-                context,
-                CustomPageRoute(
-                  child: DrawerPage(
-                    pageDrawerId: idPage,
-                  ),
-                  direction: AxisDirection.left,
-                ),
-              );
-            },
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.copyright_rounded,
-                  size: 25,
-                  color: iconColorOFDrawerChooser,
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Text(
-                    textOfCopyrightOfDrawerChooser,
-                    textDirection: textDirection,
-                    textAlign: textAlignOfDrawerChooser,
-                    style: textStyleOfDrawerChooser,
-                  ),
-                ),
-              ],
+            Divider(
+              color: dividerColorOfDrawerChooser,
+              height: 10,
+              thickness: 1,
+              indent: 50,
             ),
-          ),
-          Divider(
-            color: dividerColorOfDrawerChooser,
-            height: 10,
-            thickness: 1,
-            indent: 50,
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              _showActionSheet(context);
-            },
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.support_agent_rounded,
-                  size: 25,
-                  color: iconColorOFDrawerChooser,
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Text(
-                    textOfSupportOfDrawerChooser,
-                    textDirection: textDirection,
-                    textAlign: textAlignOfDrawerChooser,
-                    style: textStyleOfDrawerChooser,
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                idPage = 1;
+                Navigator.push(
+                  context,
+                  CustomPageRoute(
+                    child: DrawerPage(
+                      pageDrawerId: idPage,
+                    ),
+                    direction: AxisDirection.left,
                   ),
-                ),
-              ],
+                );
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.code_rounded,
+                    size: 25,
+                    color: iconColorOFDrawerChooser,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      textOfDevelopersOfDrawerChooser,
+                      textDirection: textDirection,
+                      textAlign: textAlignOfDrawerChooser,
+                      style: textStyleOfDrawerChooser,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Divider(
-            color: dividerColorOfDrawerChooser,
-            height: 10,
-            thickness: 1,
-            indent: 50,
-          ),
-        ],
+            Divider(
+              color: dividerColorOfDrawerChooser,
+              height: 10,
+              thickness: 1,
+              indent: 50,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                idPage = 2;
+                Navigator.push(
+                  context,
+                  CustomPageRoute(
+                    child: DrawerPage(
+                      pageDrawerId: idPage,
+                    ),
+                    direction: AxisDirection.left,
+                  ),
+                );
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.copyright_rounded,
+                    size: 25,
+                    color: iconColorOFDrawerChooser,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      textOfCopyrightOfDrawerChooser,
+                      textDirection: textDirection,
+                      textAlign: textAlignOfDrawerChooser,
+                      style: textStyleOfDrawerChooser,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Divider(
+              color: dividerColorOfDrawerChooser,
+              height: 10,
+              thickness: 1,
+              indent: 50,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _showActionSheet(context);
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.support_agent_rounded,
+                    size: 25,
+                    color: iconColorOFDrawerChooser,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      textOfSupportOfDrawerChooser,
+                      textDirection: textDirection,
+                      textAlign: textAlignOfDrawerChooser,
+                      style: textStyleOfDrawerChooser,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Divider(
+              color: dividerColorOfDrawerChooser,
+              height: 10,
+              thickness: 1,
+              indent: 50,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -225,13 +228,14 @@ class _BottomDrawerState extends State<BottomDrawer> {
 
   void _showBottomDrawer(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: false,
       backgroundColor: Colors.transparent,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       context: context,
       builder: (context) {
-        return const ShowBottomDrawer(heightDrawer: 0.9,contineDrawer: CurrencyChooser(),);
+        return ShowBottomDrawer(heightDrawer: 1,contineDrawer: const CurrencyChooser(),showholderDraweSheet: true,childHeader: Container(height: 0),);
       },
     );
   }

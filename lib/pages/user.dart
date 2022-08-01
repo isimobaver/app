@@ -108,13 +108,14 @@ class _TopBarState extends State<TopBar> {
 
   void _showBottomDrawer(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       backgroundColor: Colors.transparent,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       context: context,
       builder: (context) {
-        return const ShowBottomDrawer(heightDrawer: 0.9,contineDrawer: BottomDrawer(),);
+        return ShowBottomDrawer(heightDrawer: 0.52,contineDrawer: const BottomDrawer(),showholderDraweSheet: true,childHeader: Container(height: 0),);
       },
     );
   }

@@ -5,8 +5,10 @@ import 'package:myapp/style/colors.dart';
 class ShowBottomDrawer extends StatefulWidget {
   final double heightDrawer;
   final Widget contineDrawer;
-  const ShowBottomDrawer(
-      {Key? key, required this.heightDrawer, required this.contineDrawer})
+  final Widget childHeader;
+  final bool showholderDraweSheet;
+  ShowBottomDrawer(
+      {Key? key, required this.heightDrawer, required this.contineDrawer,this.showholderDraweSheet = true, required this.childHeader,})
       : super(key: key);
 
   @override
@@ -25,12 +27,12 @@ class _ShowBottomDrawerState extends State<ShowBottomDrawer> {
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       initialChildSize: widget.heightDrawer,
+      expand: false,
       maxChildSize: 1.0,
       minChildSize: 0.5,
       builder: (context, scrollController) {
         return Container(
             alignment: AlignmentDirectional.topCenter,
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             decoration: BoxDecoration(
                 color: backgroundColorOfdrawerSheet,
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(20))),
@@ -40,12 +42,15 @@ class _ShowBottomDrawerState extends State<ShowBottomDrawer> {
               children: [
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-                  child: widget.contineDrawer,
+                  child: SingleChildScrollView(
+                    controller: scrollController,
+                    child: widget.contineDrawer,
+                  ),
                 ),
-                Container(
+                widget.showholderDraweSheet? Container(
                   height: 5,
                   margin: const EdgeInsets.symmetric(
-                    horizontal: 95,
+                    horizontal: 95,vertical: 10
                   ),
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
@@ -56,10 +61,14 @@ class _ShowBottomDrawerState extends State<ShowBottomDrawer> {
                             offset: const Offset(0, 0),
                             color: shadowColorOfholderDraweSheet)
                       ]),
-                ),
+                ) : widget.childHeader,
               ],
             ));
       },
     );
   }
 }
+
+
+
+
