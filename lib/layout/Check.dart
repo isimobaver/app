@@ -1,9 +1,11 @@
 
+// ignore_for_file: file_names, unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 
 
-const double _kOuterRadius = 8.0;
-const double _kInnerRadius = 4.5;
+// const double _kOuterRadius = 8.0;
+// const double _kInnerRadius = 4.5;
 
 class Check<T> extends StatefulWidget {
   const Check({
@@ -207,7 +209,7 @@ class _CheckPainter extends ToggleablePainter {
   void paint(Canvas canvas, Size size) {
     paintRadialReaction(canvas: canvas, origin: size.center(Offset.zero));
 
-    final Offset center = (Offset.zero & size).centerRight;
+    // final Offset center = (Offset.zero & size).centerRight;
 
     // Outer circle
     final path = Path()

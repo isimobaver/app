@@ -1,4 +1,6 @@
 
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -305,7 +307,7 @@ class _FirstState extends State<First> {
       ),
       context: context,
       builder: (context) {
-        return ShowBottomDrawer(
+        return const ShowBottomDrawer(
           childHeader: header(),
           heightDrawer: 1,
           contineDrawer: Poster(),
