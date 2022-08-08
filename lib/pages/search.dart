@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/layout/drawer_sheet.dart';
+import 'package:myapp/widget/poster.dart';
 import 'package:widget_slider/widget_slider.dart';
 import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
@@ -216,16 +218,23 @@ class _LayoutPostState extends State<LayoutPost> {
     duration: const Duration(milliseconds: 600),
   );
 
-  final images = const [
-    "images/6099494567cc3.jpg",
-    "images/6099494567cc3.jpg",
-    "images/6099494567cc3.jpg",
-    "images/6099494567cc3.jpg",
-    "images/6099494567cc3.jpg",
-    "images/6099494567cc3.jpg",
-    "images/6099494567cc3.jpg",
-    "images/6099494567cc3.jpg",
-  ];
+  final images = [
+     "images/oman-nature/bridge and sea.jpg",
+     "images/oman-nature/byo desert.jpg",
+     "images/oman-nature/desert and lake.jpg",
+     "images/oman-nature/dhafar palm.jpg",
+     "images/oman-nature/dhofar mountain and sea.jpg",
+     "images/oman-nature/dhofar sunset.jpg",
+     "images/oman-nature/moving camels.jpg",
+     "images/oman-nature/musandam lightening.jpg",
+     "images/oman-nature/oman bike rider.jpg",
+     "images/oman-nature/oman heaven dhofar.jpg",
+     "images/oman-nature/peaches flowers 2.jpg",
+     "images/oman-nature/pink lake.jpg",
+     "images/oman-nature/serb dhafar.jpg",
+     "images/oman-nature/smile day.jpg",
+  ]..shuffle();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -236,7 +245,9 @@ class _LayoutPostState extends State<LayoutPost> {
         child: Row(
             children: images.map((imagePath) {
           return CupertinoButton(
-            onPressed: () {},
+            onPressed: () {
+              _showBottomDrawer(context, imagePath);
+            },
             child: Container(
               height: 180,
               width: 200,
@@ -260,6 +271,24 @@ class _LayoutPostState extends State<LayoutPost> {
           );
         }).toList()),
       ),
+    );
+  }
+  void _showBottomDrawer(BuildContext context, String imagePath) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      context: context,
+      builder: (context) {
+        return ShowBottomDrawer(
+          childHeader: const Header(),
+          heightDrawer: 1,
+          contineDrawer:  Poster(imageSource: imagePath,),
+          showholderDraweSheet: false,
+        );
+      },
     );
   }
 }

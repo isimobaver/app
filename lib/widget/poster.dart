@@ -3,10 +3,8 @@
 import 'package:flutter/material.dart';
 
 class Poster extends StatefulWidget {
-  
-  const Poster({
-    Key? key
-  }) : super(key: key);
+  final String  imageSource; 
+  const Poster({Key? key, required this.imageSource}) : super(key: key);
 
   @override
   State<Poster> createState() => _PosterState();
@@ -19,7 +17,7 @@ class _PosterState extends State<Poster> {
     return SafeArea(
       bottom: false,
       child: Container(
-        child: yes ? PosterLayout() : Container(),
+        child: yes ? PosterLayout(imageSource: widget.imageSource,) : Container(),
       ),
     );
   }
@@ -39,10 +37,11 @@ class _PosterState extends State<Poster> {
 
 class PosterLayout extends StatefulWidget {
   bool open;
-  
+  String imageSource;
   PosterLayout({
     Key? key,
     this.open = false,
+    required this.imageSource
   }) : super(key: key);
 
   @override
@@ -52,7 +51,9 @@ class PosterLayout extends StatefulWidget {
 class _PosterLayoutState extends State<PosterLayout> {
   bool showheader = false;
   @override
-  Widget build(BuildContext context,) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Column(
       children: [
         SingleChildScrollView(
@@ -65,24 +66,62 @@ class _PosterLayoutState extends State<PosterLayout> {
                 duration: const Duration(seconds: 1),
                 height: widget.open ? 300 : 0,
                 margin: widget.open
-                    ? const EdgeInsets.only(bottom: 20,left: 20,right: 20,)
+                    ? const EdgeInsets.only(
+                        bottom: 20,
+                        left: 20,
+                        right: 20,
+                      )
                     : const EdgeInsets.all(0),
                 decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage(widget.imageSource), fit: BoxFit.fill),
                   borderRadius: BorderRadius.all(widget.open
                       ? const Radius.circular(20)
                       : const Radius.circular(0)),
-                  color: widget.open ? Colors.grey : const Color.fromARGB(0, 255, 255, 255),
+                  color: widget.open
+                      ? Colors.grey
+                      : const Color.fromARGB(0, 255, 255, 255),
                 ),
               ),
-              Container(margin: const EdgeInsets.all(10),color: Colors.tealAccent[700],height: 100,),
-              Container(margin: const EdgeInsets.all(10),color: Colors.tealAccent[700],height: 100,),
-              Container(margin: const EdgeInsets.all(10),color: Colors.tealAccent[700],height: 100,),
-              Container(margin: const EdgeInsets.all(10),color: Colors.tealAccent[700],height: 100,),
-              Container(margin: const EdgeInsets.all(10),color: Colors.tealAccent[700],height: 100,),
-              Container(margin: const EdgeInsets.all(10),color: Colors.tealAccent[700],height: 100,),
-              Container(margin: const EdgeInsets.all(10),color: Colors.tealAccent[700],height: 100,),
-              Container(margin: const EdgeInsets.all(10),color: Colors.tealAccent[700],height: 100,),
-
+              Container(
+                margin: const EdgeInsets.all(10),
+                color: Colors.tealAccent[700],
+                height: 100,
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                color: Colors.tealAccent[700],
+                height: 100,
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                color: Colors.tealAccent[700],
+                height: 100,
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                color: Colors.tealAccent[700],
+                height: 100,
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                color: Colors.tealAccent[700],
+                height: 100,
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                color: Colors.tealAccent[700],
+                height: 100,
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                color: Colors.tealAccent[700],
+                height: 100,
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                color: Colors.tealAccent[700],
+                height: 100,
+              ),
             ],
           ),
         ),
@@ -101,23 +140,18 @@ class _PosterLayoutState extends State<PosterLayout> {
       });
     });
   }
-
- 
 }
 
-
-
-
-class header extends StatefulWidget {
-   const header({Key? key, }) : super(key: key);
+class Header extends StatefulWidget {
+  const Header({Key? key}) : super(key: key);
 
   @override
-  State<header> createState() => _headerState();
+  State<Header> createState() => _HeaderState();
 }
 
-class _headerState extends State<header> {
+class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
-    return  Container();
+    return Container();
   }
 }

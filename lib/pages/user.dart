@@ -193,7 +193,6 @@ class _FirstSectionState extends State<FirstSection> {
   }
 }
 
-////////////////////Second Section/////////////////////
 class SecondSection extends StatefulWidget {
   const SecondSection({Key? key}) : super(key: key);
 
@@ -205,7 +204,7 @@ class _SecondSectionState extends State<SecondSection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.only(top: 20, bottom: 100),
       child: Wrap(
         direction: Axis.horizontal,
         spacing: 30,
@@ -222,9 +221,9 @@ class _SecondSectionState extends State<SecondSection> {
                 boxShadow: [
                   BoxShadow(
                     color: shadowColorOfSlider,
-                    offset: const Offset(0, 0),
-                    spreadRadius: -10,
-                    blurRadius: 20,
+                    offset: const Offset(0, 8),
+                    spreadRadius: 5,
+                    blurRadius: 10,
                   ),
                 ],
               ),

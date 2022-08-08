@@ -11,14 +11,14 @@ Color backgroundColorOfbottomNavigationBar = const Color(0xFFF2F2F2);
 //////////////////////////shadowColor////////////////////////////
 Color shadowColorOfTopBar = const Color.fromARGB(59, 0, 0, 0);
 Color shadowColorOfAvatar = const Color.fromARGB(59, 0, 0, 0);
-Color shadowColorOfSlider = const Color.fromARGB(255, 0, 0, 0);
+Color shadowColorOfSlider = const Color.fromARGB(50, 0, 0, 0);
 Color shadowColorOfSearchBar = const Color.fromARGB(47, 0, 0, 0);
 Color shadowColorOfdivider = const Color.fromARGB(59, 0, 0, 0);
 Color shadowColorOfbookmarkInUserpage = const Color.fromARGB(59, 0, 0, 0);
 Color shadowColorOfholderDraweSheet = const Color.fromARGB(59, 0, 0, 0);
 Color shadowColorOfbottomNavigationBar = const Color.fromARGB(59, 0, 0, 0);
 //////////////////////////textColor//////////////////////////////
-Color textColorOfSliderTextBottonInHomepage = const Color(0xFFFFCFB7);
+Color textColorOfSliderTextBottonInHomepage = const Color(0xFF0B5D69);
 Color textColorOfhintTextOfSearchBarInSearchpage = const Color(0xFF73A2AC);
 Color textColorOfCancelBottonOfSearchBarInSearchpage = const Color(0xFF0B5D69);
 Color textColorOfHeaderTextBottonInUserpage = const Color(0xFF0B5D69);
