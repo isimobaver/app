@@ -6,6 +6,8 @@ import 'package:widget_slider/widget_slider.dart';
 import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
 
+import '../widget/image_cards_slider.dart';
+
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
 
@@ -237,41 +239,42 @@ class _LayoutPostState extends State<LayoutPost> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.only(left: 20),
-        scrollDirection: Axis.horizontal,
-        child: Row(
-            children: images.map((imagePath) {
-          return CupertinoButton(
-            onPressed: () {
-              _showBottomDrawer(context, imagePath);
-            },
-            child: Container(
-              height: 180,
-              width: 200,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: backgroundColorOfSlider,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(imagePath),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: shadowColorOfSlider,
-                    offset: const Offset(0, 0),
-                    spreadRadius: -10,
-                    blurRadius: 20,
-                  ),
-                ],
-              ),
-            ),
-          );
-        }).toList()),
-      ),
-    );
+    return ImageCardsSilder();
+    // Container(
+    //   alignment: Alignment.center,
+    //   child: SingleChildScrollView(
+    //     padding: const EdgeInsets.only(left: 20),
+    //     scrollDirection: Axis.horizontal,
+    //     child: Row(
+    //         children: images.map((imagePath) {
+    //       return CupertinoButton(
+    //         onPressed: () {
+    //           _showBottomDrawer(context, imagePath);
+    //         },
+    //         child: Container(
+    //           height: 180,
+    //           width: 200,
+    //           decoration: BoxDecoration(
+    //             borderRadius: BorderRadius.circular(30),
+    //             color: backgroundColorOfSlider,
+    //             image: DecorationImage(
+    //               fit: BoxFit.cover,
+    //               image: AssetImage(imagePath),
+    //             ),
+    //             boxShadow: [
+    //               BoxShadow(
+    //                 color: shadowColorOfSlider,
+    //                 offset: const Offset(0, 0),
+    //                 spreadRadius: -10,
+    //                 blurRadius: 20,
+    //               ),
+    //             ],
+    //           ),
+    //         ),
+    //       );
+    //     }).toList()),
+    //   ),
+    // );
   }
   void _showBottomDrawer(BuildContext context, String imagePath) {
     showModalBottomSheet(
