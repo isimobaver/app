@@ -2,6 +2,8 @@
 
 // import 'dart:html';
 
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:myapp/layout/drawer_sheet.dart';
@@ -125,13 +127,13 @@ class _ImageCardsSilderState extends State<ImageCardsSilder> {
                       toolbarHeight: 80,
                       pinned: true,
                       expandedHeight: 500,
-                      flexibleSpace: FlexibleSpaceBar(
+                      flexibleSpace: const FlexibleSpaceBar(
                         centerTitle: true,
                         background: Galary(),
                       ),
                     ),
                     SliverList(
-                        delegate: SliverChildListDelegate([PostContine()]))
+                        delegate: SliverChildListDelegate([const PostContine()]))
                   ],
                 ),
               );
@@ -142,7 +144,7 @@ class _ImageCardsSilderState extends State<ImageCardsSilder> {
 }
 
 class Galary extends StatefulWidget {
-  Galary({Key? key}) : super(key: key);
+  const Galary({Key? key}) : super(key: key);
 
   @override
   State<Galary> createState() => _GalaryState();
@@ -353,7 +355,7 @@ class _GalaryState extends State<Galary> {
 }
 
 class PostContine extends StatefulWidget {
-  PostContine({Key? key}) : super(key: key);
+  const PostContine({Key? key}) : super(key: key);
 
   @override
   State<PostContine> createState() => _PostContineState();
@@ -597,7 +599,7 @@ class _PostContineState extends State<PostContine> {
                         color: isLike ? Colors.red[700] : Colors.blueGrey[300],
                         size: 35,
                       )),
-                  Text(
+                  const Text(
                     "22",
                     style: TextStyle(
                         color: Colors.grey,
@@ -636,7 +638,7 @@ class _PostContineState extends State<PostContine> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(bottom: 50, left: 10, right: 10),
+          padding: const EdgeInsets.only(bottom: 50, left: 10, right: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -646,15 +648,7 @@ class _PostContineState extends State<PostContine> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                      onPressed: () => print("object"),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: Text("more",
-                            style: TextStyle(
-                                color: Colors.black87,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold)),
-                      ),
+                      onPressed: () => log("object"),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.blue[50]),
@@ -664,6 +658,14 @@ class _PostContineState extends State<PostContine> {
                           ),
                         ),
                         shadowColor: MaterialStateProperty.all(Colors.black),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Text("more",
+                            style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold)),
                       )),
                 ),
               ),
@@ -672,15 +674,7 @@ class _PostContineState extends State<PostContine> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                      onPressed: () => print("object"),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Text("just go",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold)),
-                      ),
+                      onPressed: () => log("object"),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.green[300]),
@@ -690,6 +684,14 @@ class _PostContineState extends State<PostContine> {
                           ),
                         ),
                         shadowColor: MaterialStateProperty.all(Colors.black),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Text("just go",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold)),
                       )),
                 ),
               ),
@@ -704,7 +706,7 @@ class _PostContineState extends State<PostContine> {
 
 
 class CommentPage extends StatefulWidget {
-  CommentPage({Key? key}) : super(key: key);
+  const CommentPage({Key? key}) : super(key: key);
 
   @override
   State<CommentPage> createState() => _CommentPageState();
@@ -793,7 +795,7 @@ class _CommentPageState extends State<CommentPage> {
   }
 
   Widget buildCommintIn(BuildContext context){
-    return CustomScrollView(
+    return const CustomScrollView(
       slivers: [
       ],
       );
