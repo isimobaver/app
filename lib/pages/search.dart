@@ -239,7 +239,7 @@ class _LayoutPostState extends State<LayoutPost> {
 
   @override
   Widget build(BuildContext context) {
-    return ImageCardsSilder();
+    return const ImageCardsSilder();
     // Container(
     //   alignment: Alignment.center,
     //   child: SingleChildScrollView(
@@ -276,22 +276,22 @@ class _LayoutPostState extends State<LayoutPost> {
     //   ),
     // );
   }
-  void _showBottomDrawer(BuildContext context, String imagePath) {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      context: context,
-      builder: (context) {
-        return ShowBottomDrawer(
-          childHeader: const Header(),
-          heightDrawer: 1,
-          contineDrawer:  Poster(imageSource: imagePath,),
-          showholderDraweSheet: false,
-        );
-      },
-    );
-  }
+  // void _showBottomDrawer(BuildContext context, String imagePath) {
+  //   showModalBottomSheet(
+  //     isScrollControlled: true,
+  //     backgroundColor: Colors.transparent,
+  //     shape: const RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  //     ),
+  //     context: context,
+  //     builder: (context) {
+  //       return ShowBottomDrawer(
+  //         childHeader: const Header(),
+  //         heightDrawer: 1,
+  //         contineDrawer:  Poster(imageSource: imagePath,),
+  //         showholderDraweSheet: false,
+  //       );
+  //     },
+  //   );
+  // }
 }
