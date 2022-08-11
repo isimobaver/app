@@ -1,17 +1,17 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:ffi';
-import 'dart:ui';
+// import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/layout/drawer_sheet.dart';
+// import 'package:myapp/layout/drawer_sheet.dart';
 import 'package:myapp/style/colors.dart';
-import 'package:myapp/widget/poster.dart';
+// import 'package:myapp/widget/poster.dart';
 import 'package:widget_slider/widget_slider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:myapp/style/effects.dart';
 import 'package:readmore/readmore.dart';
+import 'package:myapp/style/text.dart';
 
 class ImageCardsSilder extends StatefulWidget {
   const ImageCardsSilder({Key? key}) : super(key: key);
@@ -241,7 +241,9 @@ class _GalaryState extends State<Galary> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: images.asMap().entries.map((entry) {
+                children: images.asMap().entries.map((
+                  entry,
+                ) {
                   return GestureDetector(
                     onTap: () =>
                         buttonCarouselController.animateToPage(entry.key),
@@ -358,6 +360,24 @@ class PostContine extends StatefulWidget {
 }
 
 class _PostContineState extends State<PostContine> {
+  final headerPosterContine = const [
+    "Overview",
+    "About",
+  ];
+  final page0 = const [
+    "Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.",
+  ];
+  final page1 = const [
+    "images/oman-nature/bridge and sea.jpg",
+    "images/oman-nature/bridge and sea.jpg",
+    "images/oman-nature/bridge and sea.jpg",
+  ];
+
+  int _current = 0;
+  bool isLike = false;
+  bool isSave = false;
+  double _currentRate = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -390,12 +410,20 @@ class _PostContineState extends State<PostContine> {
                         ),
                         shadowColor: MaterialStateProperty.all(Colors.black),
                       ),
-                      onPressed: null,
+                      onPressed: (){
+                        setState(() {
+                          if(_currentRate <5){
+                            _currentRate = _currentRate + 0.5;
+                          } else if(_currentRate >=5){
+                            _currentRate = 0.0;
+                          }
+                        });
+                      },
                       icon: Icon(Icons.star_rate_rounded,
                           color: Colors.yellow[600], size: 20),
-                      label: const Text(
-                        "2.5",
-                        style: TextStyle(
+                      label:   Text(
+                        "$_currentRate",
+                        style: const TextStyle(
                           fontSize: 15,
                         ),
                       )),
@@ -424,19 +452,41 @@ class _PostContineState extends State<PostContine> {
           padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(
-                  left: 20,
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
                   right: 20,
                 ),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Overview",
-                      style: TextStyle(fontSize: 25, color: Colors.grey),
-                    )),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: headerPosterContine.asMap().entries.map((
+                    entry,
+                  ) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: SizedBox(
+                        height: 40,
+                        child: TextButton(
+                            onPressed: () {
+                              setState(() {
+                                _current = entry.key;
+                              });
+                            },
+                            child: Text(
+                              entry.value,
+                              style: TextStyle(
+                                  color: _current == entry.key
+                                      ? Colors.black
+                                      : Colors.grey,
+                                  fontSize: 25),
+                            )),
+                      ),
+                    );
+                  }).toList(),
+                ),
               ),
               const Divider(
                 color: Colors.black,
@@ -445,33 +495,66 @@ class _PostContineState extends State<PostContine> {
                 endIndent: 10,
                 indent: 10,
               ),
-              const Padding(
-                padding: EdgeInsets.only(
+              Padding(
+                padding: const EdgeInsets.only(
                   top: 20,
                   left: 20,
                   right: 30,
                   bottom: 10,
                 ),
-                child: ReadMoreText(
-                  'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
-                  trimLines: 4,
-                  trimMode: TrimMode.Line,
-                  trimCollapsedText: 'Show more',
-                  trimExpandedText: 'Show less',
-                  moreStyle:
-                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  lessStyle:
-                      TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  textDirection: TextDirection.ltr,
-                  style: TextStyle(color: Colors.black, fontSize: 18),
-                ),
+                child: Column(
+                    children: _current == 0
+                        ? page0.map((i) {
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return ReadMoreText(
+                                  i,
+                                  trimLines: 4,
+                                  trimMode: TrimMode.Line,
+                                  trimCollapsedText: 'Show more',
+                                  trimExpandedText: 'Show less',
+                                  moreStyle: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                  lessStyle: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                  textDirection: TextDirection.ltr,
+                                  style: const TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                );
+                              },
+                            );
+                          }).toList()
+                        : page1.map((e) {
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return ReadMoreText(
+                                  e,
+                                  trimLines: 4,
+                                  trimMode: TrimMode.Line,
+                                  trimCollapsedText: 'Show more',
+                                  trimExpandedText: 'Show less',
+                                  moreStyle: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                  lessStyle: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                  textDirection: TextDirection.ltr,
+                                  style: const TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                );
+                              },
+                            );
+                          }).toList()),
               ),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+                  children: const [
                     Text(
                       "2 day ago ",
                       style: TextStyle(
@@ -491,7 +574,7 @@ class _PostContineState extends State<PostContine> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: 0,
             left: 10,
             right: 10,
@@ -504,10 +587,14 @@ class _PostContineState extends State<PostContine> {
               Column(
                 children: [
                   IconButton(
-                      onPressed: null,
+                      onPressed: () {
+                        setState(() {
+                          isLike = !isLike;
+                        });
+                      },
                       icon: Icon(
-                        Icons.favorite_rounded,
-                        color: Colors.red[700],
+                        isLike ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+                        color: isLike ? Colors.red[700] : Colors.blueGrey[300],
                         size: 35,
                       )),
                   Text(
@@ -535,9 +622,13 @@ class _PostContineState extends State<PostContine> {
                     size: 35,
                   )),
               IconButton(
-                  onPressed: null,
+                  onPressed: () {
+                        setState(() {
+                          isSave = !isSave;
+                        });
+                      },
                   icon: Icon(
-                    Icons.bookmark_rounded,
+                    isSave ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
                     color: Colors.blueGrey[300],
                     size: 35,
                   )),
@@ -607,5 +698,104 @@ class _PostContineState extends State<PostContine> {
         )
       ],
     );
+  }
+}
+
+
+
+class CommentPage extends StatefulWidget {
+  CommentPage({Key? key}) : super(key: key);
+
+  @override
+  State<CommentPage> createState() => _CommentPageState();
+}
+
+class _CommentPageState extends State<CommentPage> {
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: SafeArea(
+          child: Scaffold(
+        backgroundColor: backgroundColorOfpages,
+        body: GestureDetector(
+          onHorizontalDragStart: (details) => Navigator.pop(context),
+          child: Stack(
+            alignment: AlignmentDirectional.topCenter,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(
+              top: 150,
+              bottom: 80,
+              left: 30,
+              right: 30,
+            ),
+
+            ),
+              buildTopBarDrawer(context),
+            ],
+          ),
+        ),
+      )),
+    );
+  }
+
+  ////////////////////////////////////////////////
+  Widget buildTopBarDrawer(BuildContext context) {
+    return Container(
+      height: 100,
+      alignment: AlignmentDirectional.bottomCenter,
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(95),
+          bottomRight: Radius.circular(120),
+          topRight: Radius.circular(60),
+        ),
+        color: backgroundColorOfTopBar,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 90,
+            offset: const Offset(0, 0),
+            color: shadowColorOfTopBar,
+          )
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(
+              Icons.chevron_left_rounded,
+              size: 45,
+              color: iconColorOfchevronOFDrawerChooserpages,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              alignment: AlignmentDirectional.bottomCenter,
+              margin: const EdgeInsets.only(right: 45),
+              child: Text(
+                "commint",
+                textDirection: textDirection,
+                textAlign: textAlignOfDrawerChooserpages,
+                style: textStyleOfHeaderText,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildCommintIn(BuildContext context){
+    return CustomScrollView(
+      slivers: [
+      ],
+      );
   }
 }
