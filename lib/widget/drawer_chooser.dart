@@ -301,7 +301,7 @@ class DrawerPage extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
             },
             icon: Icon(
               Icons.chevron_left_rounded,

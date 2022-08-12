@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/layout/drawer_sheet.dart';
 import 'package:myapp/widget/profile.dart';
 import 'package:myapp/widget/drawer_chooser.dart';
 import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
+import 'package:myapp/style/effects.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -56,6 +57,7 @@ class _TopBarState extends State<TopBar> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                const Text("isim.obaver",style: TextStyle(color: Colors.black54,fontSize: 25,fontWeight: FontWeight.bold)),
                 const Expanded(child: SizedBox()),
                 IconButton(
                   icon: Icon(Icons.menu_rounded,
@@ -92,18 +94,20 @@ class _TopBarState extends State<TopBar> {
                     textOfEditAvatar,
                     style: textStyleOfEditAvatar,
                   ),
-                  onPressed: () => _showActionSheet(context),
+                  onPressed: (){
+                    Navigator.push(
+                  context,
+                  CustomPageRoute(
+                    child: const ProfileEdit(),
+                    direction: AxisDirection.up,
+                  ),
+                );
+                  },
                 ),
               ))
         ],
       ),
     );
-  }
-
-  void _showActionSheet(BuildContext context) {
-    showCupertinoModalPopup(
-        context: context,
-        builder: (BuildContext context) => const ActionSheet());
   }
 
   void _showBottomDrawer(BuildContext context) {

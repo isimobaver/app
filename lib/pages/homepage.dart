@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myapp/widget/category_text_buttons.dart';
 import 'package:myapp/widget/image_cards_slider.dart';
+import '../style/effects.dart';
+import 'intry_page.dart';
 import 'search.dart';
 import 'user.dart';
 import 'package:myapp/style/colors.dart';
+
+
+
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
 class Home extends StatefulWidget {
@@ -164,7 +169,7 @@ class _TopBarState extends State<TopBar> {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             height: 50,
@@ -182,7 +187,14 @@ class _TopBarState extends State<TopBar> {
               ],
             ),
           ),
-          const Expanded(flex: 7, child: SizedBox())
+          const Expanded(flex: 7, child: SizedBox()),
+          IconButton(onPressed: (){Navigator.push(
+                  context,
+                  CustomPageRoute(
+                    child: const IntryPage(),
+                    direction: AxisDirection.up,
+                  ),
+                );}, icon: const Icon(Icons.account_circle,color: Colors.white,size: 30,))
         ],
       ),
     );

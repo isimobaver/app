@@ -18,7 +18,7 @@ final textOfHeaderTextBottonInUserpage = [
   "For you",
   "Most View",
 ];
-String textOfEditAvatar = "Edit";
+String textOfEditAvatar = "Edit Profile";
 String textOfLanguageOfDrawerChooser = "Language";
 String textOfAboutOfDrawerChooser = "About";
 String textOfDevelopersOfDrawerChooser = "Developers";

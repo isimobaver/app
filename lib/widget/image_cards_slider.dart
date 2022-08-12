@@ -11,7 +11,8 @@ import 'package:widget_slider/widget_slider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:myapp/style/effects.dart';
 import 'package:readmore/readmore.dart';
-import 'package:myapp/style/text.dart';
+// import 'package:myapp/style/text.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ImageCardsSilder extends StatefulWidget {
   const ImageCardsSilder({Key? key}) : super(key: key);
@@ -125,13 +126,13 @@ class _ImageCardsSilderState extends State<ImageCardsSilder> {
                       toolbarHeight: 80,
                       pinned: true,
                       expandedHeight: 500,
-                      flexibleSpace: FlexibleSpaceBar(
+                      flexibleSpace: const FlexibleSpaceBar(
                         centerTitle: true,
                         background: Galary(),
                       ),
                     ),
                     SliverList(
-                        delegate: SliverChildListDelegate([PostContine()]))
+                        delegate: SliverChildListDelegate([const PostContine()]))
                   ],
                 ),
               );
@@ -142,7 +143,7 @@ class _ImageCardsSilderState extends State<ImageCardsSilder> {
 }
 
 class Galary extends StatefulWidget {
-  Galary({Key? key}) : super(key: key);
+  const Galary({Key? key}) : super(key: key);
 
   @override
   State<Galary> createState() => _GalaryState();
@@ -166,17 +167,9 @@ class _GalaryState extends State<Galary> {
     "images/oman-nature/smile day.jpg",
   ];
 
-  final controller = PageController(
-    initialPage: 1,
-  );
   int _current = 0;
   final CarouselController buttonCarouselController = CarouselController();
 
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -353,7 +346,7 @@ class _GalaryState extends State<Galary> {
 }
 
 class PostContine extends StatefulWidget {
-  PostContine({Key? key}) : super(key: key);
+  const PostContine({Key? key}) : super(key: key);
 
   @override
   State<PostContine> createState() => _PostContineState();
@@ -377,6 +370,7 @@ class _PostContineState extends State<PostContine> {
   bool isLike = false;
   bool isSave = false;
   double _currentRate = 0.0;
+  int _currentLikes = 55;
 
   @override
   Widget build(BuildContext context) {
@@ -590,6 +584,11 @@ class _PostContineState extends State<PostContine> {
                       onPressed: () {
                         setState(() {
                           isLike = !isLike;
+                          if(isLike == true){
+                            _currentLikes = _currentLikes + 1;
+                          }else if(isLike == false){
+                            _currentLikes = _currentLikes - 1;
+                          }
                         });
                       },
                       icon: Icon(
@@ -598,8 +597,8 @@ class _PostContineState extends State<PostContine> {
                         size: 35,
                       )),
                   Text(
-                    "22",
-                    style: TextStyle(
+                    "$_currentLikes",
+                    style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 10,
                         fontWeight: FontWeight.bold),
@@ -608,11 +607,17 @@ class _PostContineState extends State<PostContine> {
               ),
               IconButton(
                   onPressed: null,
-                  icon: Icon(
-                    Icons.maps_ugc,
+                  icon: FaIcon(
+                    FontAwesomeIcons.comment,
                     color: Colors.blueGrey[300],
-                    size: 35,
-                  )),
+                    size: 30,
+                  ),
+                  // Icon(
+                  //   Icons.maps_ugc,
+                  //   color: Colors.blueGrey[300],
+                  //   size: 35,
+                  // )
+                  ),
               const Expanded(child: SizedBox()),
               IconButton(
                   onPressed: null,
@@ -636,7 +641,7 @@ class _PostContineState extends State<PostContine> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(bottom: 50, left: 10, right: 10),
+          padding: const EdgeInsets.only(bottom: 50, left: 10, right: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -646,15 +651,7 @@ class _PostContineState extends State<PostContine> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                      onPressed: () => print("object"),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: Text("more",
-                            style: TextStyle(
-                                color: Colors.black87,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold)),
-                      ),
+                      onPressed: null,
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.blue[50]),
@@ -664,6 +661,14 @@ class _PostContineState extends State<PostContine> {
                           ),
                         ),
                         shadowColor: MaterialStateProperty.all(Colors.black),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Text("more",
+                            style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold)),
                       )),
                 ),
               ),
@@ -672,15 +677,7 @@ class _PostContineState extends State<PostContine> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                      onPressed: () => print("object"),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Text("just go",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold)),
-                      ),
+                      onPressed: null,
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.green[300]),
@@ -690,6 +687,14 @@ class _PostContineState extends State<PostContine> {
                           ),
                         ),
                         shadowColor: MaterialStateProperty.all(Colors.black),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Text("just go",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold)),
                       )),
                 ),
               ),
@@ -703,99 +708,4 @@ class _PostContineState extends State<PostContine> {
 
 
 
-class CommentPage extends StatefulWidget {
-  CommentPage({Key? key}) : super(key: key);
 
-  @override
-  State<CommentPage> createState() => _CommentPageState();
-}
-
-class _CommentPageState extends State<CommentPage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-          child: Scaffold(
-        backgroundColor: backgroundColorOfpages,
-        body: GestureDetector(
-          onHorizontalDragStart: (details) => Navigator.pop(context),
-          child: Stack(
-            alignment: AlignmentDirectional.topCenter,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(
-              top: 150,
-              bottom: 80,
-              left: 30,
-              right: 30,
-            ),
-
-            ),
-              buildTopBarDrawer(context),
-            ],
-          ),
-        ),
-      )),
-    );
-  }
-
-  ////////////////////////////////////////////////
-  Widget buildTopBarDrawer(BuildContext context) {
-    return Container(
-      height: 100,
-      alignment: AlignmentDirectional.bottomCenter,
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(95),
-          bottomRight: Radius.circular(120),
-          topRight: Radius.circular(60),
-        ),
-        color: backgroundColorOfTopBar,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 90,
-            offset: const Offset(0, 0),
-            color: shadowColorOfTopBar,
-          )
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(
-              Icons.chevron_left_rounded,
-              size: 45,
-              color: iconColorOfchevronOFDrawerChooserpages,
-            ),
-          ),
-          Expanded(
-            child: Container(
-              alignment: AlignmentDirectional.bottomCenter,
-              margin: const EdgeInsets.only(right: 45),
-              child: Text(
-                "commint",
-                textDirection: textDirection,
-                textAlign: textAlignOfDrawerChooserpages,
-                style: textStyleOfHeaderText,
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget buildCommintIn(BuildContext context){
-    return CustomScrollView(
-      slivers: [
-      ],
-      );
-  }
-}
