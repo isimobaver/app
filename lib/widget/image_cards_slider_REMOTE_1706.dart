@@ -13,8 +13,7 @@ import 'package:widget_slider/widget_slider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:myapp/style/effects.dart';
 import 'package:readmore/readmore.dart';
-// import 'package:myapp/style/text.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:myapp/style/text.dart';
 
 class ImageCardsSilder extends StatefulWidget {
   const ImageCardsSilder({Key? key}) : super(key: key);
@@ -169,9 +168,17 @@ class _GalaryState extends State<Galary> {
     "images/oman-nature/smile day.jpg",
   ];
 
+  final controller = PageController(
+    initialPage: 1,
+  );
   int _current = 0;
   final CarouselController buttonCarouselController = CarouselController();
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -372,7 +379,6 @@ class _PostContineState extends State<PostContine> {
   bool isLike = false;
   bool isSave = false;
   double _currentRate = 0.0;
-  int _currentLikes = 55;
 
   @override
   Widget build(BuildContext context) {
@@ -586,11 +592,6 @@ class _PostContineState extends State<PostContine> {
                       onPressed: () {
                         setState(() {
                           isLike = !isLike;
-                          if(isLike == true){
-                            _currentLikes = _currentLikes + 1;
-                          }else if(isLike == false){
-                            _currentLikes = _currentLikes - 1;
-                          }
                         });
                       },
                       icon: Icon(
@@ -598,15 +599,9 @@ class _PostContineState extends State<PostContine> {
                         color: isLike ? Colors.red[700] : Colors.blueGrey[300],
                         size: 35,
                       )),
-<<<<<<< HEAD
-                  Text(
-                    "$_currentLikes",
-                    style: const TextStyle(
-=======
                   const Text(
                     "22",
                     style: TextStyle(
->>>>>>> cda7ef2d40cac9a97c8b92b91bb820e39a6e3404
                         color: Colors.grey,
                         fontSize: 10,
                         fontWeight: FontWeight.bold),
@@ -615,17 +610,11 @@ class _PostContineState extends State<PostContine> {
               ),
               IconButton(
                   onPressed: null,
-                  icon: FaIcon(
-                    FontAwesomeIcons.comment,
+                  icon: Icon(
+                    Icons.maps_ugc,
                     color: Colors.blueGrey[300],
-                    size: 30,
-                  ),
-                  // Icon(
-                  //   Icons.maps_ugc,
-                  //   color: Colors.blueGrey[300],
-                  //   size: 35,
-                  // )
-                  ),
+                    size: 35,
+                  )),
               const Expanded(child: SizedBox()),
               IconButton(
                   onPressed: null,
@@ -659,11 +648,7 @@ class _PostContineState extends State<PostContine> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-<<<<<<< HEAD
-                      onPressed: null,
-=======
                       onPressed: () => log("object"),
->>>>>>> cda7ef2d40cac9a97c8b92b91bb820e39a6e3404
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.blue[50]),
@@ -689,11 +674,7 @@ class _PostContineState extends State<PostContine> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-<<<<<<< HEAD
-                      onPressed: null,
-=======
                       onPressed: () => log("object"),
->>>>>>> cda7ef2d40cac9a97c8b92b91bb820e39a6e3404
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.green[300]),
@@ -724,9 +705,6 @@ class _PostContineState extends State<PostContine> {
 
 
 
-<<<<<<< HEAD
-
-=======
 class CommentPage extends StatefulWidget {
   const CommentPage({Key? key}) : super(key: key);
 
@@ -823,4 +801,3 @@ class _CommentPageState extends State<CommentPage> {
       );
   }
 }
->>>>>>> cda7ef2d40cac9a97c8b92b91bb820e39a6e3404
