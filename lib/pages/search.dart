@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:myapp/layout/drawer_sheet.dart';
-// import 'package:myapp/widget/poster.dart';
+import 'package:myapp/layout/drawer_sheet.dart';
+import 'package:myapp/widget/poster.dart';
 import 'package:widget_slider/widget_slider.dart';
 import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
@@ -276,25 +276,22 @@ class _LayoutPostState extends State<LayoutPost> {
     //   ),
     // );
   }
-<<<<<<< HEAD
-=======
-  // void _showBottomDrawer(BuildContext context, String imagePath) {
-  //   showModalBottomSheet(
-  //     isScrollControlled: true,
-  //     backgroundColor: Colors.transparent,
-  //     shape: const RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-  //     ),
-  //     context: context,
-  //     builder: (context) {
-  //       return ShowBottomDrawer(
-  //         childHeader: const Header(),
-  //         heightDrawer: 1,
-  //         contineDrawer:  Poster(imageSource: imagePath,),
-  //         showholderDraweSheet: false,
-  //       );
-  //     },
-  //   );
-  // }
->>>>>>> cda7ef2d40cac9a97c8b92b91bb820e39a6e3404
+  void _showBottomDrawer(BuildContext context, String imagePath) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      context: context,
+      builder: (context) {
+        return ShowBottomDrawer(
+          childHeader: const Header(),
+          heightDrawer: 1,
+          contineDrawer:  Poster(imageSource: imagePath,),
+          showholderDraweSheet: false,
+        );
+      },
+    );
+  }
 }
