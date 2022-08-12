@@ -2,8 +2,6 @@
 
 // import 'dart:html';
 
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:myapp/layout/drawer_sheet.dart';
@@ -598,15 +596,9 @@ class _PostContineState extends State<PostContine> {
                         color: isLike ? Colors.red[700] : Colors.blueGrey[300],
                         size: 35,
                       )),
-<<<<<<< HEAD
                   Text(
                     "$_currentLikes",
                     style: const TextStyle(
-=======
-                  const Text(
-                    "22",
-                    style: TextStyle(
->>>>>>> cda7ef2d40cac9a97c8b92b91bb820e39a6e3404
                         color: Colors.grey,
                         fontSize: 10,
                         fontWeight: FontWeight.bold),
@@ -659,11 +651,7 @@ class _PostContineState extends State<PostContine> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-<<<<<<< HEAD
                       onPressed: null,
-=======
-                      onPressed: () => log("object"),
->>>>>>> cda7ef2d40cac9a97c8b92b91bb820e39a6e3404
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.blue[50]),
@@ -689,11 +677,7 @@ class _PostContineState extends State<PostContine> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-<<<<<<< HEAD
                       onPressed: null,
-=======
-                      onPressed: () => log("object"),
->>>>>>> cda7ef2d40cac9a97c8b92b91bb820e39a6e3404
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.green[300]),
@@ -724,103 +708,4 @@ class _PostContineState extends State<PostContine> {
 
 
 
-<<<<<<< HEAD
 
-=======
-class CommentPage extends StatefulWidget {
-  const CommentPage({Key? key}) : super(key: key);
-
-  @override
-  State<CommentPage> createState() => _CommentPageState();
-}
-
-class _CommentPageState extends State<CommentPage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-          child: Scaffold(
-        backgroundColor: backgroundColorOfpages,
-        body: GestureDetector(
-          onHorizontalDragStart: (details) => Navigator.pop(context),
-          child: Stack(
-            alignment: AlignmentDirectional.topCenter,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(
-              top: 150,
-              bottom: 80,
-              left: 30,
-              right: 30,
-            ),
-
-            ),
-              buildTopBarDrawer(context),
-            ],
-          ),
-        ),
-      )),
-    );
-  }
-
-  ////////////////////////////////////////////////
-  Widget buildTopBarDrawer(BuildContext context) {
-    return Container(
-      height: 100,
-      alignment: AlignmentDirectional.bottomCenter,
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(95),
-          bottomRight: Radius.circular(120),
-          topRight: Radius.circular(60),
-        ),
-        color: backgroundColorOfTopBar,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 90,
-            offset: const Offset(0, 0),
-            color: shadowColorOfTopBar,
-          )
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(
-              Icons.chevron_left_rounded,
-              size: 45,
-              color: iconColorOfchevronOFDrawerChooserpages,
-            ),
-          ),
-          Expanded(
-            child: Container(
-              alignment: AlignmentDirectional.bottomCenter,
-              margin: const EdgeInsets.only(right: 45),
-              child: Text(
-                "commint",
-                textDirection: textDirection,
-                textAlign: textAlignOfDrawerChooserpages,
-                style: textStyleOfHeaderText,
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget buildCommintIn(BuildContext context){
-    return const CustomScrollView(
-      slivers: [
-      ],
-      );
-  }
-}
->>>>>>> cda7ef2d40cac9a97c8b92b91bb820e39a6e3404
