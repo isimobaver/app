@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/layout/drawer_sheet.dart';
-import 'package:myapp/widget/poster.dart';
-import 'package:widget_slider/widget_slider.dart';
+// import 'package:myapp/layout/drawer_sheet.dart';
+// import 'package:myapp/widget/poster.dart';
+// import 'package:widget_slider/widget_slider.dart';
 import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
-
+import 'package:vs_scrollbar/vs_scrollbar.dart';
 import '../widget/image_cards_slider.dart';
+
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -16,9 +17,27 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(child: TopSection());
+    return VsScrollbar(
+        controller: _scrollController,
+        showTrackOnHover: true, // default false
+        isAlwaysShown: false, // default false
+        scrollbarFadeDuration: const Duration(
+            milliseconds: 500), // default : Duration(milliseconds: 300)
+        scrollbarTimeToFade: const Duration(
+            milliseconds: 800), // default : Duration(milliseconds: 600)
+        style: const VsScrollbarStyle(
+          hoverThickness: 5.0, // default 12.0
+          radius: Radius.circular(10), // default Radius.circular(8.0)
+          thickness: 5.0, // default 8.0
+          color: Colors.transparent, // default ColorScheme Theme
+        ),
+        child: SingleChildScrollView(
+            controller: _scrollController,
+            scrollDirection: Axis.vertical,
+            child: const TopSection()));
   }
 }
 
@@ -172,8 +191,8 @@ class BodySection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin:
-                          const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 10),
                       child: Text(
                         headerText[index],
                         textAlign: textAlignOfHeaderTextBottonInUserpage,
@@ -183,10 +202,11 @@ class BodySection extends StatelessWidget {
                     const LayoutPost(),
                     Container(
                       height: 3,
-                      margin:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 20),
                       decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(Radius.circular(30)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30)),
                           color: dividerColorOfSearchPage,
                           boxShadow: [
                             BoxShadow(
@@ -200,7 +220,9 @@ class BodySection extends StatelessWidget {
               );
             }),
           ),
-          const SizedBox(height: 100,)
+          const SizedBox(
+            height: 100,
+          )
         ],
       ),
     );
@@ -216,82 +238,8 @@ class LayoutPost extends StatefulWidget {
 }
 
 class _LayoutPostState extends State<LayoutPost> {
-  final controller = SliderController(
-    duration: const Duration(milliseconds: 600),
-  );
-
-  final images = [
-     "images/oman-nature/bridge and sea.jpg",
-     "images/oman-nature/byo desert.jpg",
-     "images/oman-nature/desert and lake.jpg",
-     "images/oman-nature/dhafar palm.jpg",
-     "images/oman-nature/dhofar mountain and sea.jpg",
-     "images/oman-nature/dhofar sunset.jpg",
-     "images/oman-nature/moving camels.jpg",
-     "images/oman-nature/musandam lightening.jpg",
-     "images/oman-nature/oman bike rider.jpg",
-     "images/oman-nature/oman heaven dhofar.jpg",
-     "images/oman-nature/peaches flowers 2.jpg",
-     "images/oman-nature/pink lake.jpg",
-     "images/oman-nature/serb dhafar.jpg",
-     "images/oman-nature/smile day.jpg",
-  ]..shuffle();
-
   @override
   Widget build(BuildContext context) {
     return const ImageCardsSilder();
-    // Container(
-    //   alignment: Alignment.center,
-    //   child: SingleChildScrollView(
-    //     padding: const EdgeInsets.only(left: 20),
-    //     scrollDirection: Axis.horizontal,
-    //     child: Row(
-    //         children: images.map((imagePath) {
-    //       return CupertinoButton(
-    //         onPressed: () {
-    //           _showBottomDrawer(context, imagePath);
-    //         },
-    //         child: Container(
-    //           height: 180,
-    //           width: 200,
-    //           decoration: BoxDecoration(
-    //             borderRadius: BorderRadius.circular(30),
-    //             color: backgroundColorOfSlider,
-    //             image: DecorationImage(
-    //               fit: BoxFit.cover,
-    //               image: AssetImage(imagePath),
-    //             ),
-    //             boxShadow: [
-    //               BoxShadow(
-    //                 color: shadowColorOfSlider,
-    //                 offset: const Offset(0, 0),
-    //                 spreadRadius: -10,
-    //                 blurRadius: 20,
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       );
-    //     }).toList()),
-    //   ),
-    // );
-  }
-  void _showBottomDrawer(BuildContext context, String imagePath) {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      context: context,
-      builder: (context) {
-        return ShowBottomDrawer(
-          childHeader: const Header(),
-          heightDrawer: 1,
-          contineDrawer:  Poster(imageSource: imagePath,),
-          showholderDraweSheet: false,
-        );
-      },
-    );
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:myapp/layout/drawer_sheet.dart';
 import 'package:myapp/style/colors.dart';
+import 'package:overscroll_pop/overscroll_pop.dart';
 // import 'package:myapp/widget/poster.dart';
 import 'package:widget_slider/widget_slider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -74,9 +75,9 @@ class _ImageCardsSilderState extends State<ImageCardsSilder> {
                 boxShadow: [
                   BoxShadow(
                     color: shadowColorOfSlider,
-                    offset: const Offset(0, 0),
-                    spreadRadius: -10,
-                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                    spreadRadius: 3,
+                    blurRadius: 15,
                   ),
                 ],
               ),
@@ -90,53 +91,58 @@ class _ImageCardsSilderState extends State<ImageCardsSilder> {
   void _showBottomDrawer(BuildContext context, String imagePath) {
     showModalBottomSheet(
       isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: const Color.fromARGB(0, 0, 0, 0),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       context: context,
       builder: (context) {
-        return DraggableScrollableSheet(
-            snap: true,
-            initialChildSize: 1,
-            expand: false,
-            maxChildSize: 1.0,
-            minChildSize: 0.5,
-            builder: (context, scrollController) {
-              return Container(
-                decoration: BoxDecoration(
-                    color: backgroundColorOfdrawerSheet,
-                    borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(20))),
-                child: CustomScrollView(
-                  controller: scrollController,
-                  slivers: <Widget>[
-                    SliverAppBar(
-                      backgroundColor: backgroundColorOfTopBar,
-                      foregroundColor: backgroundColorOfTopBar,
-                      floating: true,
-                      leading: Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: IconButton(
-                          icon: const Icon(Icons.chevron_left_rounded,
-                              color: Colors.white, size: 50),
-                          onPressed: () => Navigator.pop(context),
+        return OverscrollPop(
+          scrollToPopOption: ScrollToPopOption.start,
+          dragToPopDirection: DragToPopDirection.toRight,
+          child: DraggableScrollableSheet(
+              snap: true,
+              initialChildSize: 1,
+              expand: false,
+              maxChildSize: 1.0,
+              minChildSize: 0.5,
+              builder: (context, scrollController) {
+                return Container(
+                  decoration: BoxDecoration(
+                      color: backgroundColorOfdrawerSheet,
+                      borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(20))),
+                  child: CustomScrollView(
+                    controller: scrollController,
+                    slivers: <Widget>[
+                      SliverAppBar(
+                        backgroundColor: backgroundColorOfTopBar,
+                        foregroundColor: backgroundColorOfTopBar,
+                        floating: true,
+                        leading: Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: IconButton(
+                            icon: const Icon(Icons.chevron_left_rounded,
+                                color: Colors.white, size: 50),
+                            onPressed: () => Navigator.pop(context),
+                          ),
+                        ),
+                        toolbarHeight: 80,
+                        pinned: true,
+                        expandedHeight: 500,
+                        flexibleSpace: const FlexibleSpaceBar(
+                          centerTitle: true,
+                          background: Galary(),
                         ),
                       ),
-                      toolbarHeight: 80,
-                      pinned: true,
-                      expandedHeight: 500,
-                      flexibleSpace: const FlexibleSpaceBar(
-                        centerTitle: true,
-                        background: Galary(),
-                      ),
-                    ),
-                    SliverList(
-                        delegate: SliverChildListDelegate([const PostContine()]))
-                  ],
-                ),
-              );
-            });
+                      SliverList(
+                          delegate:
+                              SliverChildListDelegate([const PostContine()]))
+                    ],
+                  ),
+                );
+              }),
+        );
       },
     );
   }
@@ -169,7 +175,6 @@ class _GalaryState extends State<Galary> {
 
   int _current = 0;
   final CarouselController buttonCarouselController = CarouselController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -404,18 +409,18 @@ class _PostContineState extends State<PostContine> {
                         ),
                         shadowColor: MaterialStateProperty.all(Colors.black),
                       ),
-                      onPressed: (){
+                      onPressed: () {
                         setState(() {
-                          if(_currentRate <5){
+                          if (_currentRate < 5) {
                             _currentRate = _currentRate + 0.5;
-                          } else if(_currentRate >=5){
+                          } else if (_currentRate >= 5) {
                             _currentRate = 0.0;
                           }
                         });
                       },
                       icon: Icon(Icons.star_rate_rounded,
                           color: Colors.yellow[600], size: 20),
-                      label:   Text(
+                      label: Text(
                         "$_currentRate",
                         style: const TextStyle(
                           fontSize: 15,
@@ -584,15 +589,17 @@ class _PostContineState extends State<PostContine> {
                       onPressed: () {
                         setState(() {
                           isLike = !isLike;
-                          if(isLike == true){
+                          if (isLike == true) {
                             _currentLikes = _currentLikes + 1;
-                          }else if(isLike == false){
+                          } else if (isLike == false) {
                             _currentLikes = _currentLikes - 1;
                           }
                         });
                       },
                       icon: Icon(
-                        isLike ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+                        isLike
+                            ? Icons.favorite_rounded
+                            : Icons.favorite_border_rounded,
                         color: isLike ? Colors.red[700] : Colors.blueGrey[300],
                         size: 35,
                       )),
@@ -606,18 +613,18 @@ class _PostContineState extends State<PostContine> {
                 ],
               ),
               IconButton(
-                  onPressed: null,
-                  icon: FaIcon(
-                    FontAwesomeIcons.comment,
-                    color: Colors.blueGrey[300],
-                    size: 30,
-                  ),
-                  // Icon(
-                  //   Icons.maps_ugc,
-                  //   color: Colors.blueGrey[300],
-                  //   size: 35,
-                  // )
-                  ),
+                onPressed: null,
+                icon: FaIcon(
+                  FontAwesomeIcons.comment,
+                  color: Colors.blueGrey[300],
+                  size: 30,
+                ),
+                // Icon(
+                //   Icons.maps_ugc,
+                //   color: Colors.blueGrey[300],
+                //   size: 35,
+                // )
+              ),
               const Expanded(child: SizedBox()),
               IconButton(
                   onPressed: null,
@@ -628,12 +635,14 @@ class _PostContineState extends State<PostContine> {
                   )),
               IconButton(
                   onPressed: () {
-                        setState(() {
-                          isSave = !isSave;
-                        });
-                      },
+                    setState(() {
+                      isSave = !isSave;
+                    });
+                  },
                   icon: Icon(
-                    isSave ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
+                    isSave
+                        ? Icons.bookmark_rounded
+                        : Icons.bookmark_border_rounded,
                     color: Colors.blueGrey[300],
                     size: 35,
                   )),
@@ -705,7 +714,3 @@ class _PostContineState extends State<PostContine> {
     );
   }
 }
-
-
-
-

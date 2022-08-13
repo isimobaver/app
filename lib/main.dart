@@ -14,7 +14,8 @@ void main() async {
   runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AccessWrapper(),
+      home: Home()
+      // AccessWrapper(),
     ),
   );
 }

@@ -183,14 +183,8 @@ class _TopBarState extends State<TopBar> {
               ],
             ),
           ),
-          const Expanded(flex: 7, child: SizedBox()),
-          IconButton(onPressed: (){Navigator.push(
-                  context,
-                  CustomPageRoute(
-                    child: const IntryPage(),
-                    direction: AxisDirection.up,
-                  ),
-                );}, icon: const Icon(Icons.account_circle,color: Colors.white,size: 30,))
+          const Expanded(child: SizedBox()),
+        
         ],
       ),
     );

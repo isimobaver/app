@@ -6,7 +6,7 @@ import 'package:myapp/services/firebase_auth_services.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:myapp/style/colors.dart';
 
-import '../style/effects.dart';
+// import '../style/effects.dart';
 
 class IntryPage extends StatefulWidget {
   const IntryPage({Key? key}) : super(key: key);
@@ -169,7 +169,7 @@ class _IntryPageState extends State<IntryPage> {
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  "Sign up",
+                  "Get Start",
                   style: TextStyle(
                       color: Colors.black87,
                       fontSize: 30,

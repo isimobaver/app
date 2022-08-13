@@ -6,6 +6,7 @@ import 'package:myapp/widget/drawer_chooser.dart';
 import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
 import 'package:myapp/style/effects.dart';
+import 'package:vs_scrollbar/vs_scrollbar.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -15,13 +16,30 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: const [TopBar(),Body()],
-      )
-      );
+    return VsScrollbar(
+      controller: _scrollController,
+      showTrackOnHover: true, // default false
+      isAlwaysShown: false, // default false
+      scrollbarFadeDuration: const Duration(
+          milliseconds: 500), // default : Duration(milliseconds: 300)
+      scrollbarTimeToFade: const Duration(
+          milliseconds: 800), // default : Duration(milliseconds: 600)
+      style: const VsScrollbarStyle(
+        hoverThickness: 5.0, // default 12.0
+        radius: Radius.circular(10), // default Radius.circular(8.0)
+        thickness: 5.0, // default 8.0
+        color: Colors.transparent, // default ColorScheme Theme
+      ),
+      child: SingleChildScrollView(
+          controller: _scrollController,
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: const [TopBar(), Body()],
+          )),
+    );
   }
 }
 
@@ -57,7 +75,11 @@ class _TopBarState extends State<TopBar> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const Text("isim.obaver",style: TextStyle(color: Colors.black54,fontSize: 25,fontWeight: FontWeight.bold)),
+                const Text("isim.obaver",
+                    style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold)),
                 const Expanded(child: SizedBox()),
                 IconButton(
                   icon: Icon(Icons.menu_rounded,
@@ -94,14 +116,14 @@ class _TopBarState extends State<TopBar> {
                     textOfEditAvatar,
                     style: textStyleOfEditAvatar,
                   ),
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.push(
-                  context,
-                  CustomPageRoute(
-                    child: const ProfileEdit(),
-                    direction: AxisDirection.up,
-                  ),
-                );
+                      context,
+                      CustomPageRoute(
+                        child: const ProfileEdit(),
+                        direction: AxisDirection.up,
+                      ),
+                    );
                   },
                 ),
               ))
@@ -119,11 +141,15 @@ class _TopBarState extends State<TopBar> {
       ),
       context: context,
       builder: (context) {
-        return ShowBottomDrawer(heightDrawer: 0.52,contineDrawer: const BottomDrawer(),showholderDraweSheet: true,childHeader: Container(height: 0),);
+        return ShowBottomDrawer(
+          heightDrawer: 0.52,
+          contineDrawer: const BottomDrawer(),
+          showholderDraweSheet: true,
+          childHeader: Container(height: 0),
+        );
       },
     );
   }
-
 }
 
 //////////////////Body//////////////////////////
@@ -145,7 +171,6 @@ class _BodyState extends State<Body> {
     );
   }
 }
-
 
 //////////////////First Section/////////////////////////
 class FirstSection extends StatefulWidget {

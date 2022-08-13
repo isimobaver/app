@@ -24,7 +24,8 @@ String textOfAboutOfDrawerChooser = "About";
 String textOfDevelopersOfDrawerChooser = "Developers";
 String textOfCopyrightOfDrawerChooser = "Copyright";
 String textOfSupportOfDrawerChooser = "Support";
-final textOftitelPageOfDrawerChooser = ["About", "Developers", "Copyright"];
+String textOfSettingstOfDrawerChooser = "Settings";
+final textOftitelPageOfDrawerChooser = ["About", "Developers", "Copyright","Settings"];
 String textOfAboutOfDrawerChooserInside =
     "The About Us page of your website is an essential source of information for all who want to know more about your business About Us pages are where you showcase your history what is unique about your work, your companys values, and who you serve. The design written content, and visual or video elements together tell an important story about who you are and why you do it. How can you make the most of this integral part of your marketing strategy? In this article, youll learn what makes an exceptional About Us page and find 25 about us page examples of the best ones out there to inspire your own About Us page design and content.";
 String textOfAboutOfDrawerChooserInside0 =
@@ -142,7 +143,7 @@ TextStyle textStyleOfLanguageChooserInside = TextStyle(
 double fontSizeOfSliderTextBottonInHomepage = 22;
 double fontSizeOfCancelBottonOfSearchBarInSearchpage = 16;
 double fontSizeOfHeaderTextBottonInUserpage = 27;
-double fontSizeOfHeaderText = 30;
+double fontSizeOfHeaderText = 20;
 double fontSizeOfEditAvatar = 15;
 double fontSizeOfDrawerChooser = 20;
 double fontSizeOfAboutpage = 20;
@@ -180,4 +181,4 @@ TextDirection textDirection = TextDirection.ltr;
 /////////////////////////////textAlign///////////////////////////////
 TextAlign textAlignall = TextAlign.left;
 TextAlign textAlignOfDrawerChooser = TextAlign.left;
-TextAlign textAlignOfDrawerChooserpages = TextAlign.left;
+TextAlign textAlignOfDrawerChooserpages = TextAlign.center;

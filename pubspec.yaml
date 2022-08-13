@@ -46,6 +46,8 @@ dependencies:
   firebase_auth: ^3.6.3
   cloud_firestore: ^3.4.4
   google_sign_in: ^5.4.1
+  vs_scrollbar: ^0.2.1
+  overscroll_pop: ^0.0.9
 
 dev_dependencies:
   flutter_test:
@@ -92,6 +94,7 @@ flutter:
     - "images/oman-nature/pink lake.jpg"
     - "images/oman-nature/serb dhafar.jpg"
     - "images/oman-nature/smile day.jpg"
+    - "images/Untitled-1.png"
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
      

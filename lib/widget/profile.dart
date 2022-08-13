@@ -13,6 +13,16 @@ class ProfileEdit extends StatefulWidget {
 }
 
 class _ProfileEditState extends State<ProfileEdit> {
+  TextEditingController userController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool obscureTextIs = true;
+  void _toggle() {
+    setState(() {
+      obscureTextIs = !obscureTextIs;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,7 +32,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           alignment: AlignmentDirectional.topStart,
           children: [
             SingleChildScrollView(
-              padding: const EdgeInsets.only(top: 70,bottom: 20),
+              padding: const EdgeInsets.only(top: 70, bottom: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -50,7 +60,11 @@ class _ProfileEditState extends State<ProfileEdit> {
                       ],
                     ),
                   ),
-                  const Divider(color: Colors.black54,thickness: 0.2,height: 5,),
+                  const Divider(
+                    color: Colors.black54,
+                    thickness: 0.2,
+                    height: 5,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(15),
                     child: Column(
@@ -63,60 +77,107 @@ class _ProfileEditState extends State<ProfileEdit> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 20),
-                              child: Text("Username",style: TextStyle(color: textColorOfHeaderText,fontSize: 18,fontWeight: FontWeight.w500),),
-                            ),
-                            const Expanded(child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Username"
-                                ),
+                              child: Text(
+                                "Username",
+                                style: TextStyle(
+                                    color: textColorOfHeaderText,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500),
                               ),
-                            )), 
+                            ),
+                            Expanded(
+                                child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: TextField(
+                                controller: userController,
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Username"),
+                              ),
+                            )),
                           ],
                         ),
-                        const Divider(color: Colors.black54,thickness: 0.2,height: 5,indent: 105),
+                        const Divider(
+                            color: Colors.black54,
+                            thickness: 0.2,
+                            height: 5,
+                            indent: 105),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 60),
-                              child: Text("Email",style: TextStyle(color: textColorOfHeaderText,fontSize: 18,fontWeight: FontWeight.w500),),
+                              child: Text(
+                                "Email",
+                                style: TextStyle(
+                                    color: textColorOfHeaderText,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
-                            const Expanded(child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
+                            Expanded(
+                                child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               child: TextField(
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Email"
-                                ),
+                                controller: emailController,
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Email"),
                               ),
                             )),
                           ],
                         ),
-                        const Divider(color: Colors.black54,thickness: 0.2,height: 5,indent: 105),
+                        const Divider(
+                            color: Colors.black54,
+                            thickness: 0.2,
+                            height: 5,
+                            indent: 105),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(right: 20),
-                              child: Text("Password",style: TextStyle(color: textColorOfHeaderText,fontSize: 18,fontWeight: FontWeight.w500),),
+                              child: Text(
+                                "Password",
+                                style: TextStyle(
+                                    color: textColorOfHeaderText,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
-                            const Expanded(child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
+                            Expanded(
+                                child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               child: TextField(
+                                obscureText: obscureTextIs,
+                                controller: passwordController,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: "Password"
+                                  hintText: "Password",
+                                  suffixIcon: InkWell(
+                                    onTap: _toggle,
+                                    child: Icon(
+                                      obscureTextIs
+                                          ? Icons.visibility_off_rounded
+                                          : Icons.visibility_rounded,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
                                 ),
                               ),
                             )),
                           ],
                         ),
-                        const Divider(color: Colors.black54,thickness: 0.2,height: 5,indent: 105),
+                        const Divider(
+                            color: Colors.black54,
+                            thickness: 0.2,
+                            height: 5,
+                            indent: 105),
                       ],
                     ),
                   ),
@@ -185,6 +246,9 @@ class _ProfileEditState extends State<ProfileEdit> {
             flex: 1,
             child: TextButton(
               onPressed: () {
+                print(userController.text);
+                print(emailController.text);
+                print(passwordController.text);
                 Navigator.pop(context);
               },
               child: Text(
@@ -201,7 +265,6 @@ class _ProfileEditState extends State<ProfileEdit> {
       ),
     );
   }
-
 
   ///////////////////////////////
   void _showActionSheet(BuildContext context) {
