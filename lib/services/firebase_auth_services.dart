@@ -3,23 +3,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthServices {
-  static final User? _user = FirebaseAuth.instance.currentUser;
-  static String? userId = _user!.uid;
-  static String? userEmail = _user!.email;
-  static String? userPhoto = _user!.photoURL;
-  static String? userName = _user!.displayName;
-  static bool? userIsVerified = _user!.emailVerified;
+  static final User? user = FirebaseAuth.instance.currentUser;
+  static String? userId = user?.uid ;
+  static String? userEmail = user?.email;
+  static String? userPhoto = user?.photoURL;
+  static String? userName = user?.displayName;
+  static bool? userIsVerified = user?.emailVerified;
 
   static Future<void> updateUserName({required String newUserName}) async {
-    await _user!.updateDisplayName(newUserName);
+    await user!.updateDisplayName(newUserName);
   }
 
   static Future<void> updateUserPhotoUrl({required String newPhotoUrl}) async {
-    await _user!.updatePhotoURL(newPhotoUrl);
+    await user!.updatePhotoURL(newPhotoUrl);
   }
 
   static Future<void> verifyEmail() async {
-    await _user!.sendEmailVerification();
+    await user!.sendEmailVerification();
   }
 
   static Future<void> sendResetEmailPassword(
@@ -29,7 +29,7 @@ class FirebaseAuthServices {
 
   // delete a user and his data should be delelted too except his posts
   static Future<void> deleteUser() async {
-    await _user!.delete();
+    await user!.delete();
   }
 
   static Future<void> signout() async {
@@ -90,6 +90,43 @@ class FirebaseAuthServices {
           // do somethings in this case
           break;
       }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  static Future<void> loginWithEmailAndPassword(
+      {required String email, required String password}) async {
+    try {
+      if (email == '') {
+        throw FirebaseAuthException(code: 'empty-email');
+      }
+      if (password == '') {
+        throw FirebaseAuthException(code: 'empty-password');
+      }
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'user-not-found':
+          // do something  
+          break;
+        case 'empty-password':
+          // do something
+          break;
+        case 'empty-email':
+          // do something
+          break;
+        case 'wrong-password':
+          // do something
+          break;
+        case 'invalid-email':
+          // do something
+          break;
+        default:
+          log(e.code);
+      }
+      return;
     } catch (e) {
       log(e.toString());
     }

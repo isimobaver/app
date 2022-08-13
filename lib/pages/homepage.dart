@@ -26,10 +26,7 @@ class _HomeState extends State<Home> {
   int pageId = 0;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // this line will remove the red debug banner from the top
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
+    return SafeArea(
         child: Scaffold(
           extendBody: true,
           key: scaffoldKey,
@@ -37,7 +34,6 @@ class _HomeState extends State<Home> {
           backgroundColor: backgroundColorOfpages, //لون الصفحة
           body: listOfTop[pageId],
         ),
-      ),
     );
   }
 
