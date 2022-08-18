@@ -1,4 +1,6 @@
 // import 'package:flutter/material.dart';
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/style/colors.dart';
@@ -246,9 +248,9 @@ class _ProfileEditState extends State<ProfileEdit> {
             flex: 1,
             child: TextButton(
               onPressed: () {
-                print(userController.text);
-                print(emailController.text);
-                print(passwordController.text);
+                log(userController.text);
+                log(emailController.text);
+                log(passwordController.text);
                 Navigator.pop(context);
               },
               child: Text(

@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/pages/login_page.dart';
 import 'package:myapp/pages/signup_page.dart';
-import 'package:myapp/services/firebase_auth_services.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:myapp/style/colors.dart';
 

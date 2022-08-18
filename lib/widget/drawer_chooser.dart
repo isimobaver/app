@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:myapp/style/effects.dart';
 import 'package:myapp/layout/drawer_sheet.dart';
@@ -8,7 +10,6 @@ import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
-import 'package:overscroll_pop/overscroll_pop.dart';
 // import 'package:myapp/pages/homepage.dart';
 
 /////////////////////////BottomDrawer/////////////////////////
@@ -316,7 +317,7 @@ class DrawerPage extends StatelessWidget {
     const AboutPage(),
     const DevelopersPage(),
     const CopyrightPage(),
-    Settings(),
+    const Settings(),
   ];
   late final int pageDrawerId;
 
@@ -523,7 +524,7 @@ class CopyrightPage extends StatelessWidget {
 
 /////////////////////////////////Settings/////////////////////////////
 class Settings extends StatefulWidget {
-  Settings({Key? key}) : super(key: key);
+  const Settings({Key? key}) : super(key: key);
 
   @override
   State<Settings> createState() => _SettingsState();
@@ -573,7 +574,7 @@ class _SettingsState extends State<Settings> {
               );
             },
             style: TextButton.styleFrom(
-                fixedSize: Size(double.maxFinite, 50),
+                fixedSize: const Size(double.maxFinite, 50),
                 alignment: AlignmentDirectional.centerStart),
             child: const Text(
               "Add account",
@@ -610,15 +611,15 @@ class _SettingsState extends State<Settings> {
             fit: BoxFit.contain,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Text(
             "Provide by",
             style: TextStyle(
                 color: Colors.grey, fontSize: 17, fontWeight: FontWeight.w400),
           ),
         ),
-        Text(
+        const Text(
           "Isim Obaver",
           style: TextStyle(
               color: Colors.grey, fontSize: 17, fontWeight: FontWeight.w600),

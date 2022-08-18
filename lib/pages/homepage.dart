@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myapp/widget/category_text_buttons.dart';
 import 'package:myapp/widget/image_cards_slider.dart';
-import '../style/effects.dart';
-import 'intry_page.dart';
 import 'search.dart';
 import 'user.dart';
 import 'package:myapp/style/colors.dart';
