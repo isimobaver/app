@@ -34,7 +34,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           alignment: AlignmentDirectional.topStart,
           children: [
             SingleChildScrollView(
-              padding: const EdgeInsets.only(top: 70, bottom: 20),
+              padding: const EdgeInsets.only(top: 90, bottom: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -196,15 +196,11 @@ class _ProfileEditState extends State<ProfileEdit> {
   ////////////////////////////////////////////////
   Widget buildTopBarDrawer(BuildContext context) {
     return Container(
-      height: 55,
+      height: 65,
       alignment: AlignmentDirectional.center,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(95),
-          bottomRight: Radius.circular(120),
-          topRight: Radius.circular(60),
-        ),
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(25)),
         color: backgroundColorOfTopBar,
         boxShadow: [
           BoxShadow(

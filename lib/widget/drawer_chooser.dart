@@ -89,6 +89,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                     CustomPageRoute(
                       child: DrawerPage(
                         pageDrawerId: idPage,
+                        sizeOfbare: 65,
                       ),
                       direction: AxisDirection.left,
                     ),
@@ -130,6 +131,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                     CustomPageRoute(
                       child: DrawerPage(
                         pageDrawerId: idPage,
+                        sizeOfbare: 65,
                       ),
                       direction: AxisDirection.left,
                     ),
@@ -171,6 +173,7 @@ class _BottomDrawerState extends State<BottomDrawer> {
                     CustomPageRoute(
                       child: DrawerPage(
                         pageDrawerId: idPage,
+                        sizeOfbare: 65,
                       ),
                       direction: AxisDirection.left,
                     ),
@@ -322,7 +325,7 @@ class DrawerPage extends StatelessWidget {
   late final int pageDrawerId;
 
   final List<String> titelPage = textOftitelPageOfDrawerChooser;
-  double sizeOfbare = 100;
+  double sizeOfbare = 65;
 
   DrawerPage({
     Key? key,
@@ -342,7 +345,7 @@ class DrawerPage extends StatelessWidget {
             alignment: AlignmentDirectional.topCenter,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 70, right: 3, left: 3),
+                padding: const EdgeInsets.only(top: 40, right: 3, left: 3),
                 child: VsScrollbar(
                     controller: _scrollController,
                     showTrackOnHover: true, // default false
@@ -384,11 +387,7 @@ class DrawerPage extends StatelessWidget {
         alignment: AlignmentDirectional.bottomCenter,
         padding: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(95),
-            bottomRight: Radius.circular(120),
-            topRight: Radius.circular(60),
-          ),
+          borderRadius: const BorderRadius.vertical(bottom: Radius.circular(25)),
           color: backgroundColorOfTopBar,
           boxShadow: [
             BoxShadow(

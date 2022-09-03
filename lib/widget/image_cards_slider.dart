@@ -4,16 +4,22 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:myapp/layout/drawer_sheet.dart';
 import 'package:myapp/style/colors.dart';
+import 'package:myapp/style/text.dart';
 import 'package:overscroll_pop/overscroll_pop.dart';
 // import 'package:myapp/widget/poster.dart';
 import 'package:widget_slider/widget_slider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:myapp/style/effects.dart';
-import 'package:readmore/readmore.dart';
+// import 'package:readmore/readmore.dart';
+import 'package:myapp/layout/Read_more.dart';
 // import 'package:myapp/style/text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:myapp/layout/Expanded_Bar.dart';
+// import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:myapp/layout/Rating_bar.dart';
 
 class ImageCardsSilder extends StatefulWidget {
   const ImageCardsSilder({Key? key}) : super(key: key);
@@ -43,6 +49,7 @@ class _ImageCardsSilderState extends State<ImageCardsSilder> {
     "images/oman-nature/serb dhafar.jpg",
     "images/oman-nature/smile day.jpg",
   ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,7 +68,14 @@ class _ImageCardsSilderState extends State<ImageCardsSilder> {
           return CupertinoButton(
             onPressed: () async {
               await controller.moveTo?.call(index);
-              _showBottomDrawer(context, images[index]);
+              Navigator.push(
+                context,
+                CustomPageRoute(
+                  child: PosterLayout(),
+                  direction: AxisDirection.up,
+                ),
+              );
+              // _showBottomDrawer(context, images[index]);
             },
             child: Container(
               margin: const EdgeInsets.only(bottom: 50),
@@ -87,69 +101,251 @@ class _ImageCardsSilderState extends State<ImageCardsSilder> {
       ),
     );
   }
+}
 
-  void _showBottomDrawer(BuildContext context, String imagePath) {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      backgroundColor: const Color.fromARGB(0, 0, 0, 0),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      context: context,
-      builder: (context) {
-        return OverscrollPop(
-          scrollToPopOption: ScrollToPopOption.start,
-          dragToPopDirection: DragToPopDirection.toRight,
-          child: DraggableScrollableSheet(
-              snap: true,
-              initialChildSize: 1,
-              expand: false,
-              maxChildSize: 1.0,
-              minChildSize: 0.5,
-              builder: (context, scrollController) {
-                return Container(
-                  decoration: BoxDecoration(
-                      color: backgroundColorOfdrawerSheet,
-                      borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(20))),
-                  child: CustomScrollView(
-                    controller: scrollController,
-                    slivers: <Widget>[
-                      SliverAppBar(
-                        backgroundColor: backgroundColorOfTopBar,
-                        foregroundColor: backgroundColorOfTopBar,
-                        floating: true,
-                        leading: Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: IconButton(
-                            icon: const Icon(Icons.chevron_left_rounded,
-                                color: Colors.white, size: 50),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                        ),
-                        toolbarHeight: 80,
-                        pinned: true,
-                        expandedHeight: 500,
-                        flexibleSpace: const FlexibleSpaceBar(
-                          centerTitle: true,
-                          background: Galary(),
-                        ),
-                      ),
-                      SliverList(
-                          delegate:
-                              SliverChildListDelegate([const PostContine()]))
-                    ],
-                  ),
-                );
-              }),
-        );
+class PosterLayout extends StatefulWidget {
+  const PosterLayout({Key? key}) : super(key: key);
+
+  @override
+  State<PosterLayout> createState() => _PosterLayoutState();
+}
+
+class _PosterLayoutState extends State<PosterLayout> {
+  ScrollController scrollController = ScrollController();
+  bool isScroll = false;
+  bool isScroll2 = false;
+  bool scrollEnd = false;
+  bool isFullyExpanded = false;
+
+  @override
+  void initState() {
+    setState(() {
+      scrollController.addListener(() {
+        setState(() {
+          // print(scrollController.offset);
+          if (scrollController.offset >= 330) {
+            isScroll = true;
+          } else {
+            isScroll = false;
+          }
+          if (scrollController.offset >= 10) {
+            isScroll2 = true;
+            scrollEnd = false;
+            if (scrollController.position.atEdge) {
+              bool isTop = scrollController.position.pixels == 0;
+
+              if (isTop) {
+                scrollEnd = false;
+              } else {
+                scrollEnd = true;
+              }
+            }
+          } else {
+            isScroll2 = false;
+          }
+
+          if (isFullyExpanded == true) {
+            isFullyExpanded = false;
+            Navigator.pop(context);
+          }
+          //update state
+        });
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onDoubleTap: () {
+        // setState(() {
+        //   PostContine(scrollEnd: scrollEnd,);
+        // });
       },
+      child: Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+              color: backgroundColorOfdrawerSheet,
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(20))),
+          child: Stack(
+            children: [
+              DraggableHome(
+                onStretchTrigger: () async {
+                  isFullyExpanded = true;
+                },
+                stretchTriggerOffset: 110,
+                scrollController: scrollController,
+                headerWidget: headerWidget(context),
+                body: [
+                  PostContine(scrollEnd: scrollEnd),
+                ],
+                fullyStretchable: false,
+                backgroundColor: Colors.white,
+                appBarColor: Colors.teal,
+                curvedBodyRadius: 0,
+                headerExpandedHeight: 0.45, //max is 0.8
+              ),
+              Align(
+                alignment: AlignmentDirectional.topStart,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: IconButton(
+                    alignment: Alignment.center,
+                    icon: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Icon(Icons.circle,
+                            color: isScroll
+                                ? const Color.fromARGB(255, 71, 71, 71)
+                                : const Color.fromARGB(0, 0, 0, 0),
+                            size: 50),
+                        const Icon(Icons.chevron_left_rounded,
+                            color: Colors.white, size: 50),
+                      ],
+                    ),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: AlignmentDirectional.bottomCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 20),
+                  child: scrollEnd
+                      ? null
+                      : Hero(
+                          tag: "ActionHero",
+                          child: ActionHero(
+                            isScroll2: isScroll2,
+                          )),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget headerWidget(BuildContext context) {
+    return Galary();
+  }
+}
+
+class ActionHero extends StatefulWidget {
+  final bool isScroll2;
+  final double width;
+  final double high;
+  ActionHero(
+      {Key? key, this.isScroll2 = false, this.width = 200, this.high = 96})
+      : super(key: key);
+
+  @override
+  State<ActionHero> createState() => _ActionHeroState();
+}
+
+class _ActionHeroState extends State<ActionHero> {
+  int _currentLikes = 55;
+  bool isLike = false;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: AlignmentDirectional.bottomCenter,
+      height: widget.high,
+      width: widget.width,
+      child: widget.isScroll2
+          ? Stack(
+              children: [
+                Align(
+                  alignment: AlignmentDirectional.bottomCenter,
+                  child: Container(
+                    alignment: AlignmentDirectional.center,
+                    height: 55,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                      color: Colors.teal,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 90,
+                          offset: const Offset(0, 0),
+                          color: shadowColorOfTopBar,
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                            flex: 2,
+                            child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.loupe_rounded,
+                                  color: Colors.white,
+                                  size: 35,
+                                ))),
+                        Expanded(
+                            flex: 1,
+                            child: Text(
+                              "$_currentLikes",
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                        Expanded(
+                          flex: 2,
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.near_me_rounded,
+                                color: Colors.white,
+                                size: 35,
+                              )),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Align(
+                    alignment: AlignmentDirectional.topCenter,
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.teal[300],
+                      child: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isLike = !isLike;
+                              if (isLike == true) {
+                                _currentLikes = _currentLikes + 1;
+                              } else if (isLike == false) {
+                                _currentLikes = _currentLikes - 1;
+                              }
+                            });
+                          },
+                          icon: Icon(
+                            isLike
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_border_rounded,
+                            color: isLike ? Colors.red[700] : Colors.white,
+                            size: 30,
+                          )),
+                    ))
+              ],
+            )
+          : SizedBox(),
     );
   }
 }
 
 class Galary extends StatefulWidget {
-  const Galary({Key? key}) : super(key: key);
+  Galary({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Galary> createState() => _GalaryState();
@@ -174,61 +370,15 @@ class _GalaryState extends State<Galary> {
   ];
 
   int _current = 0;
+  bool _fullSecreen = false;
+
+  late BoxFit _boxFit;
   final CarouselController buttonCarouselController = CarouselController();
 
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      Hero(
-          tag: "GalaryOpen",
-          child: CarouselSlider(
-            carouselController: buttonCarouselController,
-            options: CarouselOptions(
-              height: 1000,
-              // aspectRatio: 16/9,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _current = index;
-                });
-              },
-              viewportFraction: 1,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 3),
-              autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              pauseAutoPlayOnTouch: true,
-              // enlargeCenterPage: true,
-              scrollDirection: Axis.horizontal,
-            ),
-            items: images.map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return GestureDetector(
-                    onDoubleTap: () {
-                      Navigator.push(
-                          context,
-                          CustomPageRoute(
-                              child: buildFullpage(context),
-                              direction: AxisDirection.up));
-                    },
-                    child: Container(
-                      height: 1000,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(i),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
-            }).toList(),
-          )),
+      Hero(tag: "GalaryOpen", child: buildgalary(context)),
       Align(
         alignment: AlignmentDirectional.bottomCenter,
         child: Padding(
@@ -271,11 +421,16 @@ class _GalaryState extends State<Galary> {
           padding: const EdgeInsets.all(10),
           child: IconButton(
             onPressed: () {
+              setState(() {
+                _fullSecreen = true;
+              });
               Navigator.push(
                   context,
-                  CustomPageRoute(
-                      child: buildFullpage(context),
-                      direction: AxisDirection.up));
+                  MaterialPageRoute(
+                    fullscreenDialog: true,
+                    maintainState: false,
+                    builder: (context) => buildFullpage(context),
+                  ));
             },
             icon: const Icon(
               Icons.fullscreen_rounded,
@@ -289,69 +444,128 @@ class _GalaryState extends State<Galary> {
   }
 
   Widget buildFullpage(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white10,
-      body: Stack(
-        children: [
-          Hero(
-              tag: "GalaryOpen",
-              child: CarouselSlider(
-                carouselController: buttonCarouselController,
-                options: CarouselOptions(
-                  height: 1000,
-                  // aspectRatio: 16/9,
-                  viewportFraction: 1,
-                  initialPage: 0,
-                  enableInfiniteScroll: true,
-                  reverse: false,
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 3),
-                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  // enlargeCenterPage: true,
-                  scrollDirection: Axis.horizontal,
-                ),
-                items: images.map((i) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Container(
-                        height: 1000,
-                        decoration: BoxDecoration(
-                          // color: Colors.white,
-                          image: DecorationImage(
-                            fit: BoxFit.contain,
-                            image: AssetImage(i),
+    return WillPopScope(
+      onWillPop: () async {
+        _fullSecreen = false;
+        return true;
+      },
+      child: Scaffold(
+        // backgroundColor: Colors.white10,
+        body: OrientationBuilder(builder: (BuildContext context, orientation) {
+          return Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              Container(
+                alignment: AlignmentDirectional.center,
+                child: Expanded(
+                    child:
+                        Hero(tag: "GalaryOpen", child: buildgalary(context))),
+              ),
+              Align(
+                alignment: AlignmentDirectional.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: orientation == Orientation.portrait
+                      ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _fullSecreen = false;
+                            });
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(
+                            Icons.cancel_rounded,
+                            size: 40,
+                            color: Colors.white24,
                           ),
-                        ),
-                      );
-                    },
-                  );
-                }).toList(),
-              )),
-          Align(
-            alignment: AlignmentDirectional.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(50),
-              child: IconButton(
-                onPressed: () {
+                        )
+                      : const SizedBox(),
+                ),
+              )
+            ],
+          );
+        }),
+      ),
+    );
+  }
+
+  Widget buildgalary(BuildContext context) {
+    return CarouselSlider(
+      carouselController: buttonCarouselController,
+      options: CarouselOptions(
+        height: 1000,
+        // aspectRatio: 16/9,
+        onPageChanged: (index, reason) {
+          setState(() {
+            _current = index;
+          });
+        },
+        viewportFraction: 1,
+        initialPage: 0,
+        enableInfiniteScroll: true,
+        reverse: false,
+        autoPlay: true,
+        autoPlayInterval: const Duration(seconds: 3),
+        autoPlayAnimationDuration: const Duration(milliseconds: 800),
+        autoPlayCurve: Curves.fastOutSlowIn,
+        pauseAutoPlayOnTouch: true,
+        // enlargeCenterPage: true,
+        scrollDirection: Axis.horizontal,
+      ),
+      items: images.map((i) {
+        return OrientationBuilder(
+          builder: (BuildContext context, orientation) {
+            if (_fullSecreen == false) {
+              _boxFit = BoxFit.cover;
+            } else if (_fullSecreen == true) {
+              if (orientation == Orientation.portrait) {
+                _boxFit = BoxFit.fitWidth;
+              } else {
+                _boxFit = BoxFit.fitHeight;
+              }
+            }
+            return GestureDetector(
+              onDoubleTap: () {
+                if (_fullSecreen == false) {
+                  setState(() {
+                    _fullSecreen = true;
+                  });
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        fullscreenDialog: true,
+                        maintainState: false,
+                        builder: (context) => buildFullpage(context),
+                      ));
+                } else if (_fullSecreen == true) {
+                  setState(() {
+                    _fullSecreen = false;
+                  });
                   Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.cancel_rounded,
-                  size: 40,
-                  color: Colors.white24,
+                }
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(_fullSecreen ? 0 : 25)),
+                  color: Colors.teal[900],
+                  image: DecorationImage(
+                    fit: _boxFit,
+                    image: AssetImage(i),
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
-      ),
+            );
+          },
+        );
+      }).toList(),
     );
   }
 }
 
 class PostContine extends StatefulWidget {
-  const PostContine({Key? key}) : super(key: key);
+  final bool scrollEnd;
+  PostContine({Key? key, this.scrollEnd = false}) : super(key: key);
 
   @override
   State<PostContine> createState() => _PostContineState();
@@ -372,10 +586,11 @@ class _PostContineState extends State<PostContine> {
   ];
 
   int _current = 0;
-  bool isLike = false;
   bool isSave = false;
   double _currentRate = 0.0;
-  int _currentLikes = 55;
+  bool isExpand = true;
+  // int _currentLikes = 55;
+  // bool isLike = false;
 
   @override
   Widget build(BuildContext context) {
@@ -400,24 +615,15 @@ class _PostContineState extends State<PostContine> {
                   const Expanded(child: SizedBox()),
                   TextButton.icon(
                       style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.lightBlue[100]),
                         shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                              borderRadius: BorderRadius.circular(20),
+                              side: const BorderSide(
+                                  width: 1, color: Colors.lightGreen)),
                         ),
                         shadowColor: MaterialStateProperty.all(Colors.black),
                       ),
-                      onPressed: () {
-                        setState(() {
-                          if (_currentRate < 5) {
-                            _currentRate = _currentRate + 0.5;
-                          } else if (_currentRate >= 5) {
-                            _currentRate = 0.0;
-                          }
-                        });
-                      },
+                      onPressed: null,
                       icon: Icon(Icons.star_rate_rounded,
                           color: Colors.yellow[600], size: 20),
                       label: Text(
@@ -508,6 +714,11 @@ class _PostContineState extends State<PostContine> {
                               builder: (BuildContext context) {
                                 return ReadMoreText(
                                   i,
+                                  onTap: (val){
+                                    setState(() {
+                                      isExpand = val;
+                                    });
+                                  },
                                   trimLines: 4,
                                   trimMode: TrimMode.Line,
                                   trimCollapsedText: 'Show more',
@@ -553,99 +764,40 @@ class _PostContineState extends State<PostContine> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Text(
+                  children:  [
+                    const Text(
                       "2 day ago ",
                       style: TextStyle(
                           color: Colors.grey,
                           fontSize: 15,
                           fontWeight: FontWeight.bold),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.circle_rounded,
                       color: Colors.grey,
                       size: 5,
-                    )
+                    ),
+                    SizedBox(width: 20,),
+                    RatingBar.builder(
+                  glow: false,
+                  itemSize: 20,
+                  initialRating: 3,
+                  minRating: 1,
+                  direction: Axis.horizontal,
+                  allowHalfRating: true,
+                  itemCount: 5,
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 3.0),
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star_rate_rounded,
+                    color: Colors.amber,
+                  ),
+                  onRatingUpdate: (rating) {
+                    print(rating);
+                  },
+                ),
                   ],
                 ),
               )
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 0,
-            left: 10,
-            right: 10,
-            bottom: 50,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isLike = !isLike;
-                          if (isLike == true) {
-                            _currentLikes = _currentLikes + 1;
-                          } else if (isLike == false) {
-                            _currentLikes = _currentLikes - 1;
-                          }
-                        });
-                      },
-                      icon: Icon(
-                        isLike
-                            ? Icons.favorite_rounded
-                            : Icons.favorite_border_rounded,
-                        color: isLike ? Colors.red[700] : Colors.blueGrey[300],
-                        size: 35,
-                      )),
-                  Text(
-                    "$_currentLikes",
-                    style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-              IconButton(
-                onPressed: null,
-                icon: FaIcon(
-                  FontAwesomeIcons.comment,
-                  color: Colors.blueGrey[300],
-                  size: 30,
-                ),
-                // Icon(
-                //   Icons.maps_ugc,
-                //   color: Colors.blueGrey[300],
-                //   size: 35,
-                // )
-              ),
-              const Expanded(child: SizedBox()),
-              IconButton(
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.near_me_rounded,
-                    color: Colors.blueGrey[300],
-                    size: 35,
-                  )),
-              IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isSave = !isSave;
-                    });
-                  },
-                  icon: Icon(
-                    isSave
-                        ? Icons.bookmark_rounded
-                        : Icons.bookmark_border_rounded,
-                    color: Colors.blueGrey[300],
-                    size: 35,
-                  )),
             ],
           ),
         ),
@@ -656,29 +808,38 @@ class _PostContineState extends State<PostContine> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                      onPressed: null,
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.blue[50]),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        shadowColor: MaterialStateProperty.all(Colors.black),
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      primary: Colors.teal[50],
+                      elevation: 2,
+                      shadowColor: Colors.black87,
+                      shape: const CircleBorder(),
+                      onPrimary: Colors.teal[200]
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isSave = !isSave;
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10,
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: Text("more",
-                            style: TextStyle(
-                                color: Colors.black87,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold)),
-                      )),
+                      child: SvgPicture.asset(
+                        isSave
+                            ? "images/svg/bookmark_black_24dp.svg"
+                            : "images/svg/bookmark_border_black_24dp.svg",
+                        fit: BoxFit.contain,
+                        color: Colors.teal,
+                        height: 30,
+                        width: 30,
+                      ),
+                    ),
+                  ),
                 ),
               ),
               Expanded(
@@ -686,7 +847,38 @@ class _PostContineState extends State<PostContine> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                      onPressed: null,
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      primary: Colors.teal[50],
+                      elevation: 2,
+                      shadowColor: Colors.black87,
+                      shape: const CircleBorder(),
+                      onPrimary: Colors.teal[200]
+                    ),
+                    onPressed: () {
+                      _showActionSheet(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10,
+                      ),
+                      child: SvgPicture.asset(
+                        "images/svg/more_vert_black_24dp.svg",
+                        fit: BoxFit.contain,
+                        color: Colors.teal,
+                        height: 30,
+                        width: 30,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                      onPressed: () {},
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.green[300]),
@@ -697,20 +889,112 @@ class _PostContineState extends State<PostContine> {
                         ),
                         shadowColor: MaterialStateProperty.all(Colors.black),
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: Text("just go",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 3),
+                        child: TextButton.icon(
+                          onPressed: null,
+                          icon: const Icon(
+                            Icons.explore_rounded,
+                            size: 25,
+                            color: Colors.white,
+                          ),
+                          label: const Text("just go",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold)),
+                        ),
                       )),
                 ),
               ),
             ],
           ),
+        ),
+        Container(height: isExpand? 125 : 0,),
+        SizedBox(
+          height: 100 ,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: widget.scrollEnd
+                ? Hero(
+                    tag: "ActionHero",
+                    child: ActionHero(
+                      width: 250,
+                      isScroll2: true,
+                    ))
+                : null,
+          ),
         )
       ],
+    );
+  }
+
+
+
+  ///////////////////////////////
+  void _showActionSheet(BuildContext context) {
+    showCupertinoModalPopup(
+        context: context,
+        builder: (BuildContext context) => const ActionSheet());
+  }
+}
+
+
+
+
+class ActionSheet extends StatefulWidget {
+  const ActionSheet({Key? key}) : super(key: key);
+
+  @override
+  State<ActionSheet> createState() => _ActionSheetState();
+}
+
+class _ActionSheetState extends State<ActionSheet> {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoActionSheet(
+      actions: [
+        CupertinoActionSheetAction(
+          isDefaultAction: true,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text(
+            textOfProfileEditInside,
+            style: textStyleOfActionSheetProfileEdit,
+          ),
+        ),
+        CupertinoActionSheetAction(
+          isDefaultAction: true,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text(
+            textOfProfileEditInside0,
+            style: textStyleOfActionSheetProfileEdit,
+          ),
+        ),
+        CupertinoActionSheetAction(
+          isDefaultAction: true,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text(
+            textOfProfileEditInside1,
+            style: textStyleOfActionSheetProfileEdit,
+          ),
+        ),
+      ],
+      cancelButton: CupertinoActionSheetAction(
+        isDefaultAction: true,
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text(
+          textOfProfileEditInsideCancel,
+          style: textStyleOfCancelOfActionSheetProfileEdit,
+        ),
+      ),
     );
   }
 }

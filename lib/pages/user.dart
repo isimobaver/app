@@ -7,6 +7,7 @@ import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
 import 'package:myapp/style/effects.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
+import 'package:myapp/layout/Expanded_Bar.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -19,27 +20,43 @@ class _UserPageState extends State<UserPage> {
   final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return VsScrollbar(
-      controller: _scrollController,
-      showTrackOnHover: true, // default false
-      isAlwaysShown: false, // default false
-      scrollbarFadeDuration: const Duration(
-          milliseconds: 500), // default : Duration(milliseconds: 300)
-      scrollbarTimeToFade: const Duration(
-          milliseconds: 800), // default : Duration(milliseconds: 600)
-      style: const VsScrollbarStyle(
-        hoverThickness: 5.0, // default 12.0
-        radius: Radius.circular(10), // default Radius.circular(8.0)
-        thickness: 5.0, // default 8.0
-        color: Colors.transparent, // default ColorScheme Theme
-      ),
-      child: SingleChildScrollView(
-          controller: _scrollController,
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: const [TopBar(), Body()],
-          )),
+    return DraggableHome(
+      // title: const Text("Search"),s
+      headerWidget: headerWidget(context),
+      body: [
+        Body(),
+      ],
+      fullyStretchable: false,
+      backgroundColor: Colors.white,
+      appBarColor: Colors.teal,
+      curvedBodyRadius: 0,
+      headerExpandedHeight: 0.33, //max is 0.8
     );
+    // VsScrollbar(
+    //   controller: _scrollController,
+    //   showTrackOnHover: true, // default false
+    //   isAlwaysShown: false, // default false
+    //   scrollbarFadeDuration: const Duration(
+    //       milliseconds: 500), // default : Duration(milliseconds: 300)
+    //   scrollbarTimeToFade: const Duration(
+    //       milliseconds: 800), // default : Duration(milliseconds: 600)
+    //   style: const VsScrollbarStyle(
+    //     hoverThickness: 5.0, // default 12.0
+    //     radius: Radius.circular(10), // default Radius.circular(8.0)
+    //     thickness: 5.0, // default 8.0
+    //     color: Colors.transparent, // default ColorScheme Theme
+    //   ),
+    //   child: SingleChildScrollView(
+    //       controller: _scrollController,
+    //       scrollDirection: Axis.vertical,
+    //       child: Column(
+    //         children: const [TopBar(), Body()],
+    //       )),
+    // );
+  }
+
+  Widget headerWidget(BuildContext context) {
+    return TopBar();
   }
 }
 
@@ -56,17 +73,10 @@ class _TopBarState extends State<TopBar> {
     return Container(
       height: 250,
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.vertical(
-            bottom: Radius.circular(30),
-          ),
-          color: backgroundColorOfTopBar,
-          boxShadow: [
-            BoxShadow(
-                blurRadius: 90,
-                offset: const Offset(0, 0),
-                color: shadowColorOfTopBar)
-          ]),
+      decoration: const BoxDecoration(
+        color: Colors.teal,
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(25))
+      ),
       child: Column(
         children: [
           Expanded(

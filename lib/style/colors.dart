@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 //////////////////////////backgroundColor////////////////////////
 Color backgroundColorOfpages = const Color(0xFFF2F2F2);
-Color backgroundColorOfTopBar = const Color(0xFF6DB9AF);
+Color backgroundColorOfTopBar = Colors.teal;
 Color backgroundColorOfAvatar = Colors.white;
 Color backgroundColorOfSlider = Colors.white;
 Color backgroundColorOfSearchBarInSearchpage = const Color(0xFFC2D9DE);

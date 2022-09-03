@@ -79,6 +79,9 @@ flutter:
     - images/svg/HOME.svg
     - images/svg/SEARCH.svg
     - images/svg/USER.svg
+    - images/svg/bookmark_border_black_24dp.svg
+    - images/svg/bookmark_black_24dp.svg
+    - images/svg/more_vert_black_24dp.svg
     - images/6099494567cc3.jpg
     - "images/oman-nature/bridge and sea.jpg"
     - "images/oman-nature/byo desert.jpg"

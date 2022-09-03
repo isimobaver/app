@@ -7,6 +7,8 @@ import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
 import '../widget/image_cards_slider.dart';
+// import 'package:draggable_home/draggable_home.dart';
+import 'package:myapp/layout/Expanded_Bar.dart';
 
 
 class Search extends StatefulWidget {
@@ -17,49 +19,71 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return VsScrollbar(
-        controller: _scrollController,
-        showTrackOnHover: true, // default false
-        isAlwaysShown: false, // default false
-        scrollbarFadeDuration: const Duration(
-            milliseconds: 500), // default : Duration(milliseconds: 300)
-        scrollbarTimeToFade: const Duration(
-            milliseconds: 800), // default : Duration(milliseconds: 600)
-        style: const VsScrollbarStyle(
-          hoverThickness: 5.0, // default 12.0
-          radius: Radius.circular(10), // default Radius.circular(8.0)
-          thickness: 5.0, // default 8.0
-          color: Colors.transparent, // default ColorScheme Theme
-        ),
-        child: SingleChildScrollView(
-            controller: _scrollController,
-            scrollDirection: Axis.vertical,
-            child: const TopSection()));
-  }
-}
-
-//////////Top Section//////////////////////
-class TopSection extends StatefulWidget {
-  const TopSection({Key? key}) : super(key: key);
-
-  @override
-  State<TopSection> createState() => _TopSectionState();
-}
-
-class _TopSectionState extends State<TopSection> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SearchBar(),
+    return DraggableHome(
+      // title: const Text("Search"),
+      headerWidget: headerWidget(context),
+      body: [
         BodySection(),
       ],
+      fullyStretchable: false,
+      backgroundColor: Colors.white,
+      appBarColor: Colors.teal,
+      curvedBodyRadius: 0,
+      headerExpandedHeight: 0.33, //max is 0.8
     );
   }
+
+
+  Widget headerWidget(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.teal,
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(25))
+      ),
+      padding: const EdgeInsets.only(top: 50),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Let's go",
+            style: Theme.of(context)
+                .textTheme
+                .headline2!
+                .copyWith(color: Colors.white70),
+          ),
+          const SearchBar(),
+        ],
+      ),
+    );
+  }
+
+
 }
+
+
+
+
+//////////Top Section//////////////////////
+// class TopSection extends StatefulWidget {
+//   const TopSection({Key? key}) : super(key: key);
+
+//   @override
+//   State<TopSection> createState() => _TopSectionState();
+// }
+
+// class _TopSectionState extends State<TopSection> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         const SearchBar(),
+//         BodySection(),
+//       ],
+//     );
+//   }
+// }
 
 /////////////////////////////////////////SearchBar///////////////////////////////
 class SearchBar extends StatefulWidget {
