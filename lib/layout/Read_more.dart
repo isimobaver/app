@@ -1,10 +1,15 @@
+// ignore: file_names
+// ignore_for_file: file_names, duplicate_ignore
+
 library readmore;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 enum TrimMode {
+  // ignore: constant_identifier_names
   Length,
+  // ignore: constant_identifier_names
   Line,
 }
 
@@ -30,7 +35,7 @@ class ReadMoreText extends StatefulWidget {
     this.semanticsLabel,////
     this.moreStyle,////
     this.lessStyle,///
-    this.delimiter = _kEllipsis + ' ',///
+    this.delimiter = '$_kEllipsis ',///
     this.delimiterStyle,////
     this.callback,//
     this.onTap,
@@ -120,25 +125,25 @@ class ReadMoreTextState extends State<ReadMoreText> {
 
     final colorClickableText =
         widget.colorClickableText ?? Theme.of(context).colorScheme.secondary;
-    final _defaultLessStyle = widget.lessStyle ??
+    final defaultLessStyle = widget.lessStyle ??
         effectiveTextStyle?.copyWith(color: colorClickableText);
-    final _defaultMoreStyle = widget.moreStyle ??
+    final defaultMoreStyle = widget.moreStyle ??
         effectiveTextStyle?.copyWith(color: colorClickableText);
-    final _defaultDelimiterStyle = widget.delimiterStyle ?? effectiveTextStyle;
+    final defaultDelimiterStyle = widget.delimiterStyle ?? effectiveTextStyle;
 
     TextSpan link = TextSpan(
       text: _readMore ? widget.trimCollapsedText : widget.trimExpandedText,
-      style: _readMore ? _defaultMoreStyle : _defaultLessStyle,
+      style: _readMore ? defaultMoreStyle : defaultLessStyle,
       recognizer: TapGestureRecognizer()..onTap = _onTapLink,
     );
 
-    TextSpan _delimiter = TextSpan(
+    TextSpan delimiter = TextSpan(
       text: _readMore
           ? widget.trimCollapsedText.isNotEmpty
               ? widget.delimiter
               : ''
           : '',
-      style: _defaultDelimiterStyle,
+      style: defaultDelimiterStyle,
       recognizer: TapGestureRecognizer()..onTap = _onTapLink,
     );
 
@@ -149,18 +154,20 @@ class ReadMoreTextState extends State<ReadMoreText> {
 
         TextSpan? preTextSpan;
         TextSpan? postTextSpan;
-        if (widget.preDataText != null)
+        if (widget.preDataText != null) {
           preTextSpan = TextSpan(
-            text: widget.preDataText! + " ",
+            text: "${widget.preDataText!} ",
             style: widget.preDataTextStyle ?? effectiveTextStyle,
             recognizer: TapGestureRecognizer()..onTap = _onTapLink,
           );
-        if (widget.postDataText != null)
+        }
+        if (widget.postDataText != null) {
           postTextSpan = TextSpan(
-            text: " " + widget.postDataText!,
+            text: " ${widget.postDataText!}",
             style: widget.postDataTextStyle ?? effectiveTextStyle,
             recognizer: TapGestureRecognizer()..onTap = _onTapLink,
           );
+        }
 
         // Create a TextSpan with data
         final text = TextSpan(
@@ -186,7 +193,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
         final linkSize = textPainter.size;
 
         // Layout and measure delimiter
-        textPainter.text = _delimiter;
+        textPainter.text = delimiter;
         textPainter.layout(minWidth: 0, maxWidth: maxWidth);
         final delimiterSize = textPainter.size;
 
@@ -225,7 +232,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
                 text: _readMore
                     ? widget.data.substring(0, widget.trimLength)
                     : widget.data,
-                children: <TextSpan>[_delimiter, link],
+                children: <TextSpan>[delimiter, link],
                 recognizer: TapGestureRecognizer()..onTap = _onTapLink,
               );
             } else {
@@ -244,7 +251,7 @@ class ReadMoreTextState extends State<ReadMoreText> {
                     ? widget.data.substring(0, endIndex) +
                         (linkLongerThanLine ? _kLineSeparator : '')
                     : widget.data,
-                children: <TextSpan>[_delimiter, link],
+                children: <TextSpan>[delimiter, link],
                 recognizer: TapGestureRecognizer()..onTap = _onTapLink,
               );
             } else {

@@ -1,4 +1,8 @@
+// ignore: duplicate_ignore
+// ignore: file_names
 
+
+// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
@@ -80,8 +84,10 @@ class DraggableHome extends StatefulWidget {
 
   /// floatingActionButtonAnimator: Provider of animations to move the FloatingActionButton between FloatingActionButtonLocations.
   final FloatingActionButtonAnimator? floatingActionButtonAnimator;
+  
+  final Decoration? decoration;
 
- 
+  final Clip clipBehavior;
 
 
   final ScrollController? scrollController;
@@ -93,6 +99,7 @@ class DraggableHome extends StatefulWidget {
     Key? key,
     this.scrollController,
     this.onStretchTrigger,
+    this.clipBehavior = Clip.none,
     this.leading,
     this.title,
     this.centerTitle = true,
@@ -101,6 +108,7 @@ class DraggableHome extends StatefulWidget {
     this.alwaysShowTitle = false,
     this.headerExpandedHeight = 0.35,
     required this.headerWidget,
+    this.decoration,
     this.headerBottomBar,
     this.backgroundColor,
     this.appBarColor,
@@ -243,6 +251,8 @@ class _DraggableHomeState extends State<DraggableHome> {
                 children: [
                   FlexibleSpaceBar(
                     background: Container(
+                      clipBehavior: widget.clipBehavior,
+                      decoration: widget.decoration,
                       margin: const EdgeInsets.only(bottom: 0.2),
                       child: fullyExpanded
                           ? (widget.expandedBody ?? const SizedBox())
@@ -280,7 +290,6 @@ class _DraggableHomeState extends State<DraggableHome> {
               onStretchTrigger: widget.fullyStretchable
                   ? () async {
                       if (!fullyExpanded) isFullyExpanded.add(true);
-                      print("5s5s5s5s55s");
                     }
                   : widget.onStretchTrigger,
             );

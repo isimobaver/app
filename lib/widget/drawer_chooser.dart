@@ -9,7 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:vs_scrollbar/vs_scrollbar.dart';
+// import 'package:vs_scrollbar/vs_scrollbar.dart';
 // import 'package:myapp/pages/homepage.dart';
 
 /////////////////////////BottomDrawer/////////////////////////
@@ -25,263 +25,248 @@ class _BottomDrawerState extends State<BottomDrawer> {
   late int idPage;
   @override
   Widget build(BuildContext context) {
-    return VsScrollbar(
+    return SingleChildScrollView(
       controller: _scrollController,
-      showTrackOnHover: true, // default false
-      isAlwaysShown: false, // default false
-      scrollbarFadeDuration: const Duration(
-          milliseconds: 500), // default : Duration(milliseconds: 300)
-      scrollbarTimeToFade: const Duration(
-          milliseconds: 800), // default : Duration(milliseconds: 600)
-      style: const VsScrollbarStyle(
-        hoverThickness: 5.0, // default 12.0
-        radius: Radius.circular(10), // default Radius.circular(8.0)
-        thickness: 5.0, // default 8.0
-        color: Colors.white30, // default ColorScheme Theme
-      ),
-      child: SingleChildScrollView(
-        controller: _scrollController,
-        scrollDirection: Axis.vertical,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  _showBottomDrawer(context);
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.language_rounded,
-                      size: 25,
-                      color: iconColorOFDrawerChooser,
+      scrollDirection: Axis.vertical,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _showBottomDrawer(context);
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.language_rounded,
+                    size: 25,
+                    color: iconColorOFDrawerChooser,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      textOfLanguageOfDrawerChooser,
+                      textDirection: textDirection,
+                      textAlign: textAlignOfDrawerChooser,
+                      style: textStyleOfDrawerChooser,
                     ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Text(
-                        textOfLanguageOfDrawerChooser,
-                        textDirection: textDirection,
-                        textAlign: textAlignOfDrawerChooser,
-                        style: textStyleOfDrawerChooser,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Divider(
-                color: dividerColorOfDrawerChooser,
-                height: 10,
-                thickness: 1,
-                indent: 50,
+            ),
+            Divider(
+              color: dividerColorOfDrawerChooser,
+              height: 10,
+              thickness: 1,
+              indent: 50,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                idPage = 0;
+                Navigator.push(
+                  context,
+                  CustomPageRoute(
+                    child: DrawerPage(
+                      pageDrawerId: idPage,
+                      sizeOfbare: 65,
+                    ),
+                    direction: AxisDirection.left,
+                  ),
+                );
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.info_rounded,
+                    size: 25,
+                    color: iconColorOFDrawerChooser,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      textOfAboutOfDrawerChooser,
+                      textDirection: textDirection,
+                      textAlign: textAlignOfDrawerChooser,
+                      style: textStyleOfDrawerChooser,
+                    ),
+                  ),
+                ],
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  idPage = 0;
-                  Navigator.push(
-                    context,
-                    CustomPageRoute(
-                      child: DrawerPage(
-                        pageDrawerId: idPage,
-                        sizeOfbare: 65,
-                      ),
-                      direction: AxisDirection.left,
+            ),
+            Divider(
+              color: dividerColorOfDrawerChooser,
+              height: 10,
+              thickness: 1,
+              indent: 50,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                idPage = 1;
+                Navigator.push(
+                  context,
+                  CustomPageRoute(
+                    child: DrawerPage(
+                      pageDrawerId: idPage,
+                      sizeOfbare: 65,
                     ),
-                  );
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.info_rounded,
-                      size: 25,
-                      color: iconColorOFDrawerChooser,
+                    direction: AxisDirection.left,
+                  ),
+                );
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.code_rounded,
+                    size: 25,
+                    color: iconColorOFDrawerChooser,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      textOfDevelopersOfDrawerChooser,
+                      textDirection: textDirection,
+                      textAlign: textAlignOfDrawerChooser,
+                      style: textStyleOfDrawerChooser,
                     ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Text(
-                        textOfAboutOfDrawerChooser,
-                        textDirection: textDirection,
-                        textAlign: textAlignOfDrawerChooser,
-                        style: textStyleOfDrawerChooser,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Divider(
-                color: dividerColorOfDrawerChooser,
-                height: 10,
-                thickness: 1,
-                indent: 50,
+            ),
+            Divider(
+              color: dividerColorOfDrawerChooser,
+              height: 10,
+              thickness: 1,
+              indent: 50,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                idPage = 2;
+                Navigator.push(
+                  context,
+                  CustomPageRoute(
+                    child: DrawerPage(
+                      pageDrawerId: idPage,
+                      sizeOfbare: 65,
+                    ),
+                    direction: AxisDirection.left,
+                  ),
+                );
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.copyright_rounded,
+                    size: 25,
+                    color: iconColorOFDrawerChooser,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      textOfCopyrightOfDrawerChooser,
+                      textDirection: textDirection,
+                      textAlign: textAlignOfDrawerChooser,
+                      style: textStyleOfDrawerChooser,
+                    ),
+                  ),
+                ],
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  idPage = 1;
-                  Navigator.push(
-                    context,
-                    CustomPageRoute(
-                      child: DrawerPage(
-                        pageDrawerId: idPage,
-                        sizeOfbare: 65,
-                      ),
-                      direction: AxisDirection.left,
+            ),
+            Divider(
+              color: dividerColorOfDrawerChooser,
+              height: 10,
+              thickness: 1,
+              indent: 50,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _showActionSheet(context);
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.support_agent_rounded,
+                    size: 25,
+                    color: iconColorOFDrawerChooser,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      textOfSupportOfDrawerChooser,
+                      textDirection: textDirection,
+                      textAlign: textAlignOfDrawerChooser,
+                      style: textStyleOfDrawerChooser,
                     ),
-                  );
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.code_rounded,
-                      size: 25,
-                      color: iconColorOFDrawerChooser,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Text(
-                        textOfDevelopersOfDrawerChooser,
-                        textDirection: textDirection,
-                        textAlign: textAlignOfDrawerChooser,
-                        style: textStyleOfDrawerChooser,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Divider(
-                color: dividerColorOfDrawerChooser,
-                height: 10,
-                thickness: 1,
-                indent: 50,
+            ),
+            Divider(
+              color: dividerColorOfDrawerChooser,
+              height: 10,
+              thickness: 1,
+              indent: 50,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                idPage = 3;
+                Navigator.push(
+                  context,
+                  CustomPageRoute(
+                    child: DrawerPage(
+                      pageDrawerId: idPage,
+                      sizeOfbare: 65,
+                    ),
+                    direction: AxisDirection.left,
+                  ),
+                );
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.gear,
+                    size: 25,
+                    color: iconColorOFDrawerChooser,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      textOfSettingstOfDrawerChooser,
+                      textDirection: textDirection,
+                      textAlign: textAlignOfDrawerChooser,
+                      style: textStyleOfDrawerChooser,
+                    ),
+                  ),
+                ],
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  idPage = 2;
-                  Navigator.push(
-                    context,
-                    CustomPageRoute(
-                      child: DrawerPage(
-                        pageDrawerId: idPage,
-                        sizeOfbare: 65,
-                      ),
-                      direction: AxisDirection.left,
-                    ),
-                  );
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.copyright_rounded,
-                      size: 25,
-                      color: iconColorOFDrawerChooser,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Text(
-                        textOfCopyrightOfDrawerChooser,
-                        textDirection: textDirection,
-                        textAlign: textAlignOfDrawerChooser,
-                        style: textStyleOfDrawerChooser,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                color: dividerColorOfDrawerChooser,
-                height: 10,
-                thickness: 1,
-                indent: 50,
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  _showActionSheet(context);
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.support_agent_rounded,
-                      size: 25,
-                      color: iconColorOFDrawerChooser,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Text(
-                        textOfSupportOfDrawerChooser,
-                        textDirection: textDirection,
-                        textAlign: textAlignOfDrawerChooser,
-                        style: textStyleOfDrawerChooser,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                color: dividerColorOfDrawerChooser,
-                height: 10,
-                thickness: 1,
-                indent: 50,
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  idPage = 3;
-                  Navigator.push(
-                    context,
-                    CustomPageRoute(
-                      child: DrawerPage(
-                        pageDrawerId: idPage,
-                        sizeOfbare: 65,
-                      ),
-                      direction: AxisDirection.left,
-                    ),
-                  );
-                },
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.gear,
-                      size: 25,
-                      color: iconColorOFDrawerChooser,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Text(
-                        textOfSettingstOfDrawerChooser,
-                        textDirection: textDirection,
-                        textAlign: textAlignOfDrawerChooser,
-                        style: textStyleOfDrawerChooser,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Divider(
-                color: dividerColorOfDrawerChooser,
-                height: 10,
-                thickness: 1,
-                indent: 50,
-              ),
-            ],
-          ),
+            ),
+            Divider(
+              color: dividerColorOfDrawerChooser,
+              height: 10,
+              thickness: 1,
+              indent: 50,
+            ),
+          ],
         ),
       ),
     );
@@ -346,31 +331,17 @@ class DrawerPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 40, right: 3, left: 3),
-                child: VsScrollbar(
-                    controller: _scrollController,
-                    showTrackOnHover: true, // default false
-                    isAlwaysShown: false, // default false
-                    scrollbarFadeDuration: const Duration(
-                        milliseconds:
-                            500), // default : Duration(milliseconds: 300)
-                    scrollbarTimeToFade: const Duration(
-                        milliseconds:
-                            800), // default : Duration(milliseconds: 600)
-                    style: const VsScrollbarStyle(
-                      hoverThickness: 5.0, // default 12.0
-                      radius:
-                          Radius.circular(10), // default Radius.circular(8.0)
-                      thickness: 5.0, // default 8.0
-                      color: Colors.transparent, // default ColorScheme Theme
-                    ),
-                    child: SingleChildScrollView(
-                        controller: _scrollController,
-                        scrollDirection: Axis.vertical,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 80, horizontal: 20),
-                          child: pageDrawer[pageDrawerId],
-                        ))),
+                child: Scrollbar(
+                  radius: const Radius.circular(20),
+                  child: SingleChildScrollView(
+                      controller: _scrollController,
+                      scrollDirection: Axis.vertical,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 80, horizontal: 20),
+                        child: pageDrawer[pageDrawerId],
+                      )),
+                ),
               ),
               buildTopBarDrawer(context),
             ],

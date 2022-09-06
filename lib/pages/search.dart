@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // import 'package:widget_slider/widget_slider.dart';
 import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
-import 'package:vs_scrollbar/vs_scrollbar.dart';
+// import 'package:vs_scrollbar/vs_scrollbar.dart';
 import '../widget/image_cards_slider.dart';
 // import 'package:draggable_home/draggable_home.dart';
 import 'package:myapp/layout/Expanded_Bar.dart';
@@ -61,29 +61,6 @@ class _SearchState extends State<Search> {
 
 
 }
-
-
-
-
-//////////Top Section//////////////////////
-// class TopSection extends StatefulWidget {
-//   const TopSection({Key? key}) : super(key: key);
-
-//   @override
-//   State<TopSection> createState() => _TopSectionState();
-// }
-
-// class _TopSectionState extends State<TopSection> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         const SearchBar(),
-//         BodySection(),
-//       ],
-//     );
-//   }
-// }
 
 /////////////////////////////////////////SearchBar///////////////////////////////
 class SearchBar extends StatefulWidget {

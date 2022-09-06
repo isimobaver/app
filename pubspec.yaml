@@ -46,8 +46,8 @@ dependencies:
   firebase_auth: ^3.6.3
   cloud_firestore: ^3.4.4
   google_sign_in: ^5.4.1
-  vs_scrollbar: ^0.2.1
-  overscroll_pop: ^0.0.9
+  share_plus: ^4.0.10+1
+  android_intent: ^2.0.2
 
 dev_dependencies:
   flutter_test:

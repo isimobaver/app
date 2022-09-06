@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -28,7 +30,7 @@ class RatingWidget {
 /// As RatingBarIndicator supports any fractional rating value.
 class RatingBar extends StatefulWidget {
   /// Creates [RatingBar] using the [ratingWidget].
-  const RatingBar({
+   const RatingBar({Key? key, 
     /// Customizes the Rating Bar item with [RatingWidget].
     required RatingWidget ratingWidget,
     required this.onRatingUpdate,
@@ -50,10 +52,10 @@ class RatingBar extends StatefulWidget {
     this.updateOnDrag = false,
     this.wrapAlignment = WrapAlignment.start,
   })  : _itemBuilder = null,
-        _ratingWidget = ratingWidget;
+        _ratingWidget = ratingWidget, super(key: key);
 
   /// Creates [RatingBar] using the [itemBuilder].
-  const RatingBar.builder({
+   const RatingBar.builder({Key? key, 
     /// {@template flutterRatingBar.itemBuilder}
     /// Widget for each rating bar item.
     /// {@endtemplate}
@@ -77,7 +79,7 @@ class RatingBar extends StatefulWidget {
     this.updateOnDrag = false,
     this.wrapAlignment = WrapAlignment.start,
   })  : _itemBuilder = itemBuilder,
-        _ratingWidget = null;
+        _ratingWidget = null, super(key: key);
 
   /// Return current rating whenever rating is updated.
   ///
@@ -241,23 +243,24 @@ class _RatingBarState extends State<RatingBar> {
     final item = widget._itemBuilder?.call(context, index);
     final ratingOffset = widget.allowHalfRating ? 0.5 : 1.0;
 
+    // ignore: no_leading_underscores_for_local_identifiers
     Widget _ratingWidget;
 
     if (index >= _rating) {
       _ratingWidget = _NoRatingWidget(
         size: widget.itemSize,
-        child: ratingWidget?.empty ?? item!,
         enableMask: ratingWidget == null,
         unratedColor: widget.unratedColor ?? Theme.of(context).disabledColor,
+        child: ratingWidget?.empty ?? item!,
       );
     } else if (index >= _rating - ratingOffset && widget.allowHalfRating) {
       if (ratingWidget?.half == null) {
         _ratingWidget = _HalfRatingWidget(
           size: widget.itemSize,
-          child: item!,
           enableMask: ratingWidget == null,
           rtlMode: _isRTL,
           unratedColor: widget.unratedColor ?? Theme.of(context).disabledColor,
+          child: item!,
         );
       } else {
         _ratingWidget = SizedBox(
@@ -357,12 +360,12 @@ class _RatingBarState extends State<RatingBar> {
       final box = context.findRenderObject() as RenderBox?;
       if (box == null) return;
 
-      final _pos = box.globalToLocal(dragDetails.globalPosition);
+      final pos = box.globalToLocal(dragDetails.globalPosition);
       double i;
       if (widget.direction == Axis.horizontal) {
-        i = _pos.dx / (widget.itemSize + widget.itemPadding.horizontal);
+        i = pos.dx / (widget.itemSize + widget.itemPadding.horizontal);
       } else {
-        i = _pos.dy / (widget.itemSize + widget.itemPadding.vertical);
+        i = pos.dy / (widget.itemSize + widget.itemPadding.vertical);
       }
       var currentRating = widget.allowHalfRating ? i : i.round().toDouble();
       if (currentRating > widget.itemCount) {
@@ -393,7 +396,7 @@ class _RatingBarState extends State<RatingBar> {
 }
 
 class _HalfRatingWidget extends StatelessWidget {
-  _HalfRatingWidget({
+  const _HalfRatingWidget({
     required this.size,
     required this.child,
     required this.enableMask,
@@ -419,10 +422,10 @@ class _HalfRatingWidget extends StatelessWidget {
                 FittedBox(
                   fit: BoxFit.contain,
                   child: _NoRatingWidget(
-                    child: child,
                     size: size,
                     unratedColor: unratedColor,
                     enableMask: enableMask,
+                    child: child,
                   ),
                 ),
                 FittedBox(
@@ -437,8 +440,8 @@ class _HalfRatingWidget extends StatelessWidget {
               ],
             )
           : FittedBox(
-              child: child,
               fit: BoxFit.contain,
+              child: child,
             ),
     );
   }
@@ -469,7 +472,7 @@ class _HalfClipper extends CustomClipper<Rect> {
 }
 
 class _NoRatingWidget extends StatelessWidget {
-  _NoRatingWidget({
+  const _NoRatingWidget({
     required this.size,
     required this.child,
     required this.enableMask,

@@ -1,6 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
-// import 'dart:html';
+// ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,18 +6,21 @@ import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:myapp/layout/drawer_sheet.dart';
 import 'package:myapp/style/colors.dart';
 import 'package:myapp/style/text.dart';
-import 'package:overscroll_pop/overscroll_pop.dart';
+import 'package:myapp/widget/comment.dart';
+// import 'package:overscroll_pop/overscroll_pop.dart';
 // import 'package:myapp/widget/poster.dart';
 import 'package:widget_slider/widget_slider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:myapp/style/effects.dart';
+// import 'package:myapp/style/effects.dart';
 // import 'package:readmore/readmore.dart';
 import 'package:myapp/layout/Read_more.dart';
 // import 'package:myapp/style/text.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myapp/layout/Expanded_Bar.dart';
 // import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:myapp/layout/Rating_bar.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:android_intent/android_intent.dart';
 
 class ImageCardsSilder extends StatefulWidget {
   const ImageCardsSilder({Key? key}) : super(key: key);
@@ -49,6 +50,8 @@ class _ImageCardsSilderState extends State<ImageCardsSilder> {
     "images/oman-nature/serb dhafar.jpg",
     "images/oman-nature/smile day.jpg",
   ];
+  bool isSave = false;
+  bool isLike = false;
 
   @override
   Widget build(BuildContext context) {
@@ -65,35 +68,100 @@ class _ImageCardsSilderState extends State<ImageCardsSilder> {
         itemCount: images.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index, activeIndex) {
-          return CupertinoButton(
-            onPressed: () async {
-              await controller.moveTo?.call(index);
-              Navigator.push(
-                context,
-                CustomPageRoute(
-                  child: PosterLayout(),
-                  direction: AxisDirection.up,
-                ),
-              );
-              // _showBottomDrawer(context, images[index]);
-            },
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 50),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: backgroundColorOfSlider,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(images[index]),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: shadowColorOfSlider,
-                    offset: const Offset(0, 10),
-                    spreadRadius: 3,
-                    blurRadius: 15,
+          return CupertinoContextMenu(
+            actions: <Widget>[
+              CupertinoContextMenuAction(
+                onPressed: () {
+                  Navigator.pop(context);
+                  setState(() {
+                    isSave = !isSave;
+                  });
+                },
+                isDefaultAction: true,
+                trailingIcon: isSave
+                    ? CupertinoIcons.bookmark_fill
+                    : CupertinoIcons.bookmark,
+                child: Text(isSave ? 'Unsave' : 'Save'),
+              ),
+              CupertinoContextMenuAction(
+                onPressed: () {
+                  Navigator.pop(context);
+                  // _onShare(context);
+                },
+                trailingIcon: CupertinoIcons.share,
+                child: const Text('Share  '),
+              ),
+              CupertinoContextMenuAction(
+                onPressed: () {
+                  Navigator.pop(context);
+                  isLike = !isLike;
+                },
+                trailingIcon:
+                    isLike ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
+                child: Text(isLike ? 'Unlike' : 'Like'),
+              ),
+            ],
+            child: CupertinoButton(
+              onPressed: () async {
+                await controller.moveTo?.call(index);
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const PosterLayout(),fullscreenDialog: true,settings: const RouteSettings()
                   ),
-                ],
+                );
+                // _showBottomDrawer(context, images[index]);
+              },
+              child: Container(
+                // margin: const EdgeInsets.only(bottom: 50),
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: backgroundColorOfSlider,
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage(images[index]),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: shadowColorOfSlider,
+                      offset: const Offset(0, 0.2),
+                      spreadRadius: 3,
+                      blurRadius: 15,
+                    ),
+                  ],
+                ),
+                child: Container(
+                  height: double.maxFinite,
+                  width: double.maxFinite,
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                      Color.fromARGB(172, 0, 0, 0),
+                      Color.fromARGB(0, 255, 255, 255),
+                    ],
+                  )),
+                  child:  Padding(
+                    padding: const EdgeInsets.only(bottom: 15,right: 15,left: 15),
+                    child: Align(
+                        alignment: AlignmentDirectional.bottomCenter,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: const [
+                            Text(
+                              "Bahla",
+                              style: TextStyle(fontSize: 35, color: Colors.white),
+                            ),
+                            Text(
+                              " is a town, located 40 km away from Nizwa, and about 200 km from Oman's capital Muscat which lies in the Ad Dakhiliyah Governorate of Oman. ",
+                              style: TextStyle(fontSize: 10, color: Colors.white),textAlign: TextAlign.center,
+                            ),
+                          ],
+                        )),
+                  ),
+                ),
               ),
             ),
           );
@@ -101,6 +169,18 @@ class _ImageCardsSilderState extends State<ImageCardsSilder> {
       ),
     );
   }
+
+  // final String _content =
+  //     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum diam ipsum, lobortis quis ultricies non, lacinia at justo.';
+
+  // void _onShare(BuildContext context) async {
+  //   final box = context.findRenderObject() as RenderBox?;
+  //   await Share.share(
+  //     _content,
+  //     subject: "subject",
+  //     sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+  //   );
+  // }
 }
 
 class PosterLayout extends StatefulWidget {
@@ -157,80 +237,86 @@ class _PosterLayoutState extends State<PosterLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onDoubleTap: () {
-        // setState(() {
-        //   PostContine(scrollEnd: scrollEnd,);
-        // });
-      },
-      child: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-              color: backgroundColorOfdrawerSheet,
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(20))),
-          child: Stack(
-            children: [
-              DraggableHome(
-                onStretchTrigger: () async {
-                  isFullyExpanded = true;
-                },
-                stretchTriggerOffset: 110,
-                scrollController: scrollController,
-                headerWidget: headerWidget(context),
-                body: [
-                  PostContine(scrollEnd: scrollEnd),
-                ],
-                fullyStretchable: false,
-                backgroundColor: Colors.white,
-                appBarColor: Colors.teal,
-                curvedBodyRadius: 0,
-                headerExpandedHeight: 0.45, //max is 0.8
-              ),
-              Align(
-                alignment: AlignmentDirectional.topStart,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: IconButton(
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+            color: backgroundColorOfdrawerSheet,
+            borderRadius:
+                const BorderRadius.vertical(top: Radius.circular(20))),
+        child: Stack(
+          children: [
+            DraggableHome(
+              onStretchTrigger: () async {
+                isFullyExpanded = true;
+              },
+              clipBehavior: Clip.hardEdge,
+              decoration: const BoxDecoration(
+                  borderRadius:
+                      BorderRadius.vertical(bottom: Radius.circular(25))),
+              stretchTriggerOffset: 110,
+              scrollController: scrollController,
+              headerWidget: headerWidget(context),
+              body: [
+                PostContine(scrollEnd: scrollEnd),
+                const SizedBox(height: 100,)
+              ],
+              fullyStretchable: false,
+              backgroundColor: Colors.white,
+              appBarColor: Colors.teal,
+              curvedBodyRadius: 25,
+              headerExpandedHeight: 0.45, //max is 0.8
+            ),
+            Align(
+              alignment: AlignmentDirectional.topStart,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: IconButton(
+                  alignment: Alignment.center,
+                  icon: Stack(
                     alignment: Alignment.center,
-                    icon: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Icon(Icons.circle,
-                            color: isScroll
-                                ? const Color.fromARGB(255, 71, 71, 71)
-                                : const Color.fromARGB(0, 0, 0, 0),
-                            size: 50),
-                        const Icon(Icons.chevron_left_rounded,
-                            color: Colors.white, size: 50),
-                      ],
-                    ),
-                    onPressed: () => Navigator.pop(context),
+                    children: [
+                      Icon(Icons.circle,
+                          color: isScroll
+                              ? const Color.fromARGB(255, 71, 71, 71)
+                              : const Color.fromARGB(0, 0, 0, 0),
+                          size: 50),
+                      const Icon(Icons.chevron_left_rounded,
+                          color: Colors.white, size: 50),
+                    ],
                   ),
+                  onPressed: () => Navigator.pop(context),
                 ),
               ),
-              Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: scrollEnd
-                      ? null
-                      : Hero(
+            ),
+            Align(
+              alignment: AlignmentDirectional.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: scrollEnd
+                    ?  SizedBox(
+                      height: 80,
+                      child: Hero(
                           tag: "ActionHero",
                           child: ActionHero(
+                            width: 250,
                             isScroll2: isScroll2,
                           )),
-                ),
+                    )
+                    : Hero(
+                        tag: "ActionHero",
+                        child: ActionHero(
+                          isScroll2: isScroll2,
+                        )),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 
   Widget headerWidget(BuildContext context) {
-    return Galary();
+    return const Galary();
   }
 }
 
@@ -238,7 +324,7 @@ class ActionHero extends StatefulWidget {
   final bool isScroll2;
   final double width;
   final double high;
-  ActionHero(
+  const ActionHero(
       {Key? key, this.isScroll2 = false, this.width = 200, this.high = 96})
       : super(key: key);
 
@@ -249,6 +335,19 @@ class ActionHero extends StatefulWidget {
 class _ActionHeroState extends State<ActionHero> {
   int _currentLikes = 55;
   bool isLike = false;
+
+  final String _content =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum diam ipsum, lobortis quis ultricies non, lacinia at justo.';
+
+  void _onShare(BuildContext context) async {
+    final box = context.findRenderObject() as RenderBox?;
+    await Share.share(
+      _content,
+      subject: "subject",
+      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -264,7 +363,7 @@ class _ActionHeroState extends State<ActionHero> {
                     alignment: AlignmentDirectional.center,
                     height: 55,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                      borderRadius: const BorderRadius.all(Radius.circular(25)),
                       color: Colors.teal,
                       boxShadow: [
                         BoxShadow(
@@ -281,7 +380,15 @@ class _ActionHeroState extends State<ActionHero> {
                         Expanded(
                             flex: 2,
                             child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      CupertinoPageRoute(
+                                          builder: (context) =>
+                                              const CommentPage(),
+                                          settings: const RouteSettings(),
+                                          fullscreenDialog: true));
+                                },
                                 icon: const Icon(
                                   Icons.loupe_rounded,
                                   color: Colors.white,
@@ -300,7 +407,7 @@ class _ActionHeroState extends State<ActionHero> {
                         Expanded(
                           flex: 2,
                           child: IconButton(
-                              onPressed: () {},
+                              onPressed: () => _onShare(context),
                               icon: const Icon(
                                 Icons.near_me_rounded,
                                 color: Colors.white,
@@ -337,13 +444,13 @@ class _ActionHeroState extends State<ActionHero> {
                     ))
               ],
             )
-          : SizedBox(),
+          : const SizedBox(),
     );
   }
 }
 
 class Galary extends StatefulWidget {
-  Galary({
+  const Galary({
     Key? key,
   }) : super(key: key);
 
@@ -450,7 +557,7 @@ class _GalaryState extends State<Galary> {
         return true;
       },
       child: Scaffold(
-        // backgroundColor: Colors.white10,
+        backgroundColor: Colors.white10,
         body: OrientationBuilder(builder: (BuildContext context, orientation) {
           return Stack(
             alignment: AlignmentDirectional.center,
@@ -546,9 +653,9 @@ class _GalaryState extends State<Galary> {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(_fullSecreen ? 0 : 25)),
-                  color: Colors.teal[900],
+                  // borderRadius: BorderRadius.vertical(
+                  //     bottom: Radius.circular(_fullSecreen ? 0 : 25)),
+                  // color: Colors.teal[900],
                   image: DecorationImage(
                     fit: _boxFit,
                     image: AssetImage(i),
@@ -565,13 +672,18 @@ class _GalaryState extends State<Galary> {
 
 class PostContine extends StatefulWidget {
   final bool scrollEnd;
-  PostContine({Key? key, this.scrollEnd = false}) : super(key: key);
+  const PostContine({Key? key, this.scrollEnd = false}) : super(key: key);
 
   @override
   State<PostContine> createState() => _PostContineState();
 }
 
 class _PostContineState extends State<PostContine> {
+
+
+  
+
+  
   final headerPosterContine = const [
     "Overview",
     "About",
@@ -587,7 +699,7 @@ class _PostContineState extends State<PostContine> {
 
   int _current = 0;
   bool isSave = false;
-  double _currentRate = 0.0;
+  final double _currentRate = 0.0;
   bool isExpand = true;
   // int _currentLikes = 55;
   // bool isLike = false;
@@ -642,7 +754,7 @@ class _PostContineState extends State<PostContine> {
                           MaterialStateProperty.all(const EdgeInsets.all(0)),
                       alignment: Alignment.topCenter,
                     ),
-                    onPressed: null,
+                    onPressed: _displayMapInGoogleMaps,
                     icon: const Icon(Icons.location_on,
                         color: Colors.red, size: 20),
                     label: const Text(
@@ -714,7 +826,7 @@ class _PostContineState extends State<PostContine> {
                               builder: (BuildContext context) {
                                 return ReadMoreText(
                                   i,
-                                  onTap: (val){
+                                  onTap: (val) {
                                     setState(() {
                                       isExpand = val;
                                     });
@@ -764,7 +876,7 @@ class _PostContineState extends State<PostContine> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children:  [
+                  children: [
                     const Text(
                       "2 day ago ",
                       style: TextStyle(
@@ -777,24 +889,26 @@ class _PostContineState extends State<PostContine> {
                       color: Colors.grey,
                       size: 5,
                     ),
-                    SizedBox(width: 20,),
+                    const SizedBox(
+                      width: 20,
+                    ),
                     RatingBar.builder(
-                  glow: false,
-                  itemSize: 20,
-                  initialRating: 3,
-                  minRating: 1,
-                  direction: Axis.horizontal,
-                  allowHalfRating: true,
-                  itemCount: 5,
-                  itemPadding: const EdgeInsets.symmetric(horizontal: 3.0),
-                  itemBuilder: (context, _) => const Icon(
-                    Icons.star_rate_rounded,
-                    color: Colors.amber,
-                  ),
-                  onRatingUpdate: (rating) {
-                    print(rating);
-                  },
-                ),
+                      glow: false,
+                      itemSize: 20,
+                      initialRating: 3,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 3.0),
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star_rate_rounded,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                      },
+                    ),
                   ],
                 ),
               )
@@ -813,13 +927,12 @@ class _PostContineState extends State<PostContine> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      primary: Colors.teal[50],
-                      elevation: 2,
-                      shadowColor: Colors.black87,
-                      shape: const CircleBorder(),
-                      onPrimary: Colors.teal[200]
-                    ),
+                        padding: EdgeInsets.zero,
+                        primary: Colors.teal[50],
+                        elevation: 2,
+                        shadowColor: Colors.black87,
+                        shape: const CircleBorder(),
+                        onPrimary: Colors.teal[200]),
                     onPressed: () {
                       setState(() {
                         isSave = !isSave;
@@ -848,13 +961,12 @@ class _PostContineState extends State<PostContine> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      primary: Colors.teal[50],
-                      elevation: 2,
-                      shadowColor: Colors.black87,
-                      shape: const CircleBorder(),
-                      onPrimary: Colors.teal[200]
-                    ),
+                        padding: EdgeInsets.zero,
+                        primary: Colors.teal[50],
+                        elevation: 2,
+                        shadowColor: Colors.black87,
+                        shape: const CircleBorder(),
+                        onPrimary: Colors.teal[200]),
                     onPressed: () {
                       _showActionSheet(context);
                     },
@@ -892,7 +1004,7 @@ class _PostContineState extends State<PostContine> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 3),
                         child: TextButton.icon(
-                          onPressed: null,
+                          onPressed: _displayMapInGoogleMaps,
                           icon: const Icon(
                             Icons.explore_rounded,
                             size: 25,
@@ -910,26 +1022,12 @@ class _PostContineState extends State<PostContine> {
             ],
           ),
         ),
-        Container(height: isExpand? 125 : 0,),
-        SizedBox(
-          height: 100 ,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: widget.scrollEnd
-                ? Hero(
-                    tag: "ActionHero",
-                    child: ActionHero(
-                      width: 250,
-                      isScroll2: true,
-                    ))
-                : null,
-          ),
-        )
+        // Container(
+        //   height: isExpand ? 125 : 0,
+        // ),
       ],
     );
   }
-
-
 
   ///////////////////////////////
   void _showActionSheet(BuildContext context) {
@@ -937,10 +1035,16 @@ class _PostContineState extends State<PostContine> {
         context: context,
         builder: (BuildContext context) => const ActionSheet());
   }
+
+
+  void _displayMapInGoogleMaps({int zoomLevel = 12}) {
+    final AndroidIntent intent = AndroidIntent(
+        action: 'action_view',
+        data: Uri.encodeFull('geo:22.947979480496084, 57.29229824151966?z=$zoomLevel'),
+        package: 'com.google.android.apps.maps');
+    intent.launch();
+  }
 }
-
-
-
 
 class ActionSheet extends StatefulWidget {
   const ActionSheet({Key? key}) : super(key: key);
@@ -960,8 +1064,8 @@ class _ActionSheetState extends State<ActionSheet> {
             Navigator.pop(context);
           },
           child: Text(
-            textOfProfileEditInside,
-            style: textStyleOfActionSheetProfileEdit,
+            textOfActionSheetSuportInside,
+            style: textStyleOfActionSheetSuport,
           ),
         ),
         CupertinoActionSheetAction(
@@ -970,8 +1074,8 @@ class _ActionSheetState extends State<ActionSheet> {
             Navigator.pop(context);
           },
           child: Text(
-            textOfProfileEditInside0,
-            style: textStyleOfActionSheetProfileEdit,
+            textOfActionSheetSuportInside0,
+            style: textStyleOfActionSheetSuport,
           ),
         ),
         CupertinoActionSheetAction(
@@ -980,8 +1084,8 @@ class _ActionSheetState extends State<ActionSheet> {
             Navigator.pop(context);
           },
           child: Text(
-            textOfProfileEditInside1,
-            style: textStyleOfActionSheetProfileEdit,
+            textOfActionSheetSuportInside1,
+            style: textStyleOfActionSheetSuport,
           ),
         ),
       ],
