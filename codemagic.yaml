@@ -1,0 +1,29 @@
+workflows:
+  ios-project-debug: # workflow ID
+    name: iOS debug # workflow name
+    environment:
+      xcode: latest
+      cocoapods: default
+      vars:
+          XCODE_PROJECT: "BMI Calculator.xcodeproj" # <-- Put the name of your project here. 
+          XCODE_SCHEME: "BMI Calculator" # <-- Put the name of your scheme here.
+    scripts:
+      - name: Run tests
+        script: |
+          xcodebuild \
+          -project "$XCODE_PROJECT" \
+          -scheme "$XCODE_SCHEME" \
+          -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.1' \
+          clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO          
+      - name: Build debug app
+        script: |
+          xcodebuild build -project "$XCODE_PROJECT" \
+          -scheme "$XCODE_SCHEME" \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO          
+    artifacts:
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+    publishing:
+      email:
+        recipients:
+          - sbis1999@gmail.com
